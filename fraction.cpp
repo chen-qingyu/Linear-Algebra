@@ -40,27 +40,27 @@ Fraction operator/(int n, Fraction f)
 
 bool operator==(int n, Fraction f)
 {
-    return f.operator==(n);
+    return Fraction(n) == f;
 }
 
 bool operator>(int n, Fraction f)
 {
-    return f.operator>(n);
+    return Fraction(n) > f;
 }
 
 bool operator<(int n, Fraction f)
 {
-    return f.operator<(n);
+    return Fraction(n) < f;
 }
 
 bool operator>=(int n, Fraction f)
 {
-    return f.operator>=(n);
+    return Fraction(n) >= f;
 }
 
 bool operator<=(int n, Fraction f)
 {
-    return f.operator<=(n);
+    return Fraction(n) <= f;
 }
 
 /*******************
