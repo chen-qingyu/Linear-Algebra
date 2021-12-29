@@ -13,54 +13,64 @@
 class Fraction
 {
     // std::cout << Fraction
-    friend std::ostream& operator<<(std::ostream& os, Fraction f);
+    friend std::ostream& operator<<(std::ostream& os, const Fraction& f);
 
     // int (op) Fraction
-    friend Fraction operator+(int n, Fraction f);
-    friend Fraction operator-(int n, Fraction f);
-    friend Fraction operator*(int n, Fraction f);
-    friend Fraction operator/(int n, Fraction f);
+    friend Fraction operator+(int n, const Fraction& f);
+    friend Fraction operator-(int n, const Fraction& f);
+    friend Fraction operator*(int n, const Fraction& f);
+    friend Fraction operator/(int n, const Fraction& f);
 
     // int (cmp) Fraction
-    friend bool operator==(int n, Fraction f);
-    friend bool operator>(int n, Fraction f);
-    friend bool operator<(int n, Fraction f);
-    friend bool operator>=(int n, Fraction f);
-    friend bool operator<=(int n, Fraction f);
+    friend bool operator==(int n, const Fraction& f);
+    friend bool operator>(int n, const Fraction& f);
+    friend bool operator<(int n, const Fraction& f);
+    friend bool operator>=(int n, const Fraction& f);
+    friend bool operator<=(int n, const Fraction& f);
 
 public:
-    Fraction();
-    Fraction(int n);
-    Fraction(int num, int den);
+    Fraction(int num = 0, int den = 1);
 
     // Fraction (op) Fraction
-    Fraction operator+(Fraction f);
-    Fraction operator-(Fraction f);
-    Fraction operator*(Fraction f);
-    Fraction operator/(Fraction f);
+    Fraction operator+(const Fraction& f) const;
+    Fraction operator-(const Fraction& f) const;
+    Fraction operator*(const Fraction& f) const;
+    Fraction operator/(const Fraction& f) const;
 
     // Fraction (cmp) Fraction
-    bool operator==(Fraction f);
-    bool operator>(Fraction f);
-    bool operator<(Fraction f);
-    bool operator>=(Fraction f);
-    bool operator<=(Fraction f);
+    bool operator==(const Fraction& f) const;
+    bool operator>(const Fraction& f) const;
+    bool operator<(const Fraction& f) const;
+    bool operator>=(const Fraction& f) const;
+    bool operator<=(const Fraction& f) const;
+
+    // Fraction (op)= Fraction
+    Fraction operator+=(const Fraction& f);
+    Fraction operator-=(const Fraction& f);
+    Fraction operator*=(const Fraction& f);
+    Fraction operator/=(const Fraction& f);
 
     // Fraction (op) int
-    Fraction operator+(int n);
-    Fraction operator-(int n);
-    Fraction operator*(int n);
-    Fraction operator/(int n);
+    Fraction operator+(int n) const;
+    Fraction operator-(int n) const;
+    Fraction operator*(int n) const;
+    Fraction operator/(int n) const;
 
     // Fraction (cmp) int
-    bool operator==(int n);
-    bool operator>(int n);
-    bool operator<(int n);
-    bool operator>=(int n);
-    bool operator<=(int n);
+    bool operator==(int n) const;
+    bool operator>(int n) const;
+    bool operator<(int n) const;
+    bool operator>=(int n) const;
+    bool operator<=(int n) const;
 
-    double toDouble();
-    std::string toString();
+    // Fraction (op)= int
+    Fraction operator+=(int n);
+    Fraction operator-=(int n);
+    Fraction operator*=(int n);
+    Fraction operator/=(int n);
+
+    double toDouble() const;
+    std::string toString() const;
 
 private:
     int num; // 分子 Numerator

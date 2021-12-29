@@ -4,32 +4,31 @@
  * friend function
  *******************/
 
-std::ostream& operator<<(std::ostream& os, Fraction f)
+std::ostream& operator<<(std::ostream& os, const Fraction& f)
 {
-    os << f.toString();
-    return os;
+    return os << f.toString();
 }
 
 /*
  * int (op) Fraction
  */
 
-Fraction operator+(int n, Fraction f)
+Fraction operator+(int n, const Fraction& f)
 {
     return Fraction(n) + f;
 }
 
-Fraction operator-(int n, Fraction f)
+Fraction operator-(int n, const Fraction& f)
 {
     return Fraction(n) - f;
 }
 
-Fraction operator*(int n, Fraction f)
+Fraction operator*(int n, const Fraction& f)
 {
     return Fraction(n) * f;
 }
 
-Fraction operator/(int n, Fraction f)
+Fraction operator/(int n, const Fraction& f)
 {
     return Fraction(n) / f;
 }
@@ -38,27 +37,27 @@ Fraction operator/(int n, Fraction f)
  * int (cmp) Fraction
  */
 
-bool operator==(int n, Fraction f)
+bool operator==(int n, const Fraction& f)
 {
     return Fraction(n) == f;
 }
 
-bool operator>(int n, Fraction f)
+bool operator>(int n, const Fraction& f)
 {
     return Fraction(n) > f;
 }
 
-bool operator<(int n, Fraction f)
+bool operator<(int n, const Fraction& f)
 {
     return Fraction(n) < f;
 }
 
-bool operator>=(int n, Fraction f)
+bool operator>=(int n, const Fraction& f)
 {
     return Fraction(n) >= f;
 }
 
-bool operator<=(int n, Fraction f)
+bool operator<=(int n, const Fraction& f)
 {
     return Fraction(n) <= f;
 }
@@ -66,18 +65,6 @@ bool operator<=(int n, Fraction f)
 /*******************
  * public function
  *******************/
-
-Fraction::Fraction()
-{
-    num = 0;
-    den = 1;
-}
-
-Fraction::Fraction(int n)
-{
-    num = n;
-    den = 1;
-}
 
 Fraction::Fraction(int num, int den)
 {
@@ -96,30 +83,26 @@ Fraction::Fraction(int num, int den)
  */
 
 // a/b + c/d == (ad+bc) / (bd)
-Fraction Fraction::operator+(Fraction f)
+Fraction Fraction::operator+(const Fraction& f) const
 {
-    simplify();
     return Fraction(num * f.den + den * f.num, den * f.den);
 }
 
 // a/b - c/d == (ad-bc) / (bd)
-Fraction Fraction::operator-(Fraction f)
+Fraction Fraction::operator-(const Fraction& f) const
 {
-    simplify();
     return Fraction(num * f.den - den * f.num, den * f.den);
 }
 
 // (a/b) * (c/d) == (ac) / (bd)
-Fraction Fraction::operator*(Fraction f)
+Fraction Fraction::operator*(const Fraction& f) const
 {
-    simplify();
     return Fraction(num * f.num, den * f.den);
 }
 
 // (a/b) / (c/d) == (ad) / (bc)
-Fraction Fraction::operator/(Fraction f)
+Fraction Fraction::operator/(const Fraction& f) const
 {
-    simplify();
     return Fraction(num * f.den, den * f.num);
 }
 
@@ -127,53 +110,79 @@ Fraction Fraction::operator/(Fraction f)
  * Fraction (cmp) Fraction
  */
 
-bool Fraction::operator==(Fraction f)
+bool Fraction::operator==(const Fraction& f) const
 {
-    simplify();
-    f.simplify();
     return num == f.num && den == f.den;
 }
 
-bool Fraction::operator>(Fraction f)
+bool Fraction::operator>(const Fraction& f) const
 {
     return operator-(f).toDouble() > 0;
 }
 
-bool Fraction::operator<(Fraction f)
+bool Fraction::operator<(const Fraction& f) const
 {
     return operator-(f).toDouble() < 0;
 }
 
-bool Fraction::operator>=(Fraction f)
+bool Fraction::operator>=(const Fraction& f) const
 {
     return operator-(f).toDouble() > 0 || operator==(f);
 }
 
-bool Fraction::operator<=(Fraction f)
+bool Fraction::operator<=(const Fraction& f) const
 {
     return operator-(f).toDouble() < 0 || operator==(f);
+}
+
+/*
+ * Fraction (op)= Fraction
+ */
+
+Fraction Fraction::operator+=(const Fraction& f)
+{
+    *this = *this + f;
+    return *this;
+}
+
+Fraction Fraction::operator-=(const Fraction& f)
+{
+    *this = *this - f;
+    return *this;
+}
+
+Fraction Fraction::operator*=(const Fraction& f)
+{
+    *this = *this * f;
+    return *this;
+}
+
+Fraction Fraction::operator/=(const Fraction& f)
+{
+    *this = *this / f;
+    return *this;
 }
 
 /*
  * Fraction (op) int
  */
 
-Fraction Fraction::operator+(int n)
+Fraction Fraction::operator+(int n) const
 {
     return operator+(Fraction(n));
 }
 
-Fraction Fraction::operator-(int n)
+Fraction Fraction::operator-(int n) const
 {
     return operator-(Fraction(n));
 }
 
-Fraction Fraction::operator*(int n)
+Fraction Fraction::operator*(int n) const
 {
     return operator*(Fraction(n));
 }
 
-Fraction Fraction::operator/(int n)
+Fraction Fraction::operator/(int n) const
 {
     return operator/(Fraction(n));
 }
@@ -182,39 +191,66 @@ Fraction Fraction::operator/(int n)
  * Fraction (cmp) int
  */
 
-bool Fraction::operator==(int n)
+bool Fraction::operator==(int n) const
 {
     return operator==(Fraction(n));
 }
 
-bool Fraction::operator>(int n)
+bool Fraction::operator>(int n) const
 {
     return operator>(Fraction(n));
 }
 
-bool Fraction::operator<(int n)
+bool Fraction::operator<(int n) const
 {
     return operator<(Fraction(n));
 }
 
-bool Fraction::operator>=(int n)
+bool Fraction::operator>=(int n) const
 {
     return operator>=(Fraction(n));
 }
 
-bool Fraction::operator<=(int n)
+bool Fraction::operator<=(int n) const
 {
     return operator<=(Fraction(n));
 }
 
-double Fraction::toDouble()
+/*
+ * Fraction (op)= int
+ */
+
+Fraction Fraction::operator+=(int n)
+{
+    *this += Fraction(n);
+    return *this;
+}
+
+Fraction Fraction::operator-=(int n)
+{
+    *this -= Fraction(n);
+    return *this;
+}
+
+Fraction Fraction::operator*=(int n)
+{
+    *this *= Fraction(n);
+    return *this;
+}
+
+Fraction Fraction::operator/=(int n)
+{
+    *this /= Fraction(n);
+    return *this;
+}
+
+double Fraction::toDouble() const
 {
     return (double)num / (double)den;
 }
 
-std::string Fraction::toString()
+std::string Fraction::toString() const
 {
-    simplify();
     std::string str;
     if (num % den == 0)
     {
