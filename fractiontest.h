@@ -19,6 +19,7 @@ private:
     static void tostr();       // toString()
     static void opassign1();   // Fraction (op)= Fraction
     static void opassign2();   // Fraction (op)= int
+    static void unary();       // (op) Fraction
     static void integration(); // all
 };
 

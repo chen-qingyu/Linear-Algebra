@@ -9,6 +9,7 @@
 #define FRACTION_H
 
 #include <iostream>
+#include <string>
 
 class Fraction
 {
@@ -69,7 +70,14 @@ public:
     Fraction operator*=(int n);
     Fraction operator/=(int n);
 
-    double toDouble() const;
+    // (op) Fraction
+    Fraction operator-() const;
+    Fraction& operator++();
+    Fraction& operator--();
+    Fraction operator++(int);
+    Fraction operator--(int);
+
+    operator double() const;
     std::string toString() const;
 
 private:

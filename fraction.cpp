@@ -117,22 +117,22 @@ bool Fraction::operator==(const Fraction& f) const
 
 bool Fraction::operator>(const Fraction& f) const
 {
-    return operator-(f).toDouble() > 0;
+    return operator-(f).operator double() > 0;
 }
 
 bool Fraction::operator<(const Fraction& f) const
 {
-    return operator-(f).toDouble() < 0;
+    return operator-(f).operator double() < 0;
 }
 
 bool Fraction::operator>=(const Fraction& f) const
 {
-    return operator-(f).toDouble() > 0 || operator==(f);
+    return operator-(f).operator double() > 0 || operator==(f);
 }
 
 bool Fraction::operator<=(const Fraction& f) const
 {
-    return operator-(f).toDouble() < 0 || operator==(f);
+    return operator-(f).operator double() < 0 || operator==(f);
 }
 
 /*
@@ -244,7 +244,47 @@ Fraction Fraction::operator/=(int n)
     return *this;
 }
 
-double Fraction::toDouble() const
+/*
+ * (op) Fraction
+ */
+
+// -Fraction
+Fraction Fraction::operator-() const
+{
+    return (*this) * (-1);
+}
+
+// ++Fraction
+Fraction& Fraction::operator++()
+{
+    *this += 1;
+    return *this;
+}
+
+// --Fraction
+Fraction& Fraction::operator--()
+{
+    *this -= 1;
+    return *this;
+}
+
+// Fraction++
+Fraction Fraction::operator++(int)
+{
+    Fraction tmp = *this;
+    *this += 1;
+    return tmp;
+}
+
+// Fraction--
+Fraction Fraction::operator--(int)
+{
+    Fraction tmp = *this;
+    *this -= 1;
+    return tmp;
+}
+
+Fraction::operator double() const
 {
     return (double)num / (double)den;
 }
