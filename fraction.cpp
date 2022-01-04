@@ -1,65 +1,30 @@
 #include "fraction.h"
 
-/*******************
- * friend function
- *******************/
+/********************
+ * private function
+ ********************/
 
-std::ostream& operator<<(std::ostream& os, const Fraction& f)
+void Fraction::simplify()
 {
-    return os << f.toString();
-}
+    // 1. 确保分母为正 2/-8 => -2/8
+    if (den < 0)
+    {
+        num = -num;
+        den = -den;
+    }
 
-/*
- * int (op) Fraction
- */
-
-Fraction operator+(int n, const Fraction& f)
-{
-    return Fraction(n) + f;
-}
-
-Fraction operator-(int n, const Fraction& f)
-{
-    return Fraction(n) - f;
-}
-
-Fraction operator*(int n, const Fraction& f)
-{
-    return Fraction(n) * f;
-}
-
-Fraction operator/(int n, const Fraction& f)
-{
-    return Fraction(n) / f;
-}
-
-/*
- * int (cmp) Fraction
- */
-
-bool operator==(int n, const Fraction& f)
-{
-    return Fraction(n) == f;
-}
-
-bool operator>(int n, const Fraction& f)
-{
-    return Fraction(n) > f;
-}
-
-bool operator<(int n, const Fraction& f)
-{
-    return Fraction(n) < f;
-}
-
-bool operator>=(int n, const Fraction& f)
-{
-    return Fraction(n) >= f;
-}
-
-bool operator<=(int n, const Fraction& f)
-{
-    return Fraction(n) <= f;
+    // 2. 约分 -2/8 => -1/4
+    // 欧几里得算法求最大公约数
+    int a = abs(num);
+    int b = abs(den);
+    while (b > 0)
+    {
+        int t = a % b;
+        a = b;
+        b = t;
+    }
+    num /= a;
+    den /= a;
 }
 
 /*******************
@@ -303,29 +268,64 @@ std::string Fraction::toString() const
     return str;
 }
 
-/********************
- * private function
- ********************/
+/*******************
+ * friend function
+ *******************/
 
-void Fraction::simplify()
+std::ostream& operator<<(std::ostream& os, const Fraction& f)
 {
-    // 1. 确保分母为正 2/-8 => -2/8
-    if (den < 0)
-    {
-        num = -num;
-        den = -den;
-    }
+    return os << f.toString();
+}
 
-    // 2. 约分 -2/8 => -1/4
-    // 欧几里得算法求最大公约数
-    int a = abs(num);
-    int b = abs(den);
-    while (b > 0)
-    {
-        int t = a % b;
-        a = b;
-        b = t;
-    }
-    num /= a;
-    den /= a;
+/*
+ * int (op) Fraction
+ */
+
+Fraction operator+(int n, const Fraction& f)
+{
+    return Fraction(n) + f;
+}
+
+Fraction operator-(int n, const Fraction& f)
+{
+    return Fraction(n) - f;
+}
+
+Fraction operator*(int n, const Fraction& f)
+{
+    return Fraction(n) * f;
+}
+
+Fraction operator/(int n, const Fraction& f)
+{
+    return Fraction(n) / f;
+}
+
+/*
+ * int (cmp) Fraction
+ */
+
+bool operator==(int n, const Fraction& f)
+{
+    return Fraction(n) == f;
+}
+
+bool operator>(int n, const Fraction& f)
+{
+    return Fraction(n) > f;
+}
+
+bool operator<(int n, const Fraction& f)
+{
+    return Fraction(n) < f;
+}
+
+bool operator>=(int n, const Fraction& f)
+{
+    return Fraction(n) >= f;
+}
+
+bool operator<=(int n, const Fraction& f)
+{
+    return Fraction(n) <= f;
 }

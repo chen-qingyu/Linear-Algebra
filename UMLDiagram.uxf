@@ -27,97 +27,166 @@ fontfamily=Monospaced //possible: SansSerif,Serif,Monospaced
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>640</x>
-      <y>710</y>
-      <w>220</w>
-      <h>150</h>
+      <x>0</x>
+      <y>10</y>
+      <w>320</w>
+      <h>350</h>
     </coordinates>
     <panel_attributes>Fraction
 
 --
 
--num: int
--den: int
+- num: int
+- den: int
 
 --
 
++ operator op(...): Fraction
++ operator cmp(...): bool
++ operator double(): double
++ toString(): std::string
+- simplify(): void
+
+&lt;&lt;friend&gt;&gt;
++ operator\&lt;&lt;(...): std::ostream&amp;
 </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>620</x>
-      <y>220</y>
-      <w>260</w>
-      <h>150</h>
+      <x>380</x>
+      <y>10</y>
+      <w>320</w>
+      <h>350</h>
     </coordinates>
     <panel_attributes>Vector
 
 --
 
--elements: vector&lt;Element&gt;
--len: int
+- elements: vector&lt;Fraction&gt;
+- size: int
 
 --
 
-</panel_attributes>
++ operator +/-(Vector): Vector
++ operator *(Fraction): Vector
++ operator *(Vector): Fraction
++ length(): double
++ isVerticalTo(Vector): bool
+//{x*y==0}
++ isParallelTo(Vector): bool
+//{a1:b1==a2:b2==...==an:bn}
++ unitization(): Vector
+
+&lt;&lt;friend&gt;&gt;
++ operator\&lt;&lt;(...): std::ostream&amp;</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>620</x>
-      <y>70</y>
-      <w>260</w>
-      <h>130</h>
+      <x>760</x>
+      <y>10</y>
+      <w>320</w>
+      <h>350</h>
     </coordinates>
     <panel_attributes>Matrix
 
 --
 
--vectors: vector&lt;Vector&gt;
+- cols: vector&lt;Vector&gt;
+- size: struct{row: int, col: int}
 
 --
 
-</panel_attributes>
++ transpose(): Matrix
+//{return new Matrix}
++ operator +/-/*(Matrix): Matrix
++ operator *(Fraction): Matrix
++ rank(): int
+
+&lt;&lt;friend&gt;&gt;
++ operator\&lt;&lt;(...): std::ostream&amp;</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>640</x>
-      <y>390</y>
-      <w>220</w>
-      <h>130</h>
+      <x>760</x>
+      <y>420</y>
+      <w>320</w>
+      <h>350</h>
     </coordinates>
-    <panel_attributes>Element
+    <panel_attributes>SquareMatrix
 
 --
 
--element: Complex
-
 --
-</panel_attributes>
+
++ determinant(): Fraction
++ inverse(): SquareMatrix
++ eigenValue(): Fraction
++ adjugateMatrix(): SquareMatrix</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
-    <id>UMLClass</id>
+    <id>Relation</id>
     <coordinates>
-      <x>640</x>
-      <y>540</y>
-      <w>220</w>
-      <h>150</h>
+      <x>910</x>
+      <y>350</y>
+      <w>30</w>
+      <h>90</h>
     </coordinates>
-    <panel_attributes>Complex
-
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>310</x>
+      <y>180</y>
+      <w>90</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+fg=black
+bg=black</panel_attributes>
+    <additional_attributes>70.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>690</x>
+      <y>180</y>
+      <w>90</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+fg=black
+bg=black</panel_attributes>
+    <additional_attributes>70.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>0</x>
+      <y>420</y>
+      <w>700</w>
+      <h>260</h>
+    </coordinates>
+    <panel_attributes>bg=white
 --
+如果用C语言追求性能的话：
 
--real: Fraction
--imag: Fraction
+1. 以列存储要快一些
 
---
-</panel_attributes>
+2. 快速矩阵乘法时间复杂度小于O(N^3)
+   大概是O(N^2 * Log2.7 N)左右
+
+3. 寄存器优化
+
+4. 嵌入汇编</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>

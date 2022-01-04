@@ -13,21 +13,11 @@
 
 class Fraction
 {
-    // std::cout << Fraction
-    friend std::ostream& operator<<(std::ostream& os, const Fraction& f);
+private:
+    int num; // 分子 Numerator
+    int den; // 分母 Denominator
 
-    // int (op) Fraction
-    friend Fraction operator+(int n, const Fraction& f);
-    friend Fraction operator-(int n, const Fraction& f);
-    friend Fraction operator*(int n, const Fraction& f);
-    friend Fraction operator/(int n, const Fraction& f);
-
-    // int (cmp) Fraction
-    friend bool operator==(int n, const Fraction& f);
-    friend bool operator>(int n, const Fraction& f);
-    friend bool operator<(int n, const Fraction& f);
-    friend bool operator>=(int n, const Fraction& f);
-    friend bool operator<=(int n, const Fraction& f);
+    void simplify();
 
 public:
     Fraction(int num = 0, int den = 1);
@@ -80,11 +70,25 @@ public:
     operator double() const;
     std::string toString() const;
 
-private:
-    int num; // 分子 Numerator
-    int den; // 分母 Denominator
+    /*
+     * friend function
+     */
 
-    void simplify();
+    // std::cout << Fraction
+    friend std::ostream& operator<<(std::ostream& os, const Fraction& f);
+
+    // int (op) Fraction
+    friend Fraction operator+(int n, const Fraction& f);
+    friend Fraction operator-(int n, const Fraction& f);
+    friend Fraction operator*(int n, const Fraction& f);
+    friend Fraction operator/(int n, const Fraction& f);
+
+    // int (cmp) Fraction
+    friend bool operator==(int n, const Fraction& f);
+    friend bool operator>(int n, const Fraction& f);
+    friend bool operator<(int n, const Fraction& f);
+    friend bool operator>=(int n, const Fraction& f);
+    friend bool operator<=(int n, const Fraction& f);
 };
 
 #endif // FRACTION_H
