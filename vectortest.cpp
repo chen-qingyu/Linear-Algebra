@@ -4,7 +4,7 @@
 
 void VectorTest::test()
 {
-    std::cout << "VectorTest::test(): Begin test." << std::endl;
+    std::cout << "==== VectorTest::test(): Begin test. ====" << std::endl;
     vect();
     append();
     op();
@@ -12,7 +12,9 @@ void VectorTest::test()
     op1();
     op2();
     op3();
-    std::cout << "VectorTest::test(): All test OK!" << std::endl;
+    len();
+    all();
+    std::cout << "==== VectorTest::test(): All test OK! ====" << std::endl;
 }
 
 void VectorTest::vect()
@@ -217,4 +219,34 @@ void VectorTest::op3()
     }
 
     std::cout << "op3(): scalar multiplication test OK." << std::endl;
+}
+
+void VectorTest::len()
+{
+    Vector v;
+    try
+    {
+        v.length();
+    }
+    catch (std::runtime_error e)
+    {
+        assert(e.what() == std::string("Error: The vector is empty."));
+    }
+
+    v.append(0);
+    assert(v.length() == 0);
+    v.append(1);
+    assert(v.length() == 1);
+
+    v[0] = 3;
+    v[1] = 4;
+    assert(v.length() == 5);
+
+    std::cout << "len(): length() test OK." << std::endl;
+}
+
+void VectorTest::all()
+{
+
+    //    std::cout << "all(): comprehensive test OK." << std::endl;
 }

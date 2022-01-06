@@ -1,3 +1,10 @@
+/******************************************
+ * File: vector.cpp
+ * Author: 青羽
+ * Blog: https://chen-qingyu.github.io/
+ * Date: 2022.01.06
+ ******************************************/
+
 #include "vector.h"
 
 #include <math.h>

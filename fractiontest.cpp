@@ -4,7 +4,7 @@
 
 void FractionTest::test()
 {
-    std::cout << "FractionTest::test(): Begin test." << std::endl;
+    std::cout << "==== FractionTest::test(): Begin test. ====" << std::endl;
     frac();
     op1();
     op2();
@@ -16,8 +16,8 @@ void FractionTest::test()
     opassign1();
     opassign2();
     unary();
-    integration();
-    std::cout << "FractionTest::test(): All test OK!" << std::endl;
+    all();
+    std::cout << "==== FractionTest::test(): All test OK! ====" << std::endl;
 }
 
 void FractionTest::frac()
@@ -210,7 +210,7 @@ void FractionTest::unary()
     std::cout << "unary(): (op) Fraction test OK." << std::endl;
 }
 
-void FractionTest::integration()
+void FractionTest::all()
 {
     Fraction a;
     assert(a == 0);
@@ -255,5 +255,5 @@ void FractionTest::integration()
         assert(e.what() == std::string("Error: Zero denominator."));
     }
 
-    std::cout << "integration(): comprehensive test OK." << std::endl;
+    std::cout << "all(): comprehensive test OK." << std::endl;
 }
