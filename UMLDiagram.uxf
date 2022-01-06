@@ -28,7 +28,7 @@ fontfamily=Monospaced //possible: SansSerif,Serif,Monospaced
     <id>UMLClass</id>
     <coordinates>
       <x>0</x>
-      <y>0</y>
+      <y>60</y>
       <w>490</w>
       <h>540</h>
     </coordinates>
@@ -69,7 +69,7 @@ operator == &gt; &lt; &gt;= &lt;=(int, const Fraction&amp;): bool
     <id>UMLClass</id>
     <coordinates>
       <x>530</x>
-      <y>0</y>
+      <y>60</y>
       <w>520</w>
       <h>540</h>
     </coordinates>
@@ -112,7 +112,7 @@ operator*(const Fraction&amp; f, const Vector&amp; v): Vector
     <id>UMLClass</id>
     <coordinates>
       <x>1090</x>
-      <y>0</y>
+      <y>60</y>
       <w>510</w>
       <h>540</h>
     </coordinates>
@@ -143,7 +143,7 @@ operator\&lt;&lt;(ostream&amp;, const Matrix&amp;): std::ostream&amp;
     <id>UMLClass</id>
     <coordinates>
       <x>1090</x>
-      <y>580</y>
+      <y>640</y>
       <w>510</w>
       <h>480</h>
     </coordinates>
@@ -163,7 +163,7 @@ operator\&lt;&lt;(ostream&amp;, const Matrix&amp;): std::ostream&amp;
     <id>Relation</id>
     <coordinates>
       <x>1240</x>
-      <y>530</y>
+      <y>590</y>
       <w>30</w>
       <h>70</h>
     </coordinates>
@@ -174,7 +174,7 @@ operator\&lt;&lt;(ostream&amp;, const Matrix&amp;): std::ostream&amp;
     <id>Relation</id>
     <coordinates>
       <x>480</x>
-      <y>170</y>
+      <y>230</y>
       <w>70</w>
       <h>30</h>
     </coordinates>
@@ -187,7 +187,7 @@ bg=black</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>1040</x>
-      <y>170</y>
+      <y>230</y>
       <w>70</w>
       <h>30</h>
     </coordinates>
@@ -200,7 +200,7 @@ bg=black</panel_attributes>
     <id>UMLNote</id>
     <coordinates>
       <x>0</x>
-      <y>590</y>
+      <y>650</y>
       <w>700</w>
       <h>260</h>
     </coordinates>
