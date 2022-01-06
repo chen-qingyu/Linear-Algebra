@@ -17,7 +17,9 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     fraction.cpp \
     fractiontest.cpp \
-    main.cpp
+    main.cpp \
+    vector.cpp \
+    vectortest.cpp
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -27,4 +29,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 HEADERS += \
     fraction.h \
     fractiontest.h \
-    test.h
+    test.h \
+    vector.h \
+    vectortest.h
