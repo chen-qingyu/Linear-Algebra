@@ -16,7 +16,7 @@
 
 using std::vector;
 
-class Vector // TODO: stack to heap
+class Vector
 {
 private:
     vector<Fraction> elements;
@@ -41,15 +41,19 @@ public:
     Vector operator+(const Vector& v) const;
     Vector operator-(const Vector& v) const;
 
-    // Vector * Vector -> Fraction
     // dot product
+    // Vector * Vector -> Fraction
     Fraction operator*(const Vector& v) const;
 
-    // Vector * Fraction -> Vector
     // scalar multiplication
+    // Vector * / Fraction -> Vector
     Vector operator*(const Fraction& f) const;
+    Vector operator/(const Fraction& f) const;
 
     double length() const;
+
+    bool isVerticalTo(const Vector& v) const;
+    bool isParallelTo(const Vector& v) const;
 
     /*
      * friend function

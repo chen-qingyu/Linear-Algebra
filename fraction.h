@@ -21,6 +21,9 @@ private:
 
 public:
     Fraction(int num = 0, int den = 1);
+    Fraction(int num, Fraction den);
+    Fraction(Fraction num, int den);
+    Fraction(Fraction num, Fraction den);
 
     // Fraction (op) Fraction
     Fraction operator+(const Fraction& f) const;

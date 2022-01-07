@@ -1,8 +1,6 @@
 #ifndef FRACTIONTEST_H
 #define FRACTIONTEST_H
 
-#include "fraction.h"
-
 class FractionTest
 {
 public:

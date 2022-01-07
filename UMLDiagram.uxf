@@ -91,7 +91,7 @@ operator == &gt; &lt; &gt;= &lt;=(int, const Fraction&amp;): bool
 + toString(): std::string
 
 + operator + -(const Vector&amp;): Vector
-+ operator *(const Fraction&amp;): Vector
++ operator * /(const Fraction&amp;): Vector
 + operator *(const Vector&amp;): Fraction
 
 + length(): double

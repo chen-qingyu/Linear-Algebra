@@ -1,6 +1,7 @@
-#include "vectortest.h"
-#include "vector.h"
 #include <assert.h>
+
+#include "vector.h"
+#include "vectortest.h"
 
 void VectorTest::test()
 {
@@ -13,6 +14,7 @@ void VectorTest::test()
     op2();
     op3();
     len();
+    vp();
     all();
     std::cout << "==== VectorTest::test(): All test OK! ====" << std::endl;
 }
@@ -218,6 +220,20 @@ void VectorTest::op3()
         assert(e.what() == std::string("Error: The vector is empty."));
     }
 
+    assert(v == Vector({1, 1, 1}));
+    assert(v / 1 == Vector({1, 1, 1}));
+    assert(v / 2 == Vector({Fraction(1, 2), Fraction(1, 2), Fraction(1, 2)}));
+    assert(v / Fraction(1, 2) == Vector({2, 2, 2}));
+    assert(v / Fraction(1, 99) == Vector({99, 99, 99}));
+    try
+    {
+        v / Fraction(1, 0);
+    }
+    catch (std::runtime_error e)
+    {
+        assert(e.what() == std::string("Error: Zero denominator."));
+    }
+
     std::cout << "op3(): scalar multiplication test OK." << std::endl;
 }
 
@@ -243,6 +259,33 @@ void VectorTest::len()
     assert(v.length() == 5);
 
     std::cout << "len(): length() test OK." << std::endl;
+}
+
+void VectorTest::vp()
+{
+    Vector zero = Vector({0, 0});
+
+    assert(zero.isVerticalTo(Vector({0, 0})));
+    assert(zero.isVerticalTo(Vector({1, 1})));
+    assert(zero.isVerticalTo(Vector({2, 3})));
+
+    assert(zero.isParallelTo(Vector({0, 0})));
+    assert(zero.isParallelTo(Vector({1, 1})));
+    assert(zero.isParallelTo(Vector({2, 3})));
+
+    Vector v = Vector({1, 1});
+
+    assert(v.isVerticalTo(Vector({1, -1})));
+    assert(v.isVerticalTo(Vector({-1, 1})));
+
+    assert(v.isParallelTo(Vector({2, 2})));
+    assert(v.isParallelTo(Vector({-2, -2})));
+
+    v.append(9); // [1 1 9]
+    assert(v.isVerticalTo(Vector({1, -1, 0})));
+    assert(v.isParallelTo(Vector({-1, -1, -9})));
+
+    std::cout << "vp(): isVerticalTo() isParallelTo() test OK." << std::endl;
 }
 
 void VectorTest::all()

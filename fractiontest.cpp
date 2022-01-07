@@ -1,6 +1,7 @@
-#include "fractiontest.h"
-#include "fraction.h"
 #include <assert.h>
+
+#include "fraction.h"
+#include "fractiontest.h"
 
 void FractionTest::test()
 {
@@ -29,6 +30,15 @@ void FractionTest::frac()
     assert(Fraction(-5, -6) == Fraction(5, 6));
     assert(Fraction(5, -1) == Fraction(-5));
     assert(Fraction(-5, -1) == Fraction(5));
+
+    assert(Fraction(1, Fraction(1, 2)) == 2);
+    assert(Fraction(1, Fraction(1, Fraction(1, Fraction(1, -2)))) == -2);
+
+    assert(Fraction(Fraction(1, 2), 1) == Fraction(1, 2));
+    assert(Fraction(Fraction(1, 2), 2) == Fraction(1, 4));
+
+    assert(Fraction(Fraction(1, 2), Fraction(1, 2)) == 1);
+    assert(Fraction(Fraction(1, 2), Fraction(2, 3)) == Fraction(3, 4));
 
     try
     {

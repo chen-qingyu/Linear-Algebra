@@ -50,6 +50,39 @@ Fraction::Fraction(int num, int den)
     simplify();
 }
 
+Fraction::Fraction(int num, Fraction den)
+{
+    if (den == 0)
+    {
+        throw std::runtime_error("Error: Zero denominator.");
+    }
+
+    (*this) = num / den;
+    simplify();
+}
+
+Fraction::Fraction(Fraction num, int den)
+{
+    if (den == 0)
+    {
+        throw std::runtime_error("Error: Zero denominator.");
+    }
+
+    (*this) = num / den;
+    simplify();
+}
+
+Fraction::Fraction(Fraction num, Fraction den)
+{
+    if (den == 0)
+    {
+        throw std::runtime_error("Error: Zero denominator.");
+    }
+
+    (*this) = num / den;
+    simplify();
+}
+
 /*
  * Fraction (op) Fraction
  */

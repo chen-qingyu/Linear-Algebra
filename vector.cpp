@@ -5,9 +5,10 @@
  * Date: 2022.01.06
  ******************************************/
 
-#include "vector.h"
+#include <cfloat>
+#include <cmath>
 
-#include <math.h>
+#include "vector.h"
 
 /*******************
  * public function
@@ -58,7 +59,7 @@ std::string Vector::toString() const
     }
     else
     {
-        for (auto f : elements)
+        for (const auto& f : elements)
         {
             str += f.toString() + " ";
         }
@@ -139,6 +140,11 @@ Vector Vector::operator*(const Fraction& f) const
     return result;
 }
 
+Vector Vector::operator/(const Fraction& f) const
+{
+    return operator*(Fraction(1, f));
+}
+
 double Vector::length() const
 {
     if (size == 0)
@@ -151,7 +157,36 @@ double Vector::length() const
     {
         result += elements[i] * elements[i];
     }
-    return sqrt(result);
+    return std::sqrt(result);
+}
+
+bool Vector::isVerticalTo(const Vector& v) const
+{
+    if (size != v.size)
+    {
+        throw std::runtime_error("Error: Multiply two vectors of different lengths.");
+    }
+    if (size == 0)
+    {
+        throw std::runtime_error("Error: The vectors are empty.");
+    }
+
+    return (*this) * v == 0;
+}
+
+bool Vector::isParallelTo(const Vector& v) const
+{
+    if (size != v.size)
+    {
+        throw std::runtime_error("Error: Multiply two vectors of different lengths.");
+    }
+    if (size == 0)
+    {
+        throw std::runtime_error("Error: The vectors are empty.");
+    }
+
+    // |(*this) * v)| eq |length() * v.length()|
+    return std::abs((double)((*this) * v)) - std::abs(length() * v.length()) < DBL_EPSILON;
 }
 
 /*******************

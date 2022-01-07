@@ -1,8 +1,6 @@
 #ifndef VECTOR_TEST_H
 #define VECTOR_TEST_H
 
-#include "vector.h"
-
 class VectorTest
 {
 public:
@@ -17,6 +15,7 @@ private:
     static void op2();    // dot product
     static void op3();    // scalar multiplication
     static void len();    // length()
+    static void vp();     // isVerticalTo() isParallelTo()
     static void all();    // comprehensive
 };
 
