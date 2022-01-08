@@ -19,16 +19,19 @@ using std::string;
 class Irrational
 {
     friend class IrrationalTest;
+    friend class Fraction;
+    friend class Vector;
 
 private:
     class Item
     {
         friend class IrrationalTest;
-        friend class Irrational;
+        friend class Fraction;
+        friend class Vector;
 
     private:
         Fraction coef;  // coefficient
-        int rational;     // rational number
+        int rational;   // rational number
         Fraction power; // power
 
         void simplify();
@@ -48,6 +51,7 @@ private:
 public:
     Irrational(Item item = Item());
     Irrational(list<Item> irrational);
+    Irrational(int n);
 
     bool operator==(const Irrational& ir) const;
 

@@ -15,13 +15,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    fraction.cpp \
-    fractiontest.cpp \
-    irrational.cpp \
-    irrationaltest.cpp \
     main.cpp \
+    fraction.cpp \
     vector.cpp \
-    vectortest.cpp
+    irrational.cpp \
+    test/fractiontest.cpp \
+    test/vectortest.cpp \
+    test/irrationaltest.cpp
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -29,10 +29,10 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
-    fraction.h \
-    fractiontest.h \
-    irrational.h \
-    irrationaltest.h \
     test.h \
+    fraction.h \
     vector.h \
-    vectortest.h
+    irrational.h \
+    test/fractiontest.h \
+    test/vectortest.h \
+    test/irrationaltest.h

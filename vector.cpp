@@ -26,6 +26,16 @@ Vector::Vector(vector<Irrational> elements)
     this->size = elements.size();
 }
 
+Vector::Vector(vector<Fraction> elements)
+{
+    vector<Irrational> tmp;
+    for (auto& f : elements)
+    {
+        tmp.push_back(Irrational::Item(f));
+    }
+    this->elements = tmp;
+}
+
 Vector& Vector::append(const Irrational& f)
 {
     elements.push_back(f);

@@ -28,6 +28,7 @@ public:
 
     Vector();
     Vector(vector<Irrational> elements);
+    Vector(vector<Fraction> elements);
 
     Vector& append(const Irrational& f);
     Vector& append(const Vector& v);

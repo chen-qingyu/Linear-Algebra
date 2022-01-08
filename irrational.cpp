@@ -165,6 +165,12 @@ Irrational::Irrational(list<Item> irrational)
     //    simplify();
 }
 
+Irrational::Irrational(int n)
+{
+    this->irrational = {Item(1, n, 1)};
+    size = 1;
+}
+
 bool Irrational::operator==(const Irrational& ir) const
 {
     if (size == ir.size)
