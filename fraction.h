@@ -13,6 +13,8 @@
 
 class Fraction
 {
+    friend class Irrational;
+
 private:
     int num; // 分子 Numerator
     int den; // 分母 Denominator

@@ -20,13 +20,13 @@ Vector::Vector()
     this->size = 0;
 }
 
-Vector::Vector(vector<Fraction> elements)
+Vector::Vector(vector<Irrational> elements)
 {
     this->elements = elements;
     this->size = elements.size();
 }
 
-Vector& Vector::append(const Fraction& f)
+Vector& Vector::append(const Irrational& f)
 {
     elements.push_back(f);
     size += 1;
@@ -40,7 +40,7 @@ Vector& Vector::append(const Vector& v)
     return *this;
 }
 
-Fraction& Vector::operator[](size_t idx)
+Irrational& Vector::operator[](size_t idx)
 {
     return elements[idx];
 }
@@ -106,7 +106,7 @@ Vector Vector::operator-(const Vector& v) const
     return result;
 }
 
-Fraction Vector::operator*(const Vector& v) const
+Irrational Vector::operator*(const Vector& v) const
 {
     if (size != v.size)
     {
@@ -117,7 +117,7 @@ Fraction Vector::operator*(const Vector& v) const
         throw std::runtime_error("Error: The vectors are empty.");
     }
 
-    Fraction result;
+    Irrational result;
     for (size_t i = 0; i < size; ++i)
     {
         result += elements[i] * v.elements[i];
@@ -125,7 +125,7 @@ Fraction Vector::operator*(const Vector& v) const
     return result;
 }
 
-Vector Vector::operator*(const Fraction& f) const
+Vector Vector::operator*(const Irrational& f) const
 {
     if (size == 0)
     {
@@ -140,9 +140,9 @@ Vector Vector::operator*(const Fraction& f) const
     return result;
 }
 
-Vector Vector::operator/(const Fraction& f) const
+Vector Vector::operator/(const Irrational& f) const
 {
-    return operator*(Fraction(1, f));
+    return operator*(Irrational(1, f));
 }
 
 double Vector::length() const
@@ -164,7 +164,7 @@ bool Vector::isVerticalTo(const Vector& v) const
 {
     if (size != v.size)
     {
-        throw std::runtime_error("Error: Multiply two vectors of different lengths.");
+        throw std::runtime_error("Error: Two vectors of different lengths.");
     }
     if (size == 0)
     {
@@ -178,7 +178,7 @@ bool Vector::isParallelTo(const Vector& v) const
 {
     if (size != v.size)
     {
-        throw std::runtime_error("Error: Multiply two vectors of different lengths.");
+        throw std::runtime_error("Error: Two vectors of different lengths.");
     }
     if (size == 0)
     {
@@ -187,6 +187,16 @@ bool Vector::isParallelTo(const Vector& v) const
 
     // |(*this) * v)| eq |length() * v.length()|
     return std::abs((double)((*this) * v)) - std::abs(length() * v.length()) < DBL_EPSILON;
+}
+
+Vector Vector::unitization() const
+{
+    if (size == 0)
+    {
+        throw std::runtime_error("Error: The vector is empty.");
+    }
+
+    return (*this) / length();
 }
 
 /*******************
@@ -198,7 +208,7 @@ std::ostream& operator<<(std::ostream& os, const Vector& v)
     return os << v.toString();
 }
 
-Vector operator*(const Fraction& f, const Vector& v)
+Vector operator*(const Irrational& f, const Vector& v)
 {
     if (v.size == 0)
     {

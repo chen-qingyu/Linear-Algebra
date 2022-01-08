@@ -1,4 +1,6 @@
 #include <assert.h>
+#include <cfloat>
+#include <cmath>
 
 #include "vector.h"
 #include "vectortest.h"
@@ -15,6 +17,7 @@ void VectorTest::test()
     op3();
     len();
     vp();
+    unit();
     all();
     std::cout << "==== VectorTest::test(): All test OK! ====" << std::endl;
 }
@@ -49,11 +52,11 @@ void VectorTest::append()
 
 void VectorTest::op()
 {
-    Vector a = Vector({-1, 0, 1, Fraction(2, 4)});
+    Vector a = Vector({-1, 0, 1, Irrational(2, 4)});
     assert(a[0] == -1);
     assert(a[1] == 0);
     assert(a[2] == 1);
-    assert(a[3] == Fraction(1, 2));
+    assert(a[3] == Irrational(1, 2));
     a[0] = 233;
     assert(a[0] == 233);
     a[10] = 666;
@@ -66,7 +69,7 @@ void VectorTest::tostr()
 {
     assert(Vector().toString() == "[]");
     assert(Vector({1, 2, 3}).toString() == "[1 2 3]");
-    assert(Vector({0, Fraction(1, 2), Fraction(2, 3)}).toString() == "[0 1/2 2/3]");
+    assert(Vector({0, Irrational(1, 2), Irrational(2, 3)}).toString() == "[0 1/2 2/3]");
 
     std::cout << "tostr(): toString() test OK." << std::endl;
 }
@@ -154,7 +157,7 @@ void VectorTest::op2()
     Vector v1 = Vector({1, 1});
     Vector v2 = Vector({1, 1});
 
-    Fraction f1 = v1 * v2;
+    Irrational f1 = v1 * v2;
     assert(v1 * v2 == 2);
     assert(2 == v2 * v1);
     assert(v1 == Vector({1, 1}));
@@ -193,10 +196,10 @@ void VectorTest::op2()
 
 void VectorTest::op3()
 {
-    Fraction f = Fraction(1, 2);
+    Irrational f = Irrational(1, 2);
     Vector v = Vector({1, 1, 1});
-    assert(v * f == Vector({Fraction(1, 2), Fraction(1, 2), Fraction(1, 2)}));
-    assert(f * v == Vector({Fraction(1, 2), Fraction(1, 2), Fraction(1, 2)}));
+    assert(v * f == Vector({Irrational(1, 2), Irrational(1, 2), Irrational(1, 2)}));
+    assert(f * v == Vector({Irrational(1, 2), Irrational(1, 2), Irrational(1, 2)}));
     assert(v * f == f * v);
     assert(v == Vector({1, 1, 1}));
     assert(v * 10 == Vector({10, 10, 10}));
@@ -222,12 +225,12 @@ void VectorTest::op3()
 
     assert(v == Vector({1, 1, 1}));
     assert(v / 1 == Vector({1, 1, 1}));
-    assert(v / 2 == Vector({Fraction(1, 2), Fraction(1, 2), Fraction(1, 2)}));
-    assert(v / Fraction(1, 2) == Vector({2, 2, 2}));
-    assert(v / Fraction(1, 99) == Vector({99, 99, 99}));
+    assert(v / 2 == Vector({Irrational(1, 2), Irrational(1, 2), Irrational(1, 2)}));
+    assert(v / Irrational(1, 2) == Vector({2, 2, 2}));
+    assert(v / Irrational(1, 99) == Vector({99, 99, 99}));
     try
     {
-        v / Fraction(1, 0);
+        v / Irrational(1, 0);
     }
     catch (std::runtime_error e)
     {
@@ -286,6 +289,15 @@ void VectorTest::vp()
     assert(v.isParallelTo(Vector({-1, -1, -9})));
 
     std::cout << "vp(): isVerticalTo() isParallelTo() test OK." << std::endl;
+}
+
+void VectorTest::unit()
+{
+    Vector v = Vector({1, 1});
+
+    assert(std::abs(v.unitization().length()) - 1 < DBL_EPSILON);
+
+    std::cout << "unit(): unitization() test OK." << std::endl;
 }
 
 void VectorTest::all()

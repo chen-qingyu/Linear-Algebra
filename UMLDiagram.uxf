@@ -97,9 +97,8 @@ operator == &gt; &lt; &gt;= &lt;=(int, const Fraction&amp;): bool
 + length(): double
 
 + isVerticalTo(const Vector&amp;): bool
-//{x*y==0}
 + isParallelTo(const Vector&amp;): bool
-//{a1:b1==a2:b2==...==an:bn}
+
 + unitization(): Vector
 
 &lt;&lt;friend&gt;&gt;
@@ -210,8 +209,8 @@ bg=black</panel_attributes>
 
 1. 以列存储要快一些
 
-2. 快速矩阵乘法时间复杂度小于O(N^3)
-   大概是O(N^2 * Log2.7 N)左右
+2. Strassen算法做矩阵乘法时间复杂度小于O(N^3)
+   大概是O(N^2.81)左右
 
 3. 寄存器优化
 

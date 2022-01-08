@@ -12,27 +12,27 @@
 #include <string>
 #include <vector>
 
-#include "fraction.h"
+#include "irrational.h"
 
 using std::vector;
 
 class Vector
 {
 private:
-    vector<Fraction> elements;
+    vector<Irrational> elements;
 
 public:
-    using size_t = vector<Fraction>::size_type;
+    using size_t = vector<Irrational>::size_type;
 
     size_t size;
 
     Vector();
-    Vector(vector<Fraction> elements);
+    Vector(vector<Irrational> elements);
 
-    Vector& append(const Fraction& f);
+    Vector& append(const Irrational& f);
     Vector& append(const Vector& v);
 
-    Fraction& operator[](size_t idx);
+    Irrational& operator[](size_t idx);
     bool operator==(const Vector& v) const;
 
     std::string toString() const;
@@ -43,17 +43,19 @@ public:
 
     // dot product
     // Vector * Vector -> Fraction
-    Fraction operator*(const Vector& v) const;
+    Irrational operator*(const Vector& v) const;
 
     // scalar multiplication
     // Vector * / Fraction -> Vector
-    Vector operator*(const Fraction& f) const;
-    Vector operator/(const Fraction& f) const;
+    Vector operator*(const Irrational& f) const;
+    Vector operator/(const Irrational& f) const;
 
     double length() const;
 
     bool isVerticalTo(const Vector& v) const;
     bool isParallelTo(const Vector& v) const;
+
+    Vector unitization() const;
 
     /*
      * friend function
@@ -64,7 +66,7 @@ public:
 
     // Vector * Fraction -> Vector
     // scalar multiplication
-    friend Vector operator*(const Fraction& f, const Vector& v);
+    friend Vector operator*(const Irrational& f, const Vector& v);
 };
 
 #endif // VECTOR_H

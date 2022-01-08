@@ -17,6 +17,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     fraction.cpp \
     fractiontest.cpp \
+    irrational.cpp \
+    irrationaltest.cpp \
     main.cpp \
     vector.cpp \
     vectortest.cpp
@@ -29,6 +31,8 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 HEADERS += \
     fraction.h \
     fractiontest.h \
+    irrational.h \
+    irrationaltest.h \
     test.h \
     vector.h \
     vectortest.h
