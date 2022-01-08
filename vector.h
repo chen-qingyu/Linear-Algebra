@@ -1,8 +1,9 @@
 /******************************************
- * File: vector.h
+ * FileName: vector.h
+ * Brief: 能够精确运算和表示的向量
  * Author: 青羽
  * Blog: https://chen-qingyu.github.io/
- * Date: 2022.01.06
+ * CreateDate: 2022.01.06
  ******************************************/
 
 #ifndef VECTOR_H
@@ -12,62 +13,88 @@
 #include <string>
 #include <vector>
 
-#include "irrational.h"
+#include "real.h"
 
+using std::string;
 using std::vector;
 
 class Vector
 {
 private:
-    vector<Irrational> elements;
+    vector<Real> reals; // 每个元素都是实数
 
 public:
-    using size_t = vector<Irrational>::size_type;
+    using size_t = vector<Real>::size_type;
 
-    size_t size;
+    size_t size; // 元素个数
 
+    /*
+     * constructor
+     */
     Vector();
-    Vector(vector<Irrational> elements);
-    Vector(vector<Fraction> elements);
+    //    Vector(const vector<Real>& reals);
+    Vector(vector<Fraction> reals);
 
-    Vector& append(const Irrational& f);
+    /*
+     * append element
+     */
+    Vector& append(const Real& f);
     Vector& append(const Vector& v);
 
-    Irrational& operator[](size_t idx);
+    /*
+     * Vector[]
+     */
+    Real& operator[](size_t idx);
+
+    /*
+     * Vector (cmp) Vector
+     */
     bool operator==(const Vector& v) const;
 
-    std::string toString() const;
+    /*
+     * type conversion
+     */
+    string toString() const;
 
+    /*
+     * Vector (op) Vector
+     */
     // Vector + - Vector -> Vector
     Vector operator+(const Vector& v) const;
     Vector operator-(const Vector& v) const;
 
     // dot product
-    // Vector * Vector -> Fraction
-    Irrational operator*(const Vector& v) const;
-
-    // scalar multiplication
-    // Vector * / Fraction -> Vector
-    Vector operator*(const Irrational& f) const;
-    Vector operator/(const Irrational& f) const;
-
-    double length() const;
-
-    bool isVerticalTo(const Vector& v) const;
-    bool isParallelTo(const Vector& v) const;
-
-    Vector unitization() const;
+    // Vector * Vector -> Real
+    Real operator*(const Vector& v) const;
 
     /*
-     * friend function
+     * Vector (op) Real
      */
+    // scalar multiplication
+    // Vector * / Real -> Vector
+    Vector operator*(const Real& f) const;
+    Vector operator/(const Real& f) const;
 
-    // std::cout << Fraction
+    /*
+     * othors
+     */
+    Real length() const;
+    bool isVerticalTo(const Vector& v) const;
+    bool isParallelTo(const Vector& v) const;
+    Vector unitization() const;
+
+    /*******************
+     * friend function
+     *******************/
+
+    /*
+     * std::cout << Fraction
+     */
     friend std::ostream& operator<<(std::ostream& os, const Vector& v);
 
-    // Vector * Fraction -> Vector
+    // Real * Vector -> Vector
     // scalar multiplication
-    friend Vector operator*(const Irrational& f, const Vector& v);
+    friend Vector operator*(const Real& f, const Vector& v);
 };
 
 #endif // VECTOR_H

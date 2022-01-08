@@ -8,7 +8,7 @@ int main(int argc, char* argv[])
 
     FractionTest::test();
     VectorTest::test();
-    IrrationalTest::test();
+    RealTest::test();
 
     return a.exec();
 }

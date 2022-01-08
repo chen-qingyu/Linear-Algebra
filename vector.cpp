@@ -1,8 +1,9 @@
 /******************************************
- * File: vector.cpp
+ * FileName: vector.cpp
+ * Brief: 能够精确运算和表示的向量
  * Author: 青羽
  * Blog: https://chen-qingyu.github.io/
- * Date: 2022.01.06
+ * CreateDate: 2022.01.06
  ******************************************/
 
 #include <cfloat>
@@ -14,62 +15,82 @@
  * public function
  *******************/
 
+/*
+ * constructor
+ */
+
 Vector::Vector()
 {
-    this->elements = {};
+    this->reals = {};
     this->size = 0;
 }
 
-Vector::Vector(vector<Irrational> elements)
-{
-    this->elements = elements;
-    this->size = elements.size();
-}
+//Vector::Vector(vector<Real> reals)
+//{
+//    this->reals = reals;
+//    this->size = reals.size();
+//}
 
-Vector::Vector(vector<Fraction> elements)
+Vector::Vector(vector<Fraction> reals)
 {
-    vector<Irrational> tmp;
-    for (auto& f : elements)
+    vector<Real> tmp;
+    for (auto& f : reals)
     {
-        tmp.push_back(Irrational::Item(f));
+        tmp.push_back(Real::Item(f));
     }
-    this->elements = tmp;
+    this->reals = tmp;
 }
 
-Vector& Vector::append(const Irrational& f)
+/*
+ * append element
+ */
+
+Vector& Vector::append(const Real& f)
 {
-    elements.push_back(f);
+    reals.push_back(f);
     size += 1;
     return *this;
 }
 
 Vector& Vector::append(const Vector& v)
 {
-    elements.insert(elements.end(), v.elements.begin(), v.elements.end());
+    reals.insert(reals.end(), v.reals.begin(), v.reals.end());
     size += v.size;
     return *this;
 }
 
-Irrational& Vector::operator[](size_t idx)
+/*
+ * Vector[]
+ */
+
+Real& Vector::operator[](size_t idx)
 {
-    return elements[idx];
+    return reals[idx];
 }
+
+/*
+ * Vector (cmp) Vector
+ */
 
 bool Vector::operator==(const Vector& v) const
 {
-    return elements == v.elements;
+    return reals == v.reals;
 }
 
-std::string Vector::toString() const
+/*
+ * type conversion
+ */
+
+string Vector::toString() const
 {
-    std::string str = "[";
+    string str = "[";
     if (size == 0)
     {
         str += "]";
     }
     else
     {
-        for (const auto& f : elements)
+        for (const auto& f : reals)
         {
             str += f.toString() + " ";
         }
@@ -77,6 +98,10 @@ std::string Vector::toString() const
     }
     return str;
 }
+
+/*
+ * Vector (op) Vector
+ */
 
 Vector Vector::operator+(const Vector& v) const
 {
@@ -92,7 +117,7 @@ Vector Vector::operator+(const Vector& v) const
     Vector result = Vector(*this);
     for (size_t i = 0; i < size; ++i)
     {
-        result.elements[i] += v.elements[i];
+        result.reals[i] = result.reals[i] + v.reals[i];
     }
     return result;
 }
@@ -111,12 +136,12 @@ Vector Vector::operator-(const Vector& v) const
     Vector result = Vector(*this);
     for (size_t i = 0; i < size; ++i)
     {
-        result.elements[i] -= v.elements[i];
+        result.reals[i] = result.reals[i] - v.reals[i];
     }
     return result;
 }
 
-Irrational Vector::operator*(const Vector& v) const
+Real Vector::operator*(const Vector& v) const
 {
     if (size != v.size)
     {
@@ -127,15 +152,19 @@ Irrational Vector::operator*(const Vector& v) const
         throw std::runtime_error("Error: The vectors are empty.");
     }
 
-    Irrational result;
+    Real result;
     for (size_t i = 0; i < size; ++i)
     {
-        result += elements[i] * v.elements[i];
+        result = result + reals[i] * v.reals[i];
     }
     return result;
 }
 
-Vector Vector::operator*(const Irrational& f) const
+/*
+ * Vector (op) Real
+ */
+
+Vector Vector::operator*(const Real& f) const
 {
     if (size == 0)
     {
@@ -145,29 +174,40 @@ Vector Vector::operator*(const Irrational& f) const
     Vector result = Vector(*this);
     for (size_t i = 0; i < size; ++i)
     {
-        result.elements[i] *= f;
+        result.reals[i] = result.reals[i] * f;
     }
     return result;
 }
 
-Vector Vector::operator/(const Irrational& f) const
+// TODO
+Vector Vector::operator/(const Real& f) const
 {
-    return operator*(Irrational(1, f));
+    Real r = f;
+    r.poly.front().power *= -1;
+    return operator*(r);
 }
 
-double Vector::length() const
+/*
+ * othors
+ */
+
+Real Vector::length() const
 {
     if (size == 0)
     {
         throw std::runtime_error("Error: The vector is empty.");
     }
 
-    double result = 0;
+    Real result = 0;
     for (size_t i = 0; i < size; ++i)
     {
-        result += elements[i] * elements[i];
+        result = result + reals[i] * reals[i];
     }
-    return std::sqrt(result);
+
+    // TODO
+
+    result.poly.front().power = Fraction(1, 2);
+    return result;
 }
 
 bool Vector::isVerticalTo(const Vector& v) const
@@ -181,7 +221,7 @@ bool Vector::isVerticalTo(const Vector& v) const
         throw std::runtime_error("Error: The vectors are empty.");
     }
 
-    return (*this) * v == 0;
+    return (*this) * v == Real(0);
 }
 
 bool Vector::isParallelTo(const Vector& v) const
@@ -196,7 +236,8 @@ bool Vector::isParallelTo(const Vector& v) const
     }
 
     // |(*this) * v)| eq |length() * v.length()|
-    return std::abs((double)((*this) * v)) - std::abs(length() * v.length()) < DBL_EPSILON;
+    return (*this) * v == length() * v.length()
+           || (*this) * v == length() * v.length() * Real(-1);
 }
 
 Vector Vector::unitization() const
@@ -213,12 +254,18 @@ Vector Vector::unitization() const
  * friend function
  *******************/
 
+/*
+ * std::cout << Fraction
+ */
+
 std::ostream& operator<<(std::ostream& os, const Vector& v)
 {
     return os << v.toString();
 }
 
-Vector operator*(const Irrational& f, const Vector& v)
+// Real * Vector -> Vector
+// scalar multiplication
+Vector operator*(const Real& f, const Vector& v)
 {
     if (v.size == 0)
     {
@@ -228,7 +275,7 @@ Vector operator*(const Irrational& f, const Vector& v)
     Vector result = Vector(v);
     for (Vector::size_t i = 0; i < v.size; ++i)
     {
-        result.elements[i] *= f;
+        result.reals[i] = result.reals[i] * f;
     }
     return result;
 }

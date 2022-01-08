@@ -157,7 +157,7 @@ void VectorTest::op2()
     Vector v1 = Vector({1, 1});
     Vector v2 = Vector({1, 1});
 
-    Fraction f1 = v1 * v2;
+    Real f1 = v1 * v2;
     assert(v1 * v2 == 2);
     assert(2 == v2 * v1);
     assert(v1 == Vector({1, 1}));

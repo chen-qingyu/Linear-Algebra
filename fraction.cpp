@@ -1,8 +1,9 @@
 /******************************************
- * File: fraction.cpp
+ * FileName: fraction.cpp
+ * Brief: 能够精确运算和表示的有理分式
  * Author: 青羽
  * Blog: https://chen-qingyu.github.io/
- * Date: 2021.12.28
+ * CreateDate: 2021.12.28
  ******************************************/
 
 #include "fraction.h"
@@ -38,6 +39,10 @@ void Fraction::simplify()
  * public function
  *******************/
 
+/*
+ * constructor
+ */
+
 Fraction::Fraction(int num, int den)
 {
     if (den == 0)
@@ -50,7 +55,7 @@ Fraction::Fraction(int num, int den)
     simplify();
 }
 
-Fraction::Fraction(int num, Fraction den)
+Fraction::Fraction(int num, const Fraction& den)
 {
     if (den == 0)
     {
@@ -61,7 +66,7 @@ Fraction::Fraction(int num, Fraction den)
     simplify();
 }
 
-Fraction::Fraction(Fraction num, int den)
+Fraction::Fraction(const Fraction& num, int den)
 {
     if (den == 0)
     {
@@ -72,7 +77,7 @@ Fraction::Fraction(Fraction num, int den)
     simplify();
 }
 
-Fraction::Fraction(Fraction num, Fraction den)
+Fraction::Fraction(const Fraction& num, const Fraction& den)
 {
     if (den == 0)
     {
@@ -289,14 +294,18 @@ Fraction Fraction::operator--(int)
     return tmp;
 }
 
+/*
+ * type conversion
+ */
+
 Fraction::operator double() const
 {
     return (double)num / (double)den;
 }
 
-std::string Fraction::toString() const
+string Fraction::toString() const
 {
-    std::string str;
+    string str = "";
     if (num % den == 0)
     {
         str = std::to_string(num / den);
@@ -311,6 +320,10 @@ std::string Fraction::toString() const
 /*******************
  * friend function
  *******************/
+
+/*
+ * std::cout << Fraction
+ */
 
 std::ostream& operator<<(std::ostream& os, const Fraction& f)
 {

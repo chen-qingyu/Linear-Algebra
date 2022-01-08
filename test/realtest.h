@@ -1,7 +1,7 @@
-#ifndef IRRATIONALTEST_H
-#define IRRATIONALTEST_H
+#ifndef REALTEST_H
+#define REALTEST_H
 
-class IrrationalTest
+class RealTest
 {
 public:
     static void test();

@@ -17,11 +17,11 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     main.cpp \
     fraction.cpp \
+    real.cpp \
+    test/realtest.cpp \
     vector.cpp \
-    irrational.cpp \
     test/fractiontest.cpp \
-    test/vectortest.cpp \
-    test/irrationaltest.cpp
+    test/vectortest.cpp
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -29,10 +29,10 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
+    real.h \
     test.h \
     fraction.h \
+    test/realtest.h \
     vector.h \
-    irrational.h \
     test/fractiontest.h \
-    test/vectortest.h \
-    test/irrationaltest.h
+    test/vectortest.h

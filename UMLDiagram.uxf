@@ -27,8 +27,8 @@ fontfamily=Monospaced //possible: SansSerif,Serif,Monospaced
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>0</x>
-      <y>60</y>
+      <x>620</x>
+      <y>0</y>
       <w>490</w>
       <h>540</h>
     </coordinates>
@@ -68,8 +68,8 @@ operator == &gt; &lt; &gt;= &lt;=(int, const Fraction&amp;): bool
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>530</x>
-      <y>60</y>
+      <x>1150</x>
+      <y>0</y>
       <w>520</w>
       <h>540</h>
     </coordinates>
@@ -110,8 +110,8 @@ operator*(const Fraction&amp; f, const Vector&amp; v): Vector
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1090</x>
-      <y>60</y>
+      <x>1710</x>
+      <y>0</y>
       <w>510</w>
       <h>540</h>
     </coordinates>
@@ -141,8 +141,8 @@ operator\&lt;&lt;(ostream&amp;, const Matrix&amp;): std::ostream&amp;
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1090</x>
-      <y>640</y>
+      <x>1710</x>
+      <y>580</y>
       <w>510</w>
       <h>480</h>
     </coordinates>
@@ -161,8 +161,8 @@ operator\&lt;&lt;(ostream&amp;, const Matrix&amp;): std::ostream&amp;
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1240</x>
-      <y>590</y>
+      <x>1860</x>
+      <y>530</y>
       <w>30</w>
       <h>70</h>
     </coordinates>
@@ -172,8 +172,8 @@ operator\&lt;&lt;(ostream&amp;, const Matrix&amp;): std::ostream&amp;
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>480</x>
-      <y>230</y>
+      <x>1100</x>
+      <y>170</y>
       <w>70</w>
       <h>30</h>
     </coordinates>
@@ -185,8 +185,8 @@ bg=black</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1040</x>
-      <y>230</y>
+      <x>1660</x>
+      <y>170</y>
       <w>70</w>
       <h>30</h>
     </coordinates>
@@ -198,8 +198,8 @@ bg=black</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>0</x>
-      <y>650</y>
+      <x>620</x>
+      <y>590</y>
       <w>700</w>
       <h>260</h>
     </coordinates>
@@ -215,6 +215,47 @@ bg=black</panel_attributes>
 3. 寄存器优化
 
 4. 嵌入汇编</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>170</x>
+      <y>320</y>
+      <w>330</w>
+      <h>230</h>
+    </coordinates>
+    <panel_attributes>Real
+
+--
+
+- list&lt;Item&gt; poly; // polynomial of Item
+- int size;
+
+--
+
+- void simplify();</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>60</x>
+      <y>590</y>
+      <w>340</w>
+      <h>300</h>
+    </coordinates>
+    <panel_attributes>Item
+
+--
+
+- coef: Fraction
+- rational: int
+- power: Fraction
+
+--
+
+- simplify(): void</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>
