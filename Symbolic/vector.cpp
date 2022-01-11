@@ -33,7 +33,7 @@ Vector::Vector()
 //}
 
 // TODO
-Vector::Vector(vector<Fraction> reals)
+Vector::Vector(const vector<Fraction>& reals)
 {
     vector<Real> tmp;
     for (auto& f : reals)
@@ -48,10 +48,16 @@ Vector::Vector(vector<Fraction> reals)
  * append element
  */
 
-Vector& Vector::append(const Real& f)
+Vector& Vector::append(const Real& r)
 {
-    reals.push_back(f);
+    reals.push_back(r);
     size += 1;
+    return *this;
+}
+
+// TODO
+Vector& Vector::append(const vector<Real>& reals)
+{
     return *this;
 }
 
@@ -72,7 +78,7 @@ Real& Vector::operator[](size_t idx)
 }
 
 /*
- * Vector (cmp) Vector
+ * Vector == Vector
  */
 
 bool Vector::operator==(const Vector& v) const
@@ -103,7 +109,7 @@ string Vector::toString() const
 }
 
 /*
- * Vector (op) Vector
+ * Vector + - Vector
  */
 
 Vector Vector::operator+(const Vector& v) const
@@ -144,6 +150,10 @@ Vector Vector::operator-(const Vector& v) const
     return result;
 }
 
+/*
+ * dot product
+ */
+
 Real Vector::operator*(const Vector& v) const
 {
     if (size != v.size)
@@ -164,10 +174,10 @@ Real Vector::operator*(const Vector& v) const
 }
 
 /*
- * Vector (op) Real
+ * scalar multiplication
  */
 
-Vector Vector::operator*(const Real& f) const
+Vector Vector::operator*(const Real& r) const
 {
     if (size == 0)
     {
@@ -177,17 +187,17 @@ Vector Vector::operator*(const Real& f) const
     Vector result = Vector(*this);
     for (size_t i = 0; i < size; ++i)
     {
-        result.reals[i] = result.reals[i] * f;
+        result.reals[i] = result.reals[i] * r;
     }
     return result;
 }
 
 // TODO
-Vector Vector::operator/(const Real& f) const
+Vector Vector::operator/(const Real& r) const
 {
-    Real r = f;
-    r.poly.front().power *= -1;
-    return operator*(r);
+    Real rr = r;
+    rr.poly.front().power *= -1;
+    return operator*(rr);
 }
 
 /*
@@ -243,14 +253,14 @@ bool Vector::isParallelTo(const Vector& v) const
            || (*this) * v == length() * v.length() * Real(-1);
 }
 
-Vector Vector::unitization() const
+Vector& Vector::unitize()
 {
     if (size == 0)
     {
         throw std::runtime_error("Error: The vector is empty.");
     }
-
-    return (*this) / length();
+    (*this) = (*this) / length();
+    return *this;
 }
 
 /*******************
@@ -258,7 +268,7 @@ Vector Vector::unitization() const
  *******************/
 
 /*
- * std::cout << Fraction
+ * std::cout << Vector
  */
 
 std::ostream& operator<<(std::ostream& os, const Vector& v)
@@ -266,9 +276,11 @@ std::ostream& operator<<(std::ostream& os, const Vector& v)
     return os << v.toString();
 }
 
-// Real * Vector -> Vector
-// scalar multiplication
-Vector operator*(const Real& f, const Vector& v)
+/*
+ * scalar multiplication
+ */
+
+Vector operator*(const Real& r, const Vector& v)
 {
     if (v.size == 0)
     {
@@ -278,7 +290,7 @@ Vector operator*(const Real& f, const Vector& v)
     Vector result = Vector(v);
     for (Vector::size_t i = 0; i < v.size; ++i)
     {
-        result.reals[i] = result.reals[i] * f;
+        result.reals[i] = result.reals[i] * r;
     }
     return result;
 }

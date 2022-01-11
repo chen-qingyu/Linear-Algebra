@@ -9,6 +9,7 @@ SOURCES += \
         vector.cpp
 
 HEADERS += \
+    double.h \
     test.h \
     test/vectortest.h \
     vector.h

@@ -295,9 +295,9 @@ void VectorTest::unit()
 {
     Vector v = Vector({1, 1});
 
-    assert(std::abs(v.unitization().length()) - 1 < DBL_EPSILON);
+    assert(std::abs(v.unitize().length()) - 1 < DBL_EPSILON);
 
-    std::cout << "unit(): unitization() test OK." << std::endl;
+    std::cout << "unit(): unitize() test OK." << std::endl;
 }
 
 void VectorTest::all()

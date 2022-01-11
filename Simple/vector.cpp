@@ -6,7 +6,6 @@
  * CreateDate: 2022.01.11
  ******************************************/
 
-#include <cfloat>
 #include <cmath>
 
 #include "vector.h"
@@ -25,7 +24,7 @@ Vector::Vector()
     this->size = 0;
 }
 
-Vector::Vector(vector<double> doubles)
+Vector::Vector(const vector<double>& doubles)
 {
     this->doubles = doubles;
     this->size = doubles.size();
@@ -39,6 +38,13 @@ Vector& Vector::append(const double& d)
 {
     doubles.push_back(d);
     size += 1;
+    return *this;
+}
+
+Vector& Vector::append(const vector<double>& ds)
+{
+    doubles.insert(doubles.end(), ds.begin(), ds.end());
+    size += ds.size();
     return *this;
 }
 
@@ -59,12 +65,23 @@ double& Vector::operator[](size_t idx)
 }
 
 /*
- * Vector (cmp) Vector
+ * Vector == Vector
  */
 
 bool Vector::operator==(const Vector& v) const
 {
-    return doubles == v.doubles;
+    if (size != v.size)
+    {
+        return false;
+    }
+    for (size_t i = 0; i < size; ++i)
+    {
+        if (ne(doubles[i], v.doubles[i]))
+        {
+            return false;
+        }
+    }
+    return true;
 }
 
 /*
@@ -90,7 +107,7 @@ string Vector::toString() const
 }
 
 /*
- * Vector (op) Vector
+ * Vector + - Vector
  */
 
 Vector Vector::operator+(const Vector& v) const
@@ -131,6 +148,10 @@ Vector Vector::operator-(const Vector& v) const
     return result;
 }
 
+/*
+ * dot product
+ */
+
 double Vector::operator*(const Vector& v) const
 {
     if (size != v.size)
@@ -151,7 +172,7 @@ double Vector::operator*(const Vector& v) const
 }
 
 /*
- * Vector (op) double
+ * scalar multiplication
  */
 
 Vector Vector::operator*(const double& d) const
@@ -215,7 +236,7 @@ bool Vector::isVerticalTo(const Vector& v) const
         throw std::runtime_error("Error: The vectors are empty.");
     }
 
-    return (*this) * v == 0;
+    return eq((*this) * v, 0);
 }
 
 bool Vector::isParallelTo(const Vector& v) const
@@ -229,45 +250,47 @@ bool Vector::isParallelTo(const Vector& v) const
         throw std::runtime_error("Error: The vectors are empty.");
     }
 
-    return std::abs((*this) * v) == length() * v.length();
+    return eq(std::abs((*this) * v), length() * v.length());
+}
+
+Vector& Vector::unitize()
+{
+    if (size == 0)
+    {
+        throw std::runtime_error("Error: The vector is empty.");
+    }
+    (*this) = (*this) / length();
+    return *this;
 }
 
 /*******************
- * inline function
+ * friend function
  *******************/
 
-// EQual
-inline bool eq(double a, double b)
+/*
+ * std::cout << Vector
+ */
+
+std::ostream& operator<<(std::ostream& os, const Vector& v)
 {
-    return std::abs(a - b) < DBL_EPSILON;
+    return os << v.toString();
 }
 
-// Not Equal
-inline bool ne(double a, double b)
-{
-    return !eq(a, b);
-}
+/*
+ * scalar multiplication
+ */
 
-// Greater Than
-inline bool gt(double a, double b)
+Vector operator*(const double& d, const Vector& v)
 {
-    return a - b > DBL_EPSILON;
-}
+    if (v.size == 0)
+    {
+        throw std::runtime_error("Error: The vector is empty.");
+    }
 
-// Less Than
-inline bool lt(double a, double b)
-{
-    return a - b < DBL_EPSILON;
-}
-
-// Greater than or Equal
-inline bool ge(double a, double b)
-{
-    return gt(a, b) || eq(a, b);
-}
-
-// Less than or Equal
-inline bool le(double a, double b)
-{
-    return lt(a, b) || eq(a, b);
+    Vector result = Vector(v);
+    for (Vector::size_t i = 0; i < v.size; ++i)
+    {
+        result.doubles[i] *= d;
+    }
+    return result;
 }

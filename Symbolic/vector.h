@@ -33,12 +33,13 @@ public:
      */
     Vector();
     //    Vector(const vector<Real>& reals);
-    Vector(vector<Fraction> reals);
+    Vector(const vector<Fraction>& reals);
 
     /*
      * append element
      */
     Vector& append(const Real& r);
+    Vector& append(const vector<Real>& reals);
     Vector& append(const Vector& v);
 
     /*
@@ -47,7 +48,7 @@ public:
     Real& operator[](size_t idx);
 
     /*
-     * Vector (cmp) Vector
+     * Vector == Vector
      */
     bool operator==(const Vector& v) const;
 
@@ -57,21 +58,19 @@ public:
     string toString() const;
 
     /*
-     * Vector (op) Vector
+     * Vector + - Vector
      */
-    // Vector + - Vector -> Vector
     Vector operator+(const Vector& v) const;
     Vector operator-(const Vector& v) const;
 
-    // dot product
-    // Vector * Vector -> Real
+    /*
+     * dot product
+     */
     Real operator*(const Vector& v) const;
 
     /*
-     * Vector (op) Real
+     * scalar multiplication
      */
-    // scalar multiplication
-    // Vector * / Real -> Vector
     Vector operator*(const Real& r) const;
     Vector operator/(const Real& r) const;
 
@@ -81,7 +80,7 @@ public:
     Real length() const;
     bool isVerticalTo(const Vector& v) const;
     bool isParallelTo(const Vector& v) const;
-    Vector unitization() const;
+    Vector& unitize();
 
     /*******************
      * friend function
@@ -92,8 +91,9 @@ public:
      */
     friend std::ostream& operator<<(std::ostream& os, const Vector& v);
 
-    // Real * Vector -> Vector
-    // scalar multiplication
+    /*
+     * scalar multiplication
+     */
     friend Vector operator*(const Real& r, const Vector& v);
 };
 

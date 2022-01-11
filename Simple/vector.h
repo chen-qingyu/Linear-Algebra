@@ -13,6 +13,8 @@
 #include <string>
 #include <vector>
 
+#include "double.h"
+
 using std::cin;
 using std::cout;
 using std::endl;
@@ -33,12 +35,13 @@ public:
      * constructor
      */
     Vector();
-    Vector(vector<double> doubles);
+    Vector(const vector<double>& doubles);
 
     /*
      * append element
      */
     Vector& append(const double& d);
+    Vector& append(const vector<double>& doubles);
     Vector& append(const Vector& v);
 
     /*
@@ -47,7 +50,7 @@ public:
     double& operator[](size_t idx);
 
     /*
-     * Vector (cmp) Vector
+     * Vector == Vector
      */
     bool operator==(const Vector& v) const;
 
@@ -57,21 +60,19 @@ public:
     string toString() const;
 
     /*
-     * Vector (op) Vector
+     * Vector + - Vector
      */
-    // Vector + - Vector -> Vector
     Vector operator+(const Vector& v) const;
     Vector operator-(const Vector& v) const;
 
-    // dot product
-    // Vector * Vector -> double
+    /*
+     * dot product
+     */
     double operator*(const Vector& v) const;
 
     /*
-     * Vector (op) double
+     * scalar multiplication
      */
-    // scalar multiplication
-    // Vector * / double -> Vector
     Vector operator*(const double& d) const;
     Vector operator/(const double& d) const;
 
@@ -81,7 +82,7 @@ public:
     double length() const;
     bool isVerticalTo(const Vector& v) const;
     bool isParallelTo(const Vector& v) const;
-    Vector unitization() const;
+    Vector& unitize();
 
     /*******************
      * friend function
@@ -92,8 +93,9 @@ public:
      */
     friend std::ostream& operator<<(std::ostream& os, const Vector& v);
 
-    // double * Vector -> Vector
-    // scalar multiplication
+    /*
+     * scalar multiplication
+     */
     friend Vector operator*(const double& d, const Vector& v);
 };
 

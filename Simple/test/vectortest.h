@@ -16,7 +16,7 @@ private:
     static void op3();    // scalar multiplication
     static void len();    // length()
     static void vp();     // isVerticalTo() isParallelTo()
-    static void unit();   // unitization()
+    static void unit();   // unitize()
     static void all();    // comprehensive
 };
 
