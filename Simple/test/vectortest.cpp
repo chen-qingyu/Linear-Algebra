@@ -1,5 +1,4 @@
 #include <assert.h>
-#include <cfloat>
 #include <cmath>
 
 #include "vector.h"
@@ -7,7 +6,7 @@
 
 void VectorTest::test()
 {
-    cout << "==== VectorTest::test(): Begin test. ====" << endl;
+    std::cout << "==== VectorTest::test(): Begin test. ====" << std::endl;
     vect();
     append();
     op();
@@ -19,7 +18,7 @@ void VectorTest::test()
     vp();
     unit();
     all();
-    cout << "==== VectorTest::test(): All test OK! ====" << endl;
+    std::cout << "==== VectorTest::test(): All test OK! ====" << std::endl;
 }
 
 void VectorTest::vect()

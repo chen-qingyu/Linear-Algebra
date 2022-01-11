@@ -259,6 +259,7 @@ Vector& Vector::unitize()
     {
         throw std::runtime_error("Error: The vector is empty.");
     }
+
     (*this) = (*this) / length();
     return *this;
 }
@@ -282,15 +283,5 @@ std::ostream& operator<<(std::ostream& os, const Vector& v)
 
 Vector operator*(const double& d, const Vector& v)
 {
-    if (v.size == 0)
-    {
-        throw std::runtime_error("Error: The vector is empty.");
-    }
-
-    Vector result = Vector(v);
-    for (Vector::size_t i = 0; i < v.size; ++i)
-    {
-        result.doubles[i] *= d;
-    }
-    return result;
+    return v * d;
 }

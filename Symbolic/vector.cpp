@@ -195,6 +195,11 @@ Vector Vector::operator*(const Real& r) const
 // TODO
 Vector Vector::operator/(const Real& r) const
 {
+    if (size == 0)
+    {
+        throw std::runtime_error("Error: The vector is empty.");
+    }
+
     Real rr = r;
     rr.poly.front().power *= -1;
     return operator*(rr);
@@ -259,6 +264,7 @@ Vector& Vector::unitize()
     {
         throw std::runtime_error("Error: The vector is empty.");
     }
+
     (*this) = (*this) / length();
     return *this;
 }
@@ -282,15 +288,5 @@ std::ostream& operator<<(std::ostream& os, const Vector& v)
 
 Vector operator*(const Real& r, const Vector& v)
 {
-    if (v.size == 0)
-    {
-        throw std::runtime_error("Error: The vector is empty.");
-    }
-
-    Vector result = Vector(v);
-    for (Vector::size_t i = 0; i < v.size; ++i)
-    {
-        result.reals[i] = result.reals[i] * r;
-    }
-    return result;
+    return v * r;
 }
