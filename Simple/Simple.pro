@@ -4,4 +4,11 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += \
-        main.cpp
+        main.cpp \
+        test/vectortest.cpp \
+        vector.cpp
+
+HEADERS += \
+    test.h \
+    test/vectortest.h \
+    vector.h

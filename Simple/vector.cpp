@@ -1,9 +1,9 @@
 /******************************************
  * FileName: vector.cpp
- * Brief: 能够精确运算和表示的向量
+ * Brief: 向量
  * Author: 青羽
  * Blog: https://chen-qingyu.github.io/
- * CreateDate: 2022.01.06
+ * CreateDate: 2022.01.11
  ******************************************/
 
 #include <cfloat>
@@ -21,43 +21,30 @@
 
 Vector::Vector()
 {
-    this->reals = {};
+    this->doubles = {};
     this->size = 0;
 }
 
-// TODO
-//Vector::Vector(vector<Real> reals)
-//{
-//    this->reals = reals;
-//    this->size = reals.size();
-//}
-
-// TODO
-Vector::Vector(vector<Fraction> reals)
+Vector::Vector(vector<double> doubles)
 {
-    vector<Real> tmp;
-    for (auto& f : reals)
-    {
-        tmp.push_back(Real::Item(f));
-    }
-    this->reals = tmp;
-    this->size = reals.size();
+    this->doubles = doubles;
+    this->size = doubles.size();
 }
 
 /*
  * append element
  */
 
-Vector& Vector::append(const Real& f)
+Vector& Vector::append(const double& d)
 {
-    reals.push_back(f);
+    doubles.push_back(d);
     size += 1;
     return *this;
 }
 
 Vector& Vector::append(const Vector& v)
 {
-    reals.insert(reals.end(), v.reals.begin(), v.reals.end());
+    doubles.insert(doubles.end(), v.doubles.begin(), v.doubles.end());
     size += v.size;
     return *this;
 }
@@ -66,9 +53,9 @@ Vector& Vector::append(const Vector& v)
  * Vector[]
  */
 
-Real& Vector::operator[](size_t idx)
+double& Vector::operator[](size_t idx)
 {
-    return reals[idx];
+    return doubles[idx];
 }
 
 /*
@@ -77,7 +64,7 @@ Real& Vector::operator[](size_t idx)
 
 bool Vector::operator==(const Vector& v) const
 {
-    return reals == v.reals;
+    return doubles == v.doubles;
 }
 
 /*
@@ -93,9 +80,9 @@ string Vector::toString() const
     }
     else
     {
-        for (const auto& f : reals)
+        for (const auto& d : doubles)
         {
-            str += f.toString() + " ";
+            str += std::to_string(d) + " ";
         }
         str[str.length() - 1] = ']';
     }
@@ -120,7 +107,7 @@ Vector Vector::operator+(const Vector& v) const
     Vector result = Vector(*this);
     for (size_t i = 0; i < size; ++i)
     {
-        result.reals[i] = result.reals[i] + v.reals[i];
+        result.doubles[i] += v.doubles[i];
     }
     return result;
 }
@@ -139,12 +126,12 @@ Vector Vector::operator-(const Vector& v) const
     Vector result = Vector(*this);
     for (size_t i = 0; i < size; ++i)
     {
-        result.reals[i] = result.reals[i] - v.reals[i];
+        result.doubles[i] -= v.doubles[i];
     }
     return result;
 }
 
-Real Vector::operator*(const Vector& v) const
+double Vector::operator*(const Vector& v) const
 {
     if (size != v.size)
     {
@@ -155,19 +142,19 @@ Real Vector::operator*(const Vector& v) const
         throw std::runtime_error("Error: The vectors are empty.");
     }
 
-    Real result;
+    double result = 0;
     for (size_t i = 0; i < size; ++i)
     {
-        result = result + reals[i] * v.reals[i];
+        result += doubles[i] * v.doubles[i];
     }
     return result;
 }
 
 /*
- * Vector (op) Real
+ * Vector (op) double
  */
 
-Vector Vector::operator*(const Real& f) const
+Vector Vector::operator*(const double& d) const
 {
     if (size == 0)
     {
@@ -177,40 +164,44 @@ Vector Vector::operator*(const Real& f) const
     Vector result = Vector(*this);
     for (size_t i = 0; i < size; ++i)
     {
-        result.reals[i] = result.reals[i] * f;
+        result.doubles[i] *= d;
     }
     return result;
 }
 
-// TODO
-Vector Vector::operator/(const Real& f) const
-{
-    Real r = f;
-    r.poly.front().power *= -1;
-    return operator*(r);
-}
-
-/*
- * othors
- */
-
-Real Vector::length() const
+Vector Vector::operator/(const double& d) const
 {
     if (size == 0)
     {
         throw std::runtime_error("Error: The vector is empty.");
     }
 
-    Real result = 0;
+    Vector result = Vector(*this);
     for (size_t i = 0; i < size; ++i)
     {
-        result = result + reals[i] * reals[i];
+        result.doubles[i] /= d;
+    }
+    return result;
+}
+
+/*
+ * othors
+ */
+
+double Vector::length() const
+{
+    if (size == 0)
+    {
+        throw std::runtime_error("Error: The vector is empty.");
     }
 
-    // TODO
+    double result = 0;
+    for (size_t i = 0; i < size; ++i)
+    {
+        result += doubles[i] * doubles[i];
+    }
 
-    result.poly.front().power = Fraction(1, 2);
-    return result;
+    return std::sqrt(result);
 }
 
 bool Vector::isVerticalTo(const Vector& v) const
@@ -224,7 +215,7 @@ bool Vector::isVerticalTo(const Vector& v) const
         throw std::runtime_error("Error: The vectors are empty.");
     }
 
-    return (*this) * v == Real(0);
+    return (*this) * v == 0;
 }
 
 bool Vector::isParallelTo(const Vector& v) const
@@ -238,47 +229,45 @@ bool Vector::isParallelTo(const Vector& v) const
         throw std::runtime_error("Error: The vectors are empty.");
     }
 
-    // |(*this) * v)| eq |length() * v.length()|
-    return (*this) * v == length() * v.length()
-           || (*this) * v == length() * v.length() * Real(-1);
-}
-
-Vector Vector::unitization() const
-{
-    if (size == 0)
-    {
-        throw std::runtime_error("Error: The vector is empty.");
-    }
-
-    return (*this) / length();
+    return std::abs((*this) * v) == length() * v.length();
 }
 
 /*******************
- * friend function
+ * inline function
  *******************/
 
-/*
- * std::cout << Fraction
- */
-
-std::ostream& operator<<(std::ostream& os, const Vector& v)
+// EQual
+inline bool eq(double a, double b)
 {
-    return os << v.toString();
+    return std::abs(a - b) < DBL_EPSILON;
 }
 
-// Real * Vector -> Vector
-// scalar multiplication
-Vector operator*(const Real& f, const Vector& v)
+// Not Equal
+inline bool ne(double a, double b)
 {
-    if (v.size == 0)
-    {
-        throw std::runtime_error("Error: The vector is empty.");
-    }
+    return !eq(a, b);
+}
 
-    Vector result = Vector(v);
-    for (Vector::size_t i = 0; i < v.size; ++i)
-    {
-        result.reals[i] = result.reals[i] * f;
-    }
-    return result;
+// Greater Than
+inline bool gt(double a, double b)
+{
+    return a - b > DBL_EPSILON;
+}
+
+// Less Than
+inline bool lt(double a, double b)
+{
+    return a - b < DBL_EPSILON;
+}
+
+// Greater than or Equal
+inline bool ge(double a, double b)
+{
+    return gt(a, b) || eq(a, b);
+}
+
+// Less than or Equal
+inline bool le(double a, double b)
+{
+    return lt(a, b) || eq(a, b);
 }

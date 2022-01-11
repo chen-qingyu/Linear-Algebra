@@ -13,4 +13,4 @@ private:
     static void all();   // comprehensive
 };
 
-#endif // IRRATIONALTEST_H
+#endif // REALTEST_H

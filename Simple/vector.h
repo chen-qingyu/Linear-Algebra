@@ -1,9 +1,9 @@
 /******************************************
  * FileName: vector.h
- * Brief: 能够精确运算和表示的向量
+ * Brief: 向量
  * Author: 青羽
  * Blog: https://chen-qingyu.github.io/
- * CreateDate: 2022.01.06
+ * CreateDate: 2022.01.11
  ******************************************/
 
 #ifndef VECTOR_H
@@ -13,18 +13,19 @@
 #include <string>
 #include <vector>
 
-#include "real.h"
-
+using std::cin;
+using std::cout;
+using std::endl;
 using std::string;
 using std::vector;
 
 class Vector
 {
 private:
-    vector<Real> reals; // 每个元素都是实数
+    vector<double> doubles; // 每个元素都是双精度浮点数
 
 public:
-    using size_t = vector<Real>::size_type;
+    using size_t = vector<double>::size_type;
 
     size_t size; // 元素个数
 
@@ -32,19 +33,18 @@ public:
      * constructor
      */
     Vector();
-    //    Vector(const vector<Real>& reals);
-    Vector(vector<Fraction> reals);
+    Vector(vector<double> doubles);
 
     /*
      * append element
      */
-    Vector& append(const Real& r);
+    Vector& append(const double& d);
     Vector& append(const Vector& v);
 
     /*
      * Vector[]
      */
-    Real& operator[](size_t idx);
+    double& operator[](size_t idx);
 
     /*
      * Vector (cmp) Vector
@@ -64,21 +64,21 @@ public:
     Vector operator-(const Vector& v) const;
 
     // dot product
-    // Vector * Vector -> Real
-    Real operator*(const Vector& v) const;
+    // Vector * Vector -> double
+    double operator*(const Vector& v) const;
 
     /*
-     * Vector (op) Real
+     * Vector (op) double
      */
     // scalar multiplication
-    // Vector * / Real -> Vector
-    Vector operator*(const Real& r) const;
-    Vector operator/(const Real& r) const;
+    // Vector * / double -> Vector
+    Vector operator*(const double& d) const;
+    Vector operator/(const double& d) const;
 
     /*
      * othors
      */
-    Real length() const;
+    double length() const;
     bool isVerticalTo(const Vector& v) const;
     bool isParallelTo(const Vector& v) const;
     Vector unitization() const;
@@ -92,9 +92,9 @@ public:
      */
     friend std::ostream& operator<<(std::ostream& os, const Vector& v);
 
-    // Real * Vector -> Vector
+    // double * Vector -> Vector
     // scalar multiplication
-    friend Vector operator*(const Real& r, const Vector& v);
+    friend Vector operator*(const double& d, const Vector& v);
 };
 
 #endif // VECTOR_H

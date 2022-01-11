@@ -1,10 +1,8 @@
-#include <iostream>
+#include "test.h"
 
-using namespace std;
-
-int main()
+int main(void)
 {
-    cout << "2333" << endl;
-    cout << "Hello World!" << endl;
+    VectorTest::test();
+
     return 0;
 }
