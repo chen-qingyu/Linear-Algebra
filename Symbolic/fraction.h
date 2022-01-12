@@ -71,6 +71,7 @@ public:
      * Fraction (cmp) int
      */
     bool operator==(int n) const;
+    bool operator!=(int n) const;
     bool operator>(int n) const;
     bool operator<(int n) const;
     bool operator>=(int n) const;
@@ -120,6 +121,7 @@ public:
      * int (cmp) Fraction
      */
     friend bool operator==(int n, const Fraction& f);
+    friend bool operator!=(int n, const Fraction& f);
     friend bool operator>(int n, const Fraction& f);
     friend bool operator<(int n, const Fraction& f);
     friend bool operator>=(int n, const Fraction& f);

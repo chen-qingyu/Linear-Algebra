@@ -211,6 +211,11 @@ bool Fraction::operator==(int n) const
     return operator==(Fraction(n));
 }
 
+bool Fraction::operator!=(int n) const
+{
+    return !operator==(Fraction(n));
+}
+
 bool Fraction::operator>(int n) const
 {
     return operator>(Fraction(n));
@@ -366,6 +371,11 @@ Fraction operator/(int n, const Fraction& f)
 bool operator==(int n, const Fraction& f)
 {
     return Fraction(n) == f;
+}
+
+bool operator!=(int n, const Fraction& f)
+{
+    return Fraction(n) != f;
 }
 
 bool operator>(int n, const Fraction& f)

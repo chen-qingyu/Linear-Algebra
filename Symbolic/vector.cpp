@@ -58,6 +58,8 @@ Vector& Vector::append(const Real& r)
 // TODO
 Vector& Vector::append(const vector<Real>& reals)
 {
+    this->reals.insert(this->reals.end(), reals.begin(), reals.end());
+    size += reals.size();
     return *this;
 }
 
