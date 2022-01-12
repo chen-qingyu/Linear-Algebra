@@ -13,7 +13,7 @@
 
 class Matrix
 {
-private:
+protected:
     vector<Vector> rows; // 每个元素都是行向量
 
 public:
@@ -60,6 +60,8 @@ public:
     /*
      * scalar multiplication
      */
+    Matrix operator*(const double& d) const;
+    Matrix operator/(const double& d) const;
 
     /*
      * othors
@@ -79,6 +81,7 @@ public:
     /*
      * scalar multiplication
      */
+    friend Matrix operator*(const double& d, const Matrix& m);
 };
 
 #endif // MATRIX_H

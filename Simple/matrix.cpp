@@ -218,6 +218,30 @@ Matrix Matrix::operator*(const Matrix& m) const
 }
 
 /*
+ * scalar multiplication
+ */
+
+Matrix Matrix::operator*(const double& d) const
+{
+    Matrix result = Matrix(*this);
+    for (size_t i = 0; i < size.row; ++i)
+    {
+        result[i] = result[i] * d;
+    }
+    return result;
+}
+
+Matrix Matrix::operator/(const double& d) const
+{
+    Matrix result = Matrix(*this);
+    for (size_t i = 0; i < size.row; ++i)
+    {
+        result[i] = result[i] / d;
+    }
+    return result;
+}
+
+/*
  * othors
  */
 
@@ -245,4 +269,13 @@ Matrix Matrix::transpose() const
 std::ostream& operator<<(std::ostream& os, const Matrix& m)
 {
     return os << m.toString();
+}
+
+/*
+ * scalar multiplication
+ */
+
+Matrix operator*(const double& d, const Matrix& m)
+{
+    return m * d;
 }
