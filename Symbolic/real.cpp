@@ -204,6 +204,11 @@ bool Real::Item::operator==(const Real::Item& i) const
            && power == i.power;
 }
 
+bool Real::Item::operator!=(const Real::Item& i) const
+{
+    return !operator==(i);
+}
+
 bool Real::Item::operator>(const Real::Item& i) const
 {
     return operator-(i).operator double() > 0;

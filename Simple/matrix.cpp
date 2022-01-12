@@ -24,15 +24,15 @@ Matrix::Matrix()
 
 Matrix::Matrix(const vector<Vector>& rows)
 {
+    if (rows.begin()->size == 0)
+    {
+        throw std::runtime_error("Error: The vectors are empty.");
+    }
     for (const auto& row : rows)
     {
         if (row.size != rows.begin()->size)
         {
             throw std::runtime_error("Error: The row vectors are not of equal size.");
-        }
-        if (row.size == 0)
-        {
-            throw std::runtime_error("Error: The vectors are empty.");
         }
     }
 
@@ -94,7 +94,7 @@ Vector& Matrix::operator[](size_t idx)
     return rows[idx];
 }
 
-Vector Matrix::operator[](Matrix::size_t idx) const
+Vector Matrix::operator[](size_t idx) const
 {
     if (idx >= size.row)
     {

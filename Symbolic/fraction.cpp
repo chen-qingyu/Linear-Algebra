@@ -125,6 +125,11 @@ bool Fraction::operator==(const Fraction& f) const
     return num == f.num && den == f.den;
 }
 
+bool Fraction::operator!=(const Fraction& f) const
+{
+    return !operator==(f);
+}
+
 bool Fraction::operator>(const Fraction& f) const
 {
     return operator-(f).operator double() > 0;

@@ -45,6 +45,7 @@ public:
      * Fraction (cmp) Fraction
      */
     bool operator==(const Fraction& f) const;
+    bool operator!=(const Fraction& f) const;
     bool operator>(const Fraction& f) const;
     bool operator<(const Fraction& f) const;
     bool operator>=(const Fraction& f) const;

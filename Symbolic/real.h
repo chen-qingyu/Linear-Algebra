@@ -56,6 +56,7 @@ private:
          * Item (cmp) Item
          */
         bool operator==(const Item& i) const;
+        bool operator!=(const Item& i) const;
         bool operator>(const Item& i) const;
         bool operator<(const Item& i) const;
         bool operator>=(const Item& i) const;
