@@ -61,11 +61,26 @@ Vector& Vector::append(const Vector& v)
 
 double& Vector::operator[](size_t idx)
 {
+    if (idx >= size)
+    {
+        throw std::runtime_error("Error: Vector index out of bounds.");
+    }
+
+    return doubles[idx];
+}
+
+double Vector::operator[](size_t idx) const
+{
+    if (idx >= size)
+    {
+        throw std::runtime_error("Error: Vector index out of bounds.");
+    }
+
     return doubles[idx];
 }
 
 /*
- * Vector == Vector
+ * Vector == != Vector
  */
 
 bool Vector::operator==(const Vector& v) const
@@ -74,6 +89,7 @@ bool Vector::operator==(const Vector& v) const
     {
         return false;
     }
+
     for (size_t i = 0; i < size; ++i)
     {
         if (ne(doubles[i], v.doubles[i]))
@@ -81,7 +97,13 @@ bool Vector::operator==(const Vector& v) const
             return false;
         }
     }
+
     return true;
+}
+
+bool Vector::operator!=(const Vector& v) const
+{
+    return !operator==(v);
 }
 
 /*
@@ -114,7 +136,7 @@ Vector Vector::operator+(const Vector& v) const
 {
     if (size != v.size)
     {
-        throw std::runtime_error("Error: Add two vectors of different lengths.");
+        throw std::runtime_error("Error: Add two vectors of different size.");
     }
     if (size == 0)
     {
@@ -133,7 +155,7 @@ Vector Vector::operator-(const Vector& v) const
 {
     if (size != v.size)
     {
-        throw std::runtime_error("Error: Subtract two vectors of different lengths.");
+        throw std::runtime_error("Error: Subtract two vectors of different size.");
     }
     if (size == 0)
     {
@@ -156,7 +178,7 @@ double Vector::operator*(const Vector& v) const
 {
     if (size != v.size)
     {
-        throw std::runtime_error("Error: Multiply two vectors of different lengths.");
+        throw std::runtime_error("Error: Multiply two vectors of different size.");
     }
     if (size == 0)
     {
@@ -229,7 +251,7 @@ bool Vector::isVerticalTo(const Vector& v) const
 {
     if (size != v.size)
     {
-        throw std::runtime_error("Error: Two vectors of different lengths.");
+        throw std::runtime_error("Error: The vectors are not of equal size.");
     }
     if (size == 0)
     {
@@ -243,7 +265,7 @@ bool Vector::isParallelTo(const Vector& v) const
 {
     if (size != v.size)
     {
-        throw std::runtime_error("Error: Two vectors of different lengths.");
+        throw std::runtime_error("Error: The vectors are not of equal size.");
     }
     if (size == 0)
     {

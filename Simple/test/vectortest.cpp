@@ -58,8 +58,15 @@ void VectorTest::op()
     assert(eq(a[3], 0.5));
     a[0] = 233;
     assert(a[0] == 233);
-    a[10] = 666;
-    assert(a[10] == 666);
+
+    try
+    {
+        a[4] = 666;
+    }
+    catch (std::runtime_error e)
+    {
+        assert(e.what() == std::string("Error: Vector index out of bounds."));
+    }
 
     std::cout << "op(): operator[] operator== test OK." << std::endl;
 }
@@ -103,7 +110,7 @@ void VectorTest::op1()
     }
     catch (std::runtime_error e)
     {
-        assert(e.what() == std::string("Error: Add two vectors of different lengths."));
+        assert(e.what() == std::string("Error: Add two vectors of different size."));
     }
     try
     {
@@ -111,7 +118,7 @@ void VectorTest::op1()
     }
     catch (std::runtime_error e)
     {
-        assert(e.what() == std::string("Error: Subtract two vectors of different lengths."));
+        assert(e.what() == std::string("Error: Subtract two vectors of different size."));
     }
     try
     {
@@ -119,7 +126,7 @@ void VectorTest::op1()
     }
     catch (std::runtime_error e)
     {
-        assert(e.what() == std::string("Error: Subtract two vectors of different lengths."));
+        assert(e.what() == std::string("Error: Subtract two vectors of different size."));
     }
 
     Vector v7, v8;
@@ -177,7 +184,7 @@ void VectorTest::op2()
     }
     catch (std::runtime_error e)
     {
-        assert(e.what() == std::string("Error: Multiply two vectors of different lengths."));
+        assert(e.what() == std::string("Error: Multiply two vectors of different size."));
     }
 
     Vector v3, v4;

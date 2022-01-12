@@ -78,12 +78,17 @@ Real& Vector::operator[](size_t idx)
 }
 
 /*
- * Vector == Vector
+ * Vector == != Vector
  */
 
 bool Vector::operator==(const Vector& v) const
 {
     return reals == v.reals;
+}
+
+bool Vector::operator!=(const Vector& v) const
+{
+    return !operator==(v);
 }
 
 /*

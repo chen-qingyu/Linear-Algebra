@@ -45,11 +45,13 @@ public:
      * Vector[]
      */
     double& operator[](size_t idx);
+    double operator[](size_t idx) const;
 
     /*
-     * Vector == Vector
+     * Vector == != Vector
      */
     bool operator==(const Vector& v) const;
+    bool operator!=(const Vector& v) const;
 
     /*
      * type conversion
