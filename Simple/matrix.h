@@ -13,8 +13,20 @@
 
 class Matrix
 {
+    friend class MatrixTest;
+
 protected:
     vector<Vector> rows; // 每个元素都是行向量
+
+    /*
+     * elementary row transformation
+     */
+    Matrix& E(size_t i, size_t j);
+    Matrix& E(size_t i, double k);
+    Matrix& E(size_t i, size_t j, double k);
+
+    // TODO
+    Matrix toUpperTriangular() const;
 
 public:
     using size_t = vector<Vector>::size_type;

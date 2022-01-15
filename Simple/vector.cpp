@@ -30,6 +30,16 @@ Vector::Vector(const vector<double>& doubles)
     this->size = doubles.size();
 }
 
+// TODO
+//Vector::Vector(int n, double element)
+//{
+//    for (int i = 0; i < n; ++i)
+//    {
+//        this->doubles.push_back(element);
+//    }
+//    this->size = n;
+//}
+
 /*
  * append element
  */

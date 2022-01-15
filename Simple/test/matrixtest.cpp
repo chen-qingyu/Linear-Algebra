@@ -12,6 +12,7 @@ void MatrixTest::test()
     op1();
     op2();
     trans();
+    e();
     //    all();
     std::cout << "==== MatrixTest::test(): All test OK! ====" << std::endl;
 }
@@ -132,4 +133,17 @@ void MatrixTest::trans()
     assert(m2 * m3.transpose() == Matrix(1, 5));
 
     std::cout << "trans(): transpose() test OK." << std::endl;
+}
+
+void MatrixTest::e()
+{
+    Matrix m = Matrix({Vector({1, 2, 3}), Vector({4, 5, 6}), Vector({7, 8, 9})});
+    m.E((size_t)1, (size_t)2);
+    assert(m == Matrix({Vector({4, 5, 6}), Vector({1, 2, 3}), Vector({7, 8, 9})}));
+    m.E((size_t)2, (double)2);
+    assert(m == Matrix({Vector({4, 5, 6}), Vector({2, 4, 6}), Vector({7, 8, 9})}));
+    m.E((size_t)1, (size_t)2, -1);
+    assert(m == Matrix({Vector({2, 1, 0}), Vector({2, 4, 6}), Vector({7, 8, 9})}));
+
+    std::cout << "e(): elementary row transformation test OK." << std::endl;
 }

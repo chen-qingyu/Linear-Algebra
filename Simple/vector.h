@@ -33,6 +33,8 @@ public:
      */
     Vector();
     Vector(const vector<double>& doubles);
+    // TODO
+    //    Vector(int n, double element);
 
     /*
      * append element

@@ -9,6 +9,54 @@
 #include "matrix.h"
 
 /*******************
+ * protected function
+ *******************/
+
+/*
+ * elementary row transformation
+ */
+
+Matrix& Matrix::E(size_t i, size_t j)
+{
+    --i;
+    --j;
+    Vector tmp = (*this)[i];
+    (*this)[i] = (*this)[j];
+    (*this)[j] = tmp;
+
+    return *this;
+}
+
+Matrix& Matrix::E(size_t i, double k)
+{
+    --i;
+    (*this)[i] = (*this)[i] * k;
+
+    return *this;
+}
+
+Matrix& Matrix::E(size_t i, size_t j, double k)
+{
+    --i;
+    --j;
+    (*this)[i] = (*this)[i] + (*this)[j] * k;
+
+    return *this;
+}
+
+// TODO
+Matrix Matrix::toUpperTriangular() const
+{
+    Matrix result = Matrix(*this);
+
+    for (size_t i = 0; i < size.row; ++i)
+    {
+    }
+
+    return result;
+}
+
+/*******************
  * public function
  *******************/
 
