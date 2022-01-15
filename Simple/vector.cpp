@@ -31,9 +31,9 @@ Vector::Vector(const vector<double>& doubles)
 }
 
 // TODO
-//Vector::Vector(int n, double element)
+//Vector::Vector(size_t n, double element)
 //{
-//    for (int i = 0; i < n; ++i)
+//    for (size_t i = 0; i < n; ++i)
 //    {
 //        this->doubles.push_back(element);
 //    }

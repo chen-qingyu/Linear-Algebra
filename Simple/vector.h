@@ -34,7 +34,7 @@ public:
     Vector();
     Vector(const vector<double>& doubles);
     // TODO
-    //    Vector(int n, double element);
+    // Vector(size_t n, double element);
 
     /*
      * append element

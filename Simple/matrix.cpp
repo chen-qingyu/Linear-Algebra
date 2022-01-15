@@ -9,54 +9,6 @@
 #include "matrix.h"
 
 /*******************
- * protected function
- *******************/
-
-/*
- * elementary row transformation
- */
-
-Matrix& Matrix::E(size_t i, size_t j)
-{
-    --i;
-    --j;
-    Vector tmp = (*this)[i];
-    (*this)[i] = (*this)[j];
-    (*this)[j] = tmp;
-
-    return *this;
-}
-
-Matrix& Matrix::E(size_t i, double k)
-{
-    --i;
-    (*this)[i] = (*this)[i] * k;
-
-    return *this;
-}
-
-Matrix& Matrix::E(size_t i, size_t j, double k)
-{
-    --i;
-    --j;
-    (*this)[i] = (*this)[i] + (*this)[j] * k;
-
-    return *this;
-}
-
-// TODO
-Matrix Matrix::toUpperTriangular() const
-{
-    Matrix result = Matrix(*this);
-
-    for (size_t i = 0; i < size.row; ++i)
-    {
-    }
-
-    return result;
-}
-
-/*******************
  * public function
  *******************/
 
@@ -290,6 +242,33 @@ Matrix Matrix::operator/(const double& d) const
 }
 
 /*
+ * elementary row transformation
+ */
+
+Matrix& Matrix::E(size_t i, size_t j)
+{
+    Vector tmp = (*this)[i];
+    (*this)[i] = (*this)[j];
+    (*this)[j] = tmp;
+
+    return *this;
+}
+
+Matrix& Matrix::E(size_t i, double k)
+{
+    (*this)[i] = (*this)[i] * k;
+
+    return *this;
+}
+
+Matrix& Matrix::E(size_t i, size_t j, double k)
+{
+    (*this)[i] = (*this)[i] + (*this)[j] * k;
+
+    return *this;
+}
+
+/*
  * othors
  */
 
@@ -304,6 +283,52 @@ Matrix Matrix::transpose() const
         }
     }
     return result;
+}
+
+// TODO
+Matrix Matrix::upperTriangular() const
+{
+    Matrix result = Matrix(*this);
+
+    for (size_t i = 0; i < size.row; ++i)
+    {
+        for (size_t j = i + 1; j < size.row; ++j)
+        {
+            size_t m = 0;
+            while (eq((*this)[i][m], 0))
+            {
+                ++m;
+            }
+            if ((*this)[i][m] != 0)
+            {
+                //                double k =
+            }
+        }
+    }
+
+    return result;
+}
+
+Matrix& Matrix::zeroAdjust()
+{
+    for (size_t i = 0; i < size.row; ++i)
+    {
+        for (size_t j = 0; j < size.col; ++j)
+        {
+            if (eq((*this)[i][j], 0))
+            {
+                (*this)[i][j] = 0;
+            }
+        }
+    }
+
+    return *this;
+}
+
+// TODO
+size_t Matrix::rank() const
+{
+    return 0;
 }
 
 /*******************
