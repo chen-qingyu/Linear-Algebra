@@ -296,6 +296,18 @@ Vector& Vector::unitize()
     return *this;
 }
 
+Vector& Vector::zeroAdjust()
+{
+    for (auto& d : doubles)
+    {
+        if (eq(d, 0))
+        {
+            d = 0;
+        }
+    }
+    return *this;
+}
+
 /*******************
  * friend function
  *******************/

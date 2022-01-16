@@ -306,22 +306,15 @@ Matrix Matrix::upperTriangular() const
         }
     }
 
-    return result;
+    return result.zeroAdjust();
 }
 
 Matrix& Matrix::zeroAdjust()
 {
-    for (size_t i = 0; i < size.row; ++i)
+    for (auto& r : rows)
     {
-        for (size_t j = 0; j < size.col; ++j)
-        {
-            if (eq((*this)[i][j], 0))
-            {
-                (*this)[i][j] = 0;
-            }
-        }
+        r.zeroAdjust();
     }
-
     return *this;
 }
 

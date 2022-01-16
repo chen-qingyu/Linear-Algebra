@@ -17,6 +17,8 @@ using std::string;
 
 class RealItem
 {
+    friend class RealItemTest;
+
 private:
     // RealItem = coef * (rational^power)
     Fraction coef;  // 系数 coefficient

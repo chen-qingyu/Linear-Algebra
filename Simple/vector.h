@@ -84,6 +84,7 @@ public:
     bool isVerticalTo(const Vector& v) const;
     bool isParallelTo(const Vector& v) const;
     Vector& unitize();
+    Vector& zeroAdjust();
 
     /*******************
      * friend function

@@ -2,7 +2,8 @@
 #define TEST_H
 
 #include "test/fractiontest.h"
+#include "test/realitemtest.h"
 #include "test/realtest.h"
-//#include "test/vectortest.h"
+#include "test/vectortest.h"
 
 #endif // TEST_H

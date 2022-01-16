@@ -7,10 +7,17 @@ public:
     static void test();
 
 private:
-    static void item();  // Item::simplify()
-    static void irra();  // Irrational::simplify()
-    static void tostr(); // toString()
-    static void all();   // comprehensive
+    static void real();      // Real()
+    static void op1();       // int (op) Real
+    static void op2();       // Real (op) Real
+    static void op3();       // Real (op) int
+    static void cmp1();      // int (cmp) Real
+    static void cmp2();      // Real (cmp) Real
+    static void cmp3();      // Real (cmp) int
+    static void tostr();     // toString()
+    static void opassign1(); // Real (op)= Real
+    static void opassign2(); // Real (op)= int
+    static void all();       // comprehensive
 };
 
 #endif // REALTEST_H

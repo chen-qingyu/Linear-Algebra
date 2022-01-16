@@ -19,6 +19,7 @@ SOURCES += \
     fraction.cpp \
     real.cpp \
     realitem.cpp \
+    test/realitemtest.cpp \
     test/realtest.cpp \
     vector.cpp \
     test/fractiontest.cpp \
@@ -35,6 +36,7 @@ HEADERS += \
     realitem.h \
     test.h \
     fraction.h \
+    test/realitemtest.h \
     test/realtest.h \
     vector.h \
     test/fractiontest.h \

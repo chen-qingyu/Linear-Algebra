@@ -19,8 +19,10 @@
 // TODO
 void Real::simplify()
 {
+    zeroAdjust();
+
     // case 1: single item
-    if (size == 1)
+    if (poly.size() == 1)
     {
         return;
     }
@@ -37,91 +39,23 @@ void Real::simplify()
  * constructor
  */
 
-Real::Real(RealItem ri)
+Real::Real(const RealItem& ri)
 {
     this->poly = {ri};
-    size = 1;
-}
-
-Real::Real(vector<RealItem> poly)
-{
-    this->poly = poly;
-    this->size = poly.size();
 
     simplify();
 }
 
-/*
- * Real (cmp) Real
- */
-
-bool Real::operator==(const Real& r) const
+Real::Real(const vector<RealItem>& poly)
 {
-    return poly.front() == r.poly.front();
+    if (poly.size() == 0)
+    {
+        throw std::runtime_error("Error: The vector of RealItem is empty");
+    }
 
-    // TODO
-    //    if (size == r.size)
-    //    {
-    //        auto ap = poly.begin();
-    //        auto bp = r.poly.begin();
-    //        while (ap != poly.end())
-    //        {
-    //            if (!((*ap) == (*bp)))
-    //            {
-    //                return false;
-    //            }
-    //            ++ap;
-    //            ++bp;
-    //        }
-    //        return true;
-    //    }
-    //    return false;
-}
+    this->poly = poly;
 
-bool Real::operator>(const Real& r) const
-{
-    return poly.front() > r.poly.front();
-
-    // TODO
-}
-
-bool Real::operator<(const Real& r) const
-{
-    return poly.front() < r.poly.front();
-
-    // TODO
-}
-
-bool Real::operator>=(const Real& r) const
-{
-    return poly.front() >= r.poly.front();
-
-    // TODO
-}
-
-bool Real::operator<=(const Real& r) const
-{
-    return poly.front() <= r.poly.front();
-
-    // TODO
-}
-
-/*
- * Real (cmp) Fraction
- */
-
-bool Real::operator==(const Fraction& f) const
-{
-    return poly.front() == RealItem(f);
-}
-
-/*
- * Real (cmp) int
- */
-
-bool Real::operator==(int n) const
-{
-    return poly.front() == RealItem(n);
+    simplify();
 }
 
 /*
@@ -157,6 +91,69 @@ Real Real::operator/(const Real& r) const
 }
 
 /*
+ * Real (cmp) Real
+ */
+
+bool Real::operator==(const Real& r) const
+{
+    size_t size = poly.size();
+    for (size_t i = 0; i < size; ++i)
+    {
+        if ((*this).poly[i] != r.poly[i])
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
+bool Real::operator!=(const Real& r) const
+{
+    return !operator==(r);
+}
+
+bool Real::operator>(const Real& r) const
+{
+    return gt(operator double(), (double)r);
+}
+
+bool Real::operator<(const Real& r) const
+{
+    return lt(operator double(), (double)r);
+}
+
+bool Real::operator>=(const Real& r) const
+{
+    return operator>(r) || operator==(r);
+}
+
+bool Real::operator<=(const Real& r) const
+{
+    return operator<(r) || operator==(r);
+}
+
+/*
+ * Real (op)= Real
+ */
+
+/*
+ * Real (op) int
+ */
+
+/*
+ * Real (cmp) int
+ */
+
+bool Real::operator==(int n) const
+{
+    return operator==(Real(RealItem(n)));
+}
+
+/*
+ * Real (op)= int
+ */
+
+/*
  * type conversion
  */
 
@@ -178,14 +175,46 @@ string Real::toString() const
         str += item.toString();
         str += " + ";
     }
-    return str.erase(str.size() - 3, str.size());
+    if (str != "")
+    {
+        str.erase(str.end() - 3, str.end());
+    }
+    return str;
+}
+
+/*
+ * othors
+ */
+
+Real& Real::zeroAdjust()
+{
+    for (auto& ri : poly)
+    {
+        if (eq(ri, 0))
+        {
+            ri = RealItem(0);
+        }
+    }
+    return *this;
 }
 
 /*******************
  * friend function
  *******************/
 
+/*
+ * std::cout << Real
+ */
+
 std::ostream& operator<<(std::ostream& os, const Real& r)
 {
     return os << r.toString();
 }
+
+/*
+ * int (op) Real
+ */
+
+/*
+ * int (cmp) Real
+ */
