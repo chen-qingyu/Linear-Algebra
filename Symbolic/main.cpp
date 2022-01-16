@@ -7,7 +7,6 @@ int main(int argc, char* argv[])
     QCoreApplication a(argc, argv);
 
     FractionTest::test();
-    VectorTest::test();
     RealTest::test();
 
     return a.exec();

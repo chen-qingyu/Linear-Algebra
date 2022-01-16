@@ -18,6 +18,7 @@ SOURCES += \
     main.cpp \
     fraction.cpp \
     real.cpp \
+    realitem.cpp \
     test/realtest.cpp \
     vector.cpp \
     test/fractiontest.cpp \
@@ -29,7 +30,9 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
+    double.h \
     real.h \
+    realitem.h \
     test.h \
     fraction.h \
     test/realtest.h \

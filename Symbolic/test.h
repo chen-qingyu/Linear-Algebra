@@ -3,6 +3,6 @@
 
 #include "test/fractiontest.h"
 #include "test/realtest.h"
-#include "test/vectortest.h"
+//#include "test/vectortest.h"
 
 #endif // TEST_H

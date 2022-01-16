@@ -12,11 +12,13 @@
 #include <iostream>
 #include <string>
 
+#include "double.h"
+
 using std::string;
 
 class Fraction
 {
-    friend class Real;
+    friend class RealItem;
 
 private:
     int num; // 分子 numerator

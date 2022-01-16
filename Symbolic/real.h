@@ -9,87 +9,30 @@
 #ifndef REAL_H
 #define REAL_H
 
-#include <list>
 #include <string>
+#include <vector>
 
-#include "fraction.h"
+#include "realitem.h"
 
-using std::list;
 using std::string;
+using std::vector;
 
 class Real
 {
-    friend class RealTest;
-    friend class Vector;
-
 private:
-    class Item
-    {
-        friend class RealTest;
-        friend class Real;
-        friend class Vector;
-
-    private:
-        // coef * (rational^power)
-        Fraction coef;  // 系数 coefficient
-        int rational;   // 有理数 rational number
-        Fraction power; // 幂次 power
-
-        void simplify();
-
-    public:
-        /*
-         * constructor
-         */
-        Item(Fraction coef = 0, int rational = 1, Fraction power = 0);
-        Item(int n);
-
-        /*
-         * Item (op) Item
-         */
-        Item operator+(const Item& i) const;
-        Item operator-(const Item& i) const;
-        Item operator*(const Item& i) const;
-        Item operator/(const Item& i) const;
-
-        /*
-         * Item (cmp) Item
-         */
-        bool operator==(const Item& i) const;
-        bool operator!=(const Item& i) const;
-        bool operator>(const Item& i) const;
-        bool operator<(const Item& i) const;
-        bool operator>=(const Item& i) const;
-        bool operator<=(const Item& i) const;
-
-        /*
-         * type conversion
-         */
-        operator double() const;
-        string toString() const;
-
-        /*******************
-         * friend function
-         *******************/
-
-        // for list sort
-        friend bool cmp(const Real::Item& first, const Real::Item& second);
-    };
-
-    list<Item> poly; // polynomial of Item
-    int size;
+    vector<RealItem> poly; // polynomial of RealItem
+    size_t size;
 
     void simplify();
 
 public:
+    using size_t = vector<RealItem>::size_type;
+
     /*
      * constructor
      */
-    Real(Item item = Item());
-    // TODO
-    Real(list<Item> poly);
-    Real(Fraction f);
-    Real(int n);
+    Real(RealItem ri = RealItem(0));
+    Real(vector<RealItem> poly);
 
     /*
      * Real (cmp) Real
@@ -128,7 +71,6 @@ public:
      * friend function
      *******************/
 
-    friend bool cmp(const Real::Item& first, const Real::Item& second);
     friend std::ostream& operator<<(std::ostream& os, const Real& r);
 };
 

@@ -132,22 +132,22 @@ bool Fraction::operator!=(const Fraction& f) const
 
 bool Fraction::operator>(const Fraction& f) const
 {
-    return operator-(f).operator double() > 0;
+    return gt(operator-(f).operator double(), 0);
 }
 
 bool Fraction::operator<(const Fraction& f) const
 {
-    return operator-(f).operator double() < 0;
+    return lt(operator-(f).operator double(), 0);
 }
 
 bool Fraction::operator>=(const Fraction& f) const
 {
-    return operator-(f).operator double() > 0 || operator==(f);
+    return operator>(f) || operator==(f);
 }
 
 bool Fraction::operator<=(const Fraction& f) const
 {
-    return operator-(f).operator double() < 0 || operator==(f);
+    return operator<(f) || operator==(f);
 }
 
 /*
@@ -213,7 +213,7 @@ bool Fraction::operator==(int n) const
 
 bool Fraction::operator!=(int n) const
 {
-    return !operator==(Fraction(n));
+    return operator!=(Fraction(n));
 }
 
 bool Fraction::operator>(int n) const
