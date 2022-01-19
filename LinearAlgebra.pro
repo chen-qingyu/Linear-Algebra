@@ -2,4 +2,6 @@ TEMPLATE = subdirs
 
 SUBDIRS += \
     Simple \
-    Symbolic
+    SimpleTest \
+    Symbolic \
+    SymbolicTest

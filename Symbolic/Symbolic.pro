@@ -19,11 +19,7 @@ SOURCES += \
     fraction.cpp \
     real.cpp \
     realitem.cpp \
-    test/realitemtest.cpp \
-    test/realtest.cpp \
-    vector.cpp \
-    test/fractiontest.cpp \
-    test/vectortest.cpp
+    vector.cpp
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -34,10 +30,5 @@ HEADERS += \
     double.h \
     real.h \
     realitem.h \
-    test.h \
     fraction.h \
-    test/realitemtest.h \
-    test/realtest.h \
-    vector.h \
-    test/fractiontest.h \
-    test/vectortest.h
+    vector.h

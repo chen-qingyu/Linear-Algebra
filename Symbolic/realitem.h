@@ -17,12 +17,10 @@ using std::string;
 
 class RealItem
 {
-    friend class RealItemTest;
-
 private:
-    // RealItem = coef * (rational^power)
+    // RealItem = coef * (integer^power)
     Fraction coef;  // 系数 coefficient
-    int rational;   // 有理数 rational number
+    int integer;    // 整数 integer
     Fraction power; // 幂次 power
 
     void simplify();
@@ -31,7 +29,7 @@ public:
     /*
      * constructor
      */
-    RealItem(const Fraction& coef = 0, int rational = 1, const Fraction& power = 0);
+    RealItem(const Fraction& coef = 0, int integer = 1, const Fraction& power = 0);
 
     /*
      * RealItem (op) RealItem

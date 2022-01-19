@@ -17,19 +17,19 @@
 
 void RealItem::simplify()
 {
-    // case 1: coef or rational == 0
-    if (coef == 0 || rational == 0)
+    // case 1: coef or integer == 0
+    if (coef == 0 || integer == 0)
     {
         coef = 0;
-        rational = 1;
+        integer = 1;
         power = 0;
     }
 
-    // case 2: rational == 1
-    if (rational == 1)
+    // case 2: integer == 1
+    if (integer == 1)
     {
         // coef not change
-        // rational not change
+        // integer not change
         power = 0;
     }
 
@@ -37,7 +37,7 @@ void RealItem::simplify()
     if (power == 0)
     {
         // coef not change
-        rational = 1;
+        integer = 1;
         // power not change
     }
 
@@ -47,7 +47,7 @@ void RealItem::simplify()
         // coef not change
         for (int i = 1; i < std::abs(power.num); ++i)
         {
-            rational *= rational;
+            integer *= integer;
         }
         power.num = (power.num > 0 ? 1 : -1);
         // power.den not change
@@ -58,7 +58,7 @@ void RealItem::simplify()
     {
         std::map<int, int> counter;
         int factor = 2;
-        int r = rational;
+        int r = integer;
 
         // decompose prime factor
         // 8^(1/3) -> fac 2: cnt 3
@@ -77,12 +77,12 @@ void RealItem::simplify()
         }
 
         // 8^(1/3):
-        //    coef: 1, rational: 8, power: (1/3)
-        // -> coef: 2, rational: 1, power: 0
+        //    coef: 1, integer: 8, power: (1/3)
+        // -> coef: 2, integer: 1, power: 0
         // 12^(1/2):
-        //    coef: 1, rational: 12, power: 1/2
-        // -> coef: 2, rational: 3, power: 1/2
-        for (factor = 2; factor < rational; ++factor)
+        //    coef: 1, integer: 12, power: 1/2
+        // -> coef: 2, integer: 3, power: 1/2
+        for (factor = 2; factor < integer; ++factor)
         {
             // √24 -> √(2*2*2*3) -> 2√6
             if (counter[factor] >= power.den)
@@ -90,7 +90,7 @@ void RealItem::simplify()
                 int tmp = power.den;
                 while (tmp != 0)
                 {
-                    rational /= factor;
+                    integer /= factor;
                     --tmp;
                 }
 
@@ -104,7 +104,7 @@ void RealItem::simplify()
                 }
             }
         }
-        if (rational == 1)
+        if (integer == 1)
         {
             power = 0;
         }
@@ -119,10 +119,10 @@ void RealItem::simplify()
  * constructor
  */
 
-RealItem::RealItem(const Fraction& coef, int rational, const Fraction& power)
+RealItem::RealItem(const Fraction& coef, int integer, const Fraction& power)
 {
     this->coef = coef;
-    this->rational = rational;
+    this->integer = integer;
     this->power = power;
 
     simplify();
@@ -134,22 +134,22 @@ RealItem::RealItem(const Fraction& coef, int rational, const Fraction& power)
 
 RealItem RealItem::operator+(const RealItem& ri) const
 {
-    if (rational != ri.rational || power != ri.power)
+    if (integer != ri.integer || power != ri.power)
     {
         throw std::runtime_error("Error: Invalid operation of RealItem.");
     }
 
-    return RealItem(coef + ri.coef, rational, power);
+    return RealItem(coef + ri.coef, integer, power);
 }
 
 RealItem RealItem::operator-(const RealItem& ri) const
 {
-    if (rational != ri.rational || power != ri.power)
+    if (integer != ri.integer || power != ri.power)
     {
         throw std::runtime_error("Error: Invalid operation of RealItem.");
     }
 
-    return RealItem(coef - ri.coef, rational, power);
+    return RealItem(coef - ri.coef, integer, power);
 }
 
 RealItem RealItem::operator*(const RealItem& ri) const
@@ -159,7 +159,7 @@ RealItem RealItem::operator*(const RealItem& ri) const
         throw std::runtime_error("Error: Invalid operation of RealItem.");
     }
 
-    return RealItem(coef * ri.coef, rational * ri.rational, power);
+    return RealItem(coef * ri.coef, integer * ri.integer, power);
 }
 
 RealItem RealItem::operator/(const RealItem& ri) const
@@ -169,7 +169,7 @@ RealItem RealItem::operator/(const RealItem& ri) const
         throw std::runtime_error("Error: Invalid operation of RealItem.");
     }
 
-    return RealItem(coef / (ri.coef * ri.rational), rational * ri.rational, power);
+    return RealItem(coef / (ri.coef * ri.integer), integer * ri.integer, power);
 }
 
 /*
@@ -179,7 +179,7 @@ RealItem RealItem::operator/(const RealItem& ri) const
 bool RealItem::operator==(const RealItem& ri) const
 {
     return coef == ri.coef
-           && rational == ri.rational
+           && integer == ri.integer
            && power == ri.power;
 }
 
@@ -363,17 +363,17 @@ RealItem RealItem::operator--(int)
 
 RealItem::operator double() const
 {
-    return (double)coef * (std::pow(rational, (double)power));
+    return (double)coef * (std::pow(integer, (double)power));
 }
 
 string RealItem::toString() const
 {
-    if (coef == 0 || rational == 0)
+    if (coef == 0 || integer == 0)
     {
         return string("0");
     }
 
-    if (rational == 1 || power == 0)
+    if (integer == 1 || power == 0)
     {
         return coef.toString();
     }
@@ -390,7 +390,7 @@ string RealItem::toString() const
             str += "(" + coef.toString() + ")*";
         }
     }
-    str += std::to_string(rational);
+    str += std::to_string(integer);
     if (power != 1)
     {
         str += "^(" + power.toString() + ")";
