@@ -136,3 +136,35 @@ TEST(MatrixTest, e)
 
     std::cout << "elementary row transformation test OK." << std::endl;
 }
+
+TEST(MatrixTest, upper)
+{
+    Matrix m = Matrix(2, 1);
+    ASSERT_EQ(m.upperTriangular().toString(), "[1.000000 1.000000]\n[0.000000 0.000000]");
+    m = Matrix({Vector({1, 2, 3}), Vector({4, 5, 6})});
+    ASSERT_EQ(m.upperTriangular().toString(), "[1.000000 2.000000 3.000000]\n[0.000000 -3.000000 -6.000000]");
+    m = Matrix({Vector({1, 2}), Vector({3, 4}), Vector({5, 6})});
+    ASSERT_EQ(m.upperTriangular().toString(), "[1.000000 2.000000]\n[0.000000 -2.000000]\n[0.000000 0.000000]");
+
+    std::cout << "upperTriangular() test OK." << std::endl;
+}
+
+TEST(MatrixTest, rank)
+{
+    Matrix m = Matrix(2, 1);
+    ASSERT_EQ(m.rank(), (Matrix::size_t)1);
+
+    m = Matrix({Vector({1, 2, 3}), Vector({4, 5, 6})});
+    ASSERT_EQ(m.rank(), (Matrix::size_t)2);
+
+    m = Matrix({Vector({1, 2}), Vector({3, 4}), Vector({5, 6})});
+    ASSERT_EQ(m.rank(), (Matrix::size_t)2);
+
+    m = Matrix({Vector({1, 2, 3}), Vector({4, 5, 6}), Vector({7, 8, 9})});
+    ASSERT_EQ(m.rank(), (Matrix::size_t)2);
+
+    m = Matrix({Vector({1, 2, 3}), Vector({4, 5, 6}), Vector({7, 8, 0})});
+    ASSERT_EQ(m.rank(), (Matrix::size_t)3);
+
+    std::cout << "rank() test OK." << std::endl;
+}

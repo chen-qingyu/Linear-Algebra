@@ -74,7 +74,6 @@ public:
      * othors
      */
     Matrix transpose() const;
-    // TODO
     Matrix upperTriangular() const;
     Matrix& zeroAdjust();
     size_t rank() const;

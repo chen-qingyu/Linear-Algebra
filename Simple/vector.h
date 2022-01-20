@@ -33,8 +33,7 @@ public:
      */
     Vector();
     Vector(const vector<double>& doubles);
-    // TODO
-    // Vector(size_t n, double element);
+    //    Vector(size_t n, double element);
 
     /*
      * append element
@@ -85,6 +84,8 @@ public:
     bool isParallelTo(const Vector& v) const;
     Vector& unitize();
     Vector& zeroAdjust();
+    size_t countLeadingZeros() const;
+    bool isZero() const;
 
     /*******************
      * friend function

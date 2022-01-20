@@ -1,3 +1,5 @@
+#include "squarematrix.h"
+
 int main(void)
 {
 

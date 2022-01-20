@@ -14,7 +14,7 @@
 class SquareMatrix : public Matrix
 {
 public:
-    size_t size; // 阶数
+    size_t n; // 阶数
 
     /*
      * constructor
@@ -22,6 +22,7 @@ public:
     SquareMatrix();
     SquareMatrix(const vector<Vector>& rows);
     SquareMatrix(size_t n, double element);
+    SquareMatrix(const Matrix& m);
 
     /*
      * determinant

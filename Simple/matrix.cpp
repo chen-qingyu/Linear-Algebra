@@ -6,6 +6,8 @@
  * CreateDate: 2022.01.12
  ******************************************/
 
+#include <algorithm>
+
 #include "matrix.h"
 
 /*******************
@@ -285,26 +287,29 @@ Matrix Matrix::transpose() const
     return result;
 }
 
-// TODO
 Matrix Matrix::upperTriangular() const
 {
     Matrix result = Matrix(*this);
 
-    for (size_t i = 0; i < size.row; ++i)
+    // step 1: Gaussian elimination
+    for (size_t i = 0; i < result.size.row; ++i)
     {
-        for (size_t j = i + 1; j < size.row; ++j)
+        size_t j = 0;
+        while (j < result.size.col && eq(result[i][j], 0))
         {
-            size_t m = 0;
-            while (eq((*this)[i][m], 0))
+            ++j;
+        }
+        for (size_t k = i + 1; k < result.size.row; ++k)
+        {
+            if (j < result.size.col && result[i][j] != 0)
             {
-                ++m;
-            }
-            if ((*this)[i][m] != 0)
-            {
-                //                double k =
+                result.E(k, i, -(result[k][j] / result[i][j]));
             }
         }
     }
+
+    // step 2: To the upper triangular. It's so elegant, I'm a genius haha.
+    std::sort(result.rows.begin(), result.rows.end(), [=](const Vector& v1, const Vector& v2) -> bool { return v1.countLeadingZeros() < v2.countLeadingZeros(); });
 
     return result.zeroAdjust();
 }
@@ -318,10 +323,18 @@ Matrix& Matrix::zeroAdjust()
     return *this;
 }
 
-// TODO
 size_t Matrix::rank() const
 {
-    return 0;
+    Matrix upper = upperTriangular();
+    size_t zeros = 0;
+    for (const auto& r : upper.rows)
+    {
+        if (r.isZero())
+        {
+            ++zeros;
+        }
+    }
+    return upper.size.row - zeros;
 }
 
 /*******************

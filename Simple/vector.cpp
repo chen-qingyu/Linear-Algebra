@@ -308,6 +308,24 @@ Vector& Vector::zeroAdjust()
     return *this;
 }
 
+size_t Vector::countLeadingZeros() const
+{
+    size_t lz = 0;
+    for (const auto& d : doubles)
+    {
+        if (eq(d, 0))
+        {
+            ++lz;
+        }
+    }
+    return lz;
+}
+
+bool Vector::isZero() const
+{
+    return countLeadingZeros() == size;
+}
+
 /*******************
  * friend function
  *******************/
