@@ -46,7 +46,7 @@ Matrix::Matrix(size_t n, double element)
 {
     if (n == 0)
     {
-        throw std::runtime_error("Error: The vectors are empty.");
+        throw std::runtime_error("Error: The matrix are empty.");
     }
 
     size = {n, n};
@@ -66,7 +66,7 @@ Matrix::Matrix(size_t row, size_t col, double element)
 {
     if (row == 0 || col == 0)
     {
-        throw std::runtime_error("Error: The vectors are empty.");
+        throw std::runtime_error("Error: The matrix are empty.");
     }
 
     size = {row, col};
@@ -325,11 +325,16 @@ Matrix& Matrix::zeroAdjust()
 
 size_t Matrix::rank() const
 {
+    if (size.row == 0 || size.col == 0)
+    {
+        throw std::runtime_error("Error: The matrix are empty.");
+    }
+
     Matrix upper = upperTriangular();
     size_t zeros = 0;
     for (const auto& r : upper.rows)
     {
-        if (r.isZero())
+        if (r.isZero()) // 这里不取非是因为循环内尽量减少操作
         {
             ++zeros;
         }

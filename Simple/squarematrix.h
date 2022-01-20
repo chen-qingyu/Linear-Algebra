@@ -14,7 +14,7 @@
 class SquareMatrix : public Matrix
 {
 public:
-    size_t n; // 阶数
+    size_t size; // 阶数
 
     /*
      * constructor

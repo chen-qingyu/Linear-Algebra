@@ -317,6 +317,10 @@ size_t Vector::countLeadingZeros() const
         {
             ++lz;
         }
+        else
+        {
+            break;
+        }
     }
     return lz;
 }
