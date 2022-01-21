@@ -77,6 +77,8 @@ public:
     Matrix upperTriangular() const;
     Matrix& zeroAdjust();
     size_t rank() const;
+    Matrix augment(const Matrix& m) const;
+    Matrix diagonal() const;
 
     /*******************
      * friend function

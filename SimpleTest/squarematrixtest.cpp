@@ -30,3 +30,22 @@ TEST(SquareMatrix, det)
 
     std::cout << "det() test OK." << std::endl;
 }
+
+TEST(SquareMatrix, inv)
+{
+    SquareMatrix sm({Vector({1, 1}), Vector({1, 1})});
+    ASSERT_EQ(sm.inverse(), SquareMatrix());
+
+    sm = SquareMatrix({Vector({1, 2}), Vector({3, 4})});
+    ASSERT_EQ(sm.inverse(), SquareMatrix({Vector({-2, 1}), Vector({1.5, -0.5})}));
+
+    sm = SquareMatrix({Vector({1, 2, 3}), Vector({4, 5, 6}), Vector({7, 8, 9})});
+    ASSERT_EQ(sm.inverse(), SquareMatrix());
+
+    sm = SquareMatrix({Vector({1, 2, 3}), Vector({4, 5, 6}), Vector({7, 8, 0})});
+    ASSERT_EQ(sm.inverse(), SquareMatrix({Vector({-1.777777777777778, 0.888888888888889, -0.111111111111111}),
+                                Vector({1.555555555555556, -0.777777777777778, 0.222222222222222}),
+                                Vector({-0.111111111111111, 0.222222222222222, -0.111111111111111})}));
+
+    std::cout << "inverse() test OK." << std::endl;
+}

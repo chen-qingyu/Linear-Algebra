@@ -342,6 +342,36 @@ size_t Matrix::rank() const
     return upper.size.row - zeros;
 }
 
+Matrix Matrix::augment(const Matrix& m) const
+{
+    if (size.row != m.size.row)
+    {
+        throw std::runtime_error("Error: Two matrices have different row numbers.");
+    }
+
+    Matrix result = Matrix(*this);
+    for (size_t i = 0; i < size.row; ++i)
+    {
+        result[i].append(m[i]);
+    }
+    result.size.col += m.size.col;
+    return result;
+}
+
+Matrix Matrix::diagonal() const
+{
+    Matrix upper = upperTriangular();
+    for (size_t c = 0; c < upper.size.row; ++c)
+    {
+        for (size_t r = 0; r < c; ++r)
+        {
+            upper.E(r, c, -(upper[r][c] / upper[c][c]));
+        }
+    }
+
+    return upper;
+}
+
 /*******************
  * friend function
  *******************/

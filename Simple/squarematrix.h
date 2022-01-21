@@ -23,6 +23,7 @@ public:
     SquareMatrix(const vector<Vector>& rows);
     SquareMatrix(size_t n, double element);
     SquareMatrix(const Matrix& m);
+    SquareMatrix(size_t n);
 
     /*
      * determinant

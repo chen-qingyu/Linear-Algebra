@@ -50,6 +50,15 @@ SquareMatrix::SquareMatrix(const Matrix& m)
     size = m.size.row;
 }
 
+SquareMatrix::SquareMatrix(Matrix::size_t n)
+    : SquareMatrix(n, 0)
+{
+    for (size_t i = 0; i < size; ++i)
+    {
+        rows[i][i] = 1;
+    }
+}
+
 /*
  * determinant
  */
@@ -69,4 +78,49 @@ double SquareMatrix::det() const
     }
 
     return det;
+}
+
+/*
+ * inverse matrix
+ */
+
+SquareMatrix SquareMatrix::inverse() const
+{
+    if (size == 0)
+    {
+        throw std::runtime_error("Error: The matrix are empty.");
+    }
+
+    if (rank() != size)
+    {
+        return SquareMatrix();
+    }
+
+    // 单位阵E
+    SquareMatrix e(size);
+    // 增广A -> A:E
+    Matrix augmented = augment(e);
+    // 将A化成上三角矩阵
+    Matrix upper = augmented.upperTriangular();
+    // 将A化为对角矩阵
+    Matrix diag = upper.diagonal();
+    // 将A化为单位阵
+    for (size_t r = 0; r < diag.size.row; ++r)
+    {
+        diag.E(r, (double)(1 / diag[r][r]));
+    }
+    // 此时原先的E即为A的逆
+    // 这一段让我debug了好久……已经凌晨了。 TODO: 以后有空需要重构一下。
+    SquareMatrix result(*this);
+    result.rows.clear();
+    result.size = size;
+    Vector tmp;
+    tmp.size = size;
+    for (size_t r = 0; r < size; ++r)
+    {
+        tmp.doubles.insert(tmp.doubles.end(), diag[r].doubles.begin() + size, diag[r].doubles.end());
+        result.rows.insert(result.rows.end(), tmp);
+        tmp.doubles.clear();
+    }
+    return result;
 }
