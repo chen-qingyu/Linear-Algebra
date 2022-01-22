@@ -155,6 +155,38 @@ string Matrix::toString() const
 }
 
 /*
+ * append rows
+ */
+
+Matrix& Matrix::appendRows(const Vector& v)
+{
+    if (v.size != size.col)
+    {
+        throw std::runtime_error("Error: The row vectors are not of equal size.");
+    }
+
+    rows.push_back(v);
+    size.row += 1;
+
+    return *this;
+}
+
+Matrix& Matrix::appendRows(vector<Vector>::const_iterator begin, vector<Vector>::const_iterator end)
+{
+    for (; begin != end; ++begin)
+    {
+        if ((*begin).size != size.col)
+        {
+            throw std::runtime_error("Error: The row vectors are not of equal size.");
+        }
+    }
+
+    rows.insert(rows.end(), begin, end);
+    size.row += (end - begin);
+    return *this;
+}
+
+/*
  * Matrix + - * Matrix
  */
 

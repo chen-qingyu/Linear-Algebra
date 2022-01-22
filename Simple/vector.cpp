@@ -30,6 +30,12 @@ Vector::Vector(const vector<double>& doubles)
     this->size = doubles.size();
 }
 
+Vector::Vector(vector<double>::const_iterator begin, vector<double>::const_iterator end)
+{
+    doubles.insert(doubles.end(), begin, end);
+    size = (end - begin);
+}
+
 // TODO
 //Vector::Vector(size_t n, double element)
 //{
@@ -62,6 +68,13 @@ Vector& Vector::append(const Vector& v)
 {
     doubles.insert(doubles.end(), v.doubles.begin(), v.doubles.end());
     size += v.size;
+    return *this;
+}
+
+Vector& Vector::append(vector<double>::const_iterator begin, vector<double>::const_iterator end)
+{
+    doubles.insert(doubles.end(), begin, end);
+    size += (end - begin);
     return *this;
 }
 

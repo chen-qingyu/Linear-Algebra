@@ -51,6 +51,12 @@ public:
     string toString() const;
 
     /*
+     * append rows
+     */
+    Matrix& appendRows(const Vector& v);
+    Matrix& appendRows(vector<Vector>::const_iterator begin, vector<Vector>::const_iterator end);
+
+    /*
      * Matrix + - * Matrix
      */
     Matrix operator+(const Matrix& m) const;

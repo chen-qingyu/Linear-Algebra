@@ -110,17 +110,12 @@ SquareMatrix SquareMatrix::inverse() const
         diag.E(r, (double)(1 / diag[r][r]));
     }
     // 此时原先的E即为A的逆
-    // 这一段让我debug了好久……已经凌晨了。 TODO: 以后有空需要重构一下。
-    SquareMatrix result(*this);
-    result.rows.clear();
+    SquareMatrix result;
+    result.Matrix::size = {0, size};
     result.size = size;
-    Vector tmp;
-    tmp.size = size;
     for (size_t r = 0; r < size; ++r)
     {
-        tmp.doubles.insert(tmp.doubles.end(), diag[r].doubles.begin() + size, diag[r].doubles.end());
-        result.rows.insert(result.rows.end(), tmp);
-        tmp.doubles.clear();
+        result.appendRows(Vector(diag[r].doubles.begin() + size, diag[r].doubles.end()));
     }
     return result;
 }

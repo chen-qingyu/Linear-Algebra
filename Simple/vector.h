@@ -36,6 +36,7 @@ public:
     Vector();
     Vector(const vector<double>& doubles);
     //    Vector(size_t n, double element);
+    Vector(vector<double>::const_iterator begin, vector<double>::const_iterator end);
 
     /*
      * append element
@@ -43,6 +44,7 @@ public:
     Vector& append(const double& d);
     Vector& append(const vector<double>& doubles);
     Vector& append(const Vector& v);
+    Vector& append(vector<double>::const_iterator begin, vector<double>::const_iterator end);
 
     /*
      * Vector[]
