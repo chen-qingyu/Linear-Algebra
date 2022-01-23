@@ -20,14 +20,14 @@
 
 Vector::Vector()
 {
-    this->doubles = {};
-    this->size = 0;
+    doubles = {};
+    size = 0;
 }
 
-Vector::Vector(const vector<double>& doubles)
+Vector::Vector(const vector<double>& vd)
 {
-    this->doubles = doubles;
-    this->size = doubles.size();
+    doubles = vd;
+    size = vd.size();
 }
 
 Vector::Vector(vector<double>::const_iterator begin, vector<double>::const_iterator end)
@@ -57,10 +57,10 @@ Vector& Vector::append(const double& d)
     return *this;
 }
 
-Vector& Vector::append(const vector<double>& ds)
+Vector& Vector::append(const vector<double>& vd)
 {
-    doubles.insert(doubles.end(), ds.begin(), ds.end());
-    size += ds.size();
+    doubles.insert(doubles.end(), vd.begin(), vd.end());
+    size += vd.size();
     return *this;
 }
 
