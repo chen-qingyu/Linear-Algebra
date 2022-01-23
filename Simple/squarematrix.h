@@ -14,9 +14,7 @@
 class SquareMatrix : public Matrix
 {
 public:
-    // TODO
-    //    size_t& size = Matrix::size.row; // 阶数
-    size_t size;
+    size_t& size = Matrix::size.row; // 阶数
 
     /*
      * constructor
@@ -30,8 +28,7 @@ public:
     /*
      * operator=
      */
-    // TODO
-    //    SquareMatrix& operator=(const SquareMatrix& sm);
+    SquareMatrix& operator=(const SquareMatrix& rhs);
 
     /*
      * determinant

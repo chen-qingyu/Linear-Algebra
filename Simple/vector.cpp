@@ -36,16 +36,6 @@ Vector::Vector(vector<double>::const_iterator begin, vector<double>::const_itera
     size = (end - begin);
 }
 
-// TODO
-//Vector::Vector(size_t n, double element)
-//{
-//    for (size_t i = 0; i < n; ++i)
-//    {
-//        this->doubles.push_back(element);
-//    }
-//    this->size = n;
-//}
-
 /*
  * append element
  */

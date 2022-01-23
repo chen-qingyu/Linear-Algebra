@@ -19,8 +19,6 @@
 SquareMatrix::SquareMatrix()
     : Matrix()
 {
-    // TODO
-    size = 0;
 }
 
 SquareMatrix::SquareMatrix(const vector<Vector>& rows)
@@ -30,15 +28,11 @@ SquareMatrix::SquareMatrix(const vector<Vector>& rows)
     {
         throw std::runtime_error("Error: The rows and columns of the square matrix are not equal.");
     }
-    // TODO
-    size = rows.size();
 }
 
 SquareMatrix::SquareMatrix(size_t n, double element)
     : Matrix(n, element)
 {
-    // TODO
-    size = n;
 }
 
 SquareMatrix::SquareMatrix(const Matrix& m)
@@ -48,8 +42,6 @@ SquareMatrix::SquareMatrix(const Matrix& m)
     {
         throw std::runtime_error("Error: The rows and columns of the square matrix are not equal.");
     }
-    // TODO
-    size = m.size.row;
 }
 
 SquareMatrix::SquareMatrix(Matrix::size_t n)
@@ -59,6 +51,18 @@ SquareMatrix::SquareMatrix(Matrix::size_t n)
     {
         rows[i][i] = 1;
     }
+}
+
+/*
+ * operator=
+ */
+
+SquareMatrix& SquareMatrix::operator=(const SquareMatrix& rhs)
+{
+    rows = rhs.rows;
+    Matrix::size = rhs.Matrix::size;
+
+    return *this;
 }
 
 /*
@@ -111,10 +115,8 @@ SquareMatrix SquareMatrix::inverse() const
     {
         diag.E(r, (double)(1 / diag[r][r]));
     }
-    // 此时原先的E即为A的逆
+    // 此时原先的E即为A的逆（写得这么清晰是花了功夫的）
     SquareMatrix result;
-    // TODO
-    result.size = size;
     for (size_t r = 0; r < size; ++r)
     {
         result.appendRows(Vector(diag[r].doubles.begin() + size, diag[r].doubles.end()));

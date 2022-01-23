@@ -49,3 +49,20 @@ TEST(SquareMatrix, inv)
 
     std::cout << "inverse() test OK." << std::endl;
 }
+
+TEST(SquareMatrix, squa)
+{
+    SquareMatrix sm;
+    ASSERT_EQ(sm, SquareMatrix());
+
+    sm = SquareMatrix({Vector({1, 1}), Vector({1, 1})});
+    ASSERT_EQ(sm, SquareMatrix({Vector({1, 1}), Vector({1, 1})}));
+
+    SquareMatrix sm2 = SquareMatrix({Vector({2, 2}), Vector({2, 2})});
+    ASSERT_EQ(sm2, SquareMatrix({Vector({2, 2}), Vector({2, 2})}));
+
+    sm2 = sm;
+    ASSERT_EQ(sm2, SquareMatrix({Vector({1, 1}), Vector({1, 1})}));
+
+    std::cout << "SquareMatrix() test OK." << std::endl;
+}

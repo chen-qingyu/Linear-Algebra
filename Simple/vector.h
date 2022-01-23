@@ -35,8 +35,6 @@ public:
      */
     Vector();
     Vector(const vector<double>& vd);
-    // TODO
-    //    Vector(size_t n, double element);
     Vector(vector<double>::const_iterator begin, vector<double>::const_iterator end);
 
     /*
