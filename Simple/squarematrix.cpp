@@ -19,6 +19,7 @@
 SquareMatrix::SquareMatrix()
     : Matrix()
 {
+    // TODO
     size = 0;
 }
 
@@ -29,13 +30,14 @@ SquareMatrix::SquareMatrix(const vector<Vector>& rows)
     {
         throw std::runtime_error("Error: The rows and columns of the square matrix are not equal.");
     }
-
+    // TODO
     size = rows.size();
 }
 
 SquareMatrix::SquareMatrix(size_t n, double element)
     : Matrix(n, element)
 {
+    // TODO
     size = n;
 }
 
@@ -46,7 +48,7 @@ SquareMatrix::SquareMatrix(const Matrix& m)
     {
         throw std::runtime_error("Error: The rows and columns of the square matrix are not equal.");
     }
-
+    // TODO
     size = m.size.row;
 }
 
@@ -111,7 +113,7 @@ SquareMatrix SquareMatrix::inverse() const
     }
     // 此时原先的E即为A的逆
     SquareMatrix result;
-    result.Matrix::size = {0, size};
+    // TODO
     result.size = size;
     for (size_t r = 0; r < size; ++r)
     {

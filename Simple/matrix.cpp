@@ -160,6 +160,11 @@ string Matrix::toString() const
 
 Matrix& Matrix::appendRows(const Vector& v)
 {
+    if (size.row == 0)
+    {
+        size.col = v.size;
+    }
+
     if (v.size != size.col)
     {
         throw std::runtime_error("Error: The row vectors are not of equal size.");
@@ -173,6 +178,11 @@ Matrix& Matrix::appendRows(const Vector& v)
 
 Matrix& Matrix::appendRows(vector<Vector>::const_iterator begin, vector<Vector>::const_iterator end)
 {
+    if (size.row == 0)
+    {
+        size.col = (*begin).size;
+    }
+
     for (; begin != end; ++begin)
     {
         if ((*begin).size != size.col)
