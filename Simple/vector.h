@@ -9,12 +9,14 @@
 #ifndef VECTOR_H
 #define VECTOR_H
 
+#include <initializer_list>
 #include <iostream>
 #include <string>
 #include <vector>
 
 #include "double.h"
 
+using std::initializer_list;
 using std::string;
 using std::vector;
 
@@ -36,6 +38,8 @@ public:
     Vector();
     Vector(const vector<double>& vd);
     Vector(vector<double>::const_iterator begin, vector<double>::const_iterator end);
+    Vector(const initializer_list<double>& il);
+    Vector(size_t n, double element);
 
     /*
      * append element
@@ -44,6 +48,7 @@ public:
     Vector& append(const vector<double>& vd);
     Vector& append(const Vector& v);
     Vector& append(vector<double>::const_iterator begin, vector<double>::const_iterator end);
+    Vector& append(const initializer_list<double>& il);
 
     /*
      * Vector[]

@@ -27,7 +27,7 @@ TEST(FractionTest, frac)
     }
     catch (std::runtime_error e)
     {
-        ASSERT_EQ(e.what(), std::string("Error: Zero denominator."));
+        ASSERT_STREQ(e.what(), "Error: Zero denominator.");
     }
 
     Fraction a = 99;
@@ -243,7 +243,7 @@ TEST(FractionTest, all)
     }
     catch (std::runtime_error e)
     {
-        ASSERT_EQ(e.what(), std::string("Error: Zero denominator."));
+        ASSERT_STREQ(e.what(), "Error: Zero denominator.");
     }
 
     std::cout << "comprehensive test OK." << std::endl;

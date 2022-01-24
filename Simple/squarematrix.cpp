@@ -21,10 +21,10 @@ SquareMatrix::SquareMatrix()
 {
 }
 
-SquareMatrix::SquareMatrix(const vector<Vector>& rows)
-    : Matrix(rows)
+SquareMatrix::SquareMatrix(const vector<Vector>& vv)
+    : Matrix(vv)
 {
-    if (rows.begin()->size != rows.size())
+    if (vv.begin()->size != vv.size())
     {
         throw std::runtime_error("Error: The rows and columns of the square matrix are not equal.");
     }
@@ -50,6 +50,15 @@ SquareMatrix::SquareMatrix(Matrix::size_t n)
     for (size_t i = 0; i < size; ++i)
     {
         rows[i][i] = 1;
+    }
+}
+
+SquareMatrix::SquareMatrix(const initializer_list<Vector>& il)
+    : Matrix(il)
+{
+    if (il.begin()->size != il.size())
+    {
+        throw std::runtime_error("Error: The rows and columns of the square matrix are not equal.");
     }
 }
 

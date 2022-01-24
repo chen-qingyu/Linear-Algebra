@@ -24,21 +24,21 @@ Matrix::Matrix()
     size = {0, 0};
 }
 
-Matrix::Matrix(const vector<Vector>& rows)
+Matrix::Matrix(const vector<Vector>& vv)
 {
-    if (rows.begin()->size == 0)
+    if (vv.begin()->size == 0)
     {
-        throw std::runtime_error("Error: The vectors are empty.");
+        throw std::runtime_error("Error: The matrix are empty.");
     }
-    for (const auto& row : rows)
+    for (const auto& row : vv)
     {
-        if (row.size != rows.begin()->size)
+        if (row.size != vv.begin()->size)
         {
             throw std::runtime_error("Error: The row vectors are not of equal size.");
         }
     }
 
-    this->rows = rows;
+    rows = vv;
     size = {rows.size(), rows.begin()->size};
 }
 
@@ -51,11 +51,7 @@ Matrix::Matrix(size_t n, double element)
 
     size = {n, n};
 
-    Vector v;
-    for (size_t i = 0; i < n; ++i)
-    {
-        v.append(element);
-    }
+    Vector v(n, element);
     for (size_t i = 0; i < n; ++i)
     {
         rows.insert(rows.end(), v);
@@ -71,15 +67,29 @@ Matrix::Matrix(size_t row, size_t col, double element)
 
     size = {row, col};
 
-    Vector v;
-    for (size_t i = 0; i < col; ++i)
-    {
-        v.append(element);
-    }
+    Vector v(col, element);
     for (size_t i = 0; i < row; ++i)
     {
         rows.insert(rows.end(), v);
     }
+}
+
+Matrix::Matrix(const initializer_list<Vector>& il)
+{
+    if (il.begin()->size == 0)
+    {
+        throw std::runtime_error("Error: The matrix are empty.");
+    }
+    for (const auto& row : il)
+    {
+        if (row.size != il.begin()->size)
+        {
+            throw std::runtime_error("Error: The row vectors are not of equal size.");
+        }
+    }
+
+    rows.insert(rows.end(), il.begin(), il.end());
+    size = {rows.size(), rows.begin()->size};
 }
 
 /*

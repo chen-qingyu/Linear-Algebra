@@ -104,7 +104,7 @@
 //    }
 //    catch (std::runtime_error e)
 //    {
-//        assert(e.what() == std::string("Error: Add two vectors of different lengths."));
+//        ASSERT_STREQ(e.what(), "Error: Add two vectors of different lengths.");
 //    }
 //    try
 //    {
@@ -112,7 +112,7 @@
 //    }
 //    catch (std::runtime_error e)
 //    {
-//        assert(e.what() == std::string("Error: Subtract two vectors of different lengths."));
+//        ASSERT_STREQ(e.what(), "Error: Subtract two vectors of different lengths.");
 //    }
 //    try
 //    {
@@ -120,7 +120,7 @@
 //    }
 //    catch (std::runtime_error e)
 //    {
-//        assert(e.what() == std::string("Error: Subtract two vectors of different lengths."));
+//        ASSERT_STREQ(e.what(), "Error: Subtract two vectors of different lengths.");
 //    }
 
 //    Vector v7, v8;
@@ -130,7 +130,7 @@
 //    }
 //    catch (std::runtime_error e)
 //    {
-//        assert(e.what() == std::string("Error: The vectors are empty."));
+//        ASSERT_STREQ(e.what(), "Error: The vectors are empty.");
 //    }
 //    try
 //    {
@@ -138,7 +138,7 @@
 //    }
 //    catch (std::runtime_error e)
 //    {
-//        assert(e.what() == std::string("Error: The vectors are empty."));
+//        ASSERT_STREQ(e.what(), "Error: The vectors are empty.");
 //    }
 //    try
 //    {
@@ -146,7 +146,7 @@
 //    }
 //    catch (std::runtime_error e)
 //    {
-//        assert(e.what() == std::string("Error: The vectors are empty."));
+//        ASSERT_STREQ(e.what(), "Error: The vectors are empty.");
 //    }
 
 //    std::cout << "op1(): operator+ operator- test OK." << std::endl;
@@ -178,7 +178,7 @@
 //    }
 //    catch (std::runtime_error e)
 //    {
-//        assert(e.what() == std::string("Error: Multiply two vectors of different lengths."));
+//        ASSERT_STREQ(e.what(), "Error: Multiply two vectors of different lengths.");
 //    }
 
 //    Vector v3, v4;
@@ -188,7 +188,7 @@
 //    }
 //    catch (std::runtime_error e)
 //    {
-//        assert(e.what() == std::string("Error: The vectors are empty."));
+//        ASSERT_STREQ(e.what(), "Error: The vectors are empty.");
 //    }
 
 //    std::cout << "op2(): dot product test OK." << std::endl;
@@ -212,7 +212,7 @@
 //    }
 //    catch (std::runtime_error e)
 //    {
-//        assert(e.what() == std::string("Error: The vector is empty."));
+//        ASSERT_STREQ(e.what(), "Error: The vector is empty.");
 //    }
 //    try
 //    {
@@ -220,7 +220,7 @@
 //    }
 //    catch (std::runtime_error e)
 //    {
-//        assert(e.what() == std::string("Error: The vector is empty."));
+//        ASSERT_STREQ(e.what(), "Error: The vector is empty.");
 //    }
 
 //    assert(v == Vector({1, 1, 1}));
@@ -234,7 +234,7 @@
 //    }
 //    catch (std::runtime_error e)
 //    {
-//        assert(e.what() == std::string("Error: Zero denominator."));
+//        ASSERT_STREQ(e.what(), "Error: Zero denominator.");
 //    }
 
 //    std::cout << "op3(): scalar multiplication test OK." << std::endl;
@@ -249,7 +249,7 @@
 //    }
 //    catch (std::runtime_error e)
 //    {
-//        assert(e.what() == std::string("Error: The vector is empty."));
+//        ASSERT_STREQ(e.what(), "Error: The vector is empty.");
 //    }
 
 //    v.append(0);

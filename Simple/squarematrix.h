@@ -20,10 +20,11 @@ public:
      * constructor
      */
     SquareMatrix();
-    SquareMatrix(const vector<Vector>& rows);
+    SquareMatrix(const vector<Vector>& vv);
     SquareMatrix(size_t n, double element);
     SquareMatrix(const Matrix& m);
     SquareMatrix(size_t n);
+    SquareMatrix(const initializer_list<Vector>& il);
 
     /*
      * operator=

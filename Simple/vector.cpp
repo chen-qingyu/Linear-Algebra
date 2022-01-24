@@ -33,7 +33,22 @@ Vector::Vector(const vector<double>& vd)
 Vector::Vector(vector<double>::const_iterator begin, vector<double>::const_iterator end)
 {
     doubles.insert(doubles.end(), begin, end);
-    size = (end - begin);
+    size = end - begin;
+}
+
+Vector::Vector(const initializer_list<double>& il)
+{
+    doubles.insert(doubles.end(), il.begin(), il.end());
+    size = il.size();
+}
+
+Vector::Vector(size_t n, double element)
+{
+    for (size_t i = 0; i < n; ++i)
+    {
+        doubles.push_back(element);
+    }
+    size = n;
 }
 
 /*
@@ -65,6 +80,13 @@ Vector& Vector::append(vector<double>::const_iterator begin, vector<double>::con
 {
     doubles.insert(doubles.end(), begin, end);
     size += (end - begin);
+    return *this;
+}
+
+Vector& Vector::append(const initializer_list<double>& il)
+{
+    doubles.insert(doubles.end(), il.begin(), il.end());
+    size += il.size();
     return *this;
 }
 

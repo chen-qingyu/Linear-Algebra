@@ -29,9 +29,10 @@ public:
      * constructor
      */
     Matrix();
-    Matrix(const vector<Vector>& rows);
+    Matrix(const vector<Vector>& vv);
     Matrix(size_t n, double element);
     Matrix(size_t row, size_t col, double element);
+    Matrix(const initializer_list<Vector>& il);
 
     /*
      * Matrix[]

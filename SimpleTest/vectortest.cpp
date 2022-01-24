@@ -18,6 +18,28 @@ TEST(VectorTest, vect)
     ASSERT_EQ(c, Vector().append(0).append(1).append(2));
     ASSERT_EQ(c.size, (Vector::size_t)3);
 
+    Vector d = {1, 2, 3, 4};
+    ASSERT_EQ(d, Vector({1, 2, 3, 4}));
+    ASSERT_EQ(d.size, (Vector::size_t)4);
+
+    Vector e(5, 4);
+    ASSERT_EQ(e, Vector({4, 4, 4, 4, 4}));
+    ASSERT_EQ(e.size, (Vector::size_t)5);
+
+    vector<double> vd = {1, 2, 3, 4, 5};
+    Vector f(vd);
+    ASSERT_EQ(f, Vector({1, 2, 3, 4, 5}));
+    ASSERT_EQ(f.size, (Vector::size_t)5);
+
+    Vector g = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+    ASSERT_EQ(g.size, (Vector::size_t)10);
+    ASSERT_EQ(g[0], 0);
+    ASSERT_EQ(g[9], 9);
+    g = {2, 3, 5, 7, 11};
+    ASSERT_EQ(g.size, (Vector::size_t)5);
+    ASSERT_EQ(g[0], 2);
+    ASSERT_EQ(g[4], 11);
+
     std::cout << "Vector() test OK." << std::endl;
 }
 
@@ -48,7 +70,7 @@ TEST(VectorTest, op)
     }
     catch (std::runtime_error e)
     {
-        ASSERT_EQ(e.what(), std::string("Error: Vector index out of bounds."));
+        ASSERT_STREQ(e.what(), "Error: Vector index out of bounds.");
     }
 
     std::cout << "op(): operator[] operator== test OK." << std::endl;
@@ -93,7 +115,7 @@ TEST(VectorTest, op1)
     }
     catch (std::runtime_error e)
     {
-        ASSERT_EQ(e.what(), std::string("Error: Add two vectors of different size."));
+        ASSERT_STREQ(e.what(), "Error: Add two vectors of different size.");
     }
     try
     {
@@ -101,7 +123,7 @@ TEST(VectorTest, op1)
     }
     catch (std::runtime_error e)
     {
-        ASSERT_EQ(e.what(), std::string("Error: Subtract two vectors of different size."));
+        ASSERT_STREQ(e.what(), "Error: Subtract two vectors of different size.");
     }
     try
     {
@@ -109,7 +131,7 @@ TEST(VectorTest, op1)
     }
     catch (std::runtime_error e)
     {
-        ASSERT_EQ(e.what(), std::string("Error: Subtract two vectors of different size."));
+        ASSERT_STREQ(e.what(), "Error: Subtract two vectors of different size.");
     }
 
     Vector v7, v8;
@@ -119,7 +141,7 @@ TEST(VectorTest, op1)
     }
     catch (std::runtime_error e)
     {
-        ASSERT_EQ(e.what(), std::string("Error: The vectors are empty."));
+        ASSERT_STREQ(e.what(), "Error: The vectors are empty.");
     }
     try
     {
@@ -127,7 +149,7 @@ TEST(VectorTest, op1)
     }
     catch (std::runtime_error e)
     {
-        ASSERT_EQ(e.what(), std::string("Error: The vectors are empty."));
+        ASSERT_STREQ(e.what(), "Error: The vectors are empty.");
     }
     try
     {
@@ -135,7 +157,7 @@ TEST(VectorTest, op1)
     }
     catch (std::runtime_error e)
     {
-        ASSERT_EQ(e.what(), std::string("Error: The vectors are empty."));
+        ASSERT_STREQ(e.what(), "Error: The vectors are empty.");
     }
 
     std::cout << "operator+ operator- test OK." << std::endl;
@@ -167,7 +189,7 @@ TEST(VectorTest, op2)
     }
     catch (std::runtime_error e)
     {
-        ASSERT_EQ(e.what(), std::string("Error: Multiply two vectors of different size."));
+        ASSERT_STREQ(e.what(), "Error: Multiply two vectors of different size.");
     }
 
     Vector v3, v4;
@@ -177,7 +199,7 @@ TEST(VectorTest, op2)
     }
     catch (std::runtime_error e)
     {
-        ASSERT_EQ(e.what(), std::string("Error: The vectors are empty."));
+        ASSERT_STREQ(e.what(), "Error: The vectors are empty.");
     }
 
     std::cout << "dot product test OK." << std::endl;
@@ -201,7 +223,7 @@ TEST(VectorTest, op3)
     }
     catch (std::runtime_error e)
     {
-        ASSERT_EQ(e.what(), std::string("Error: The vector is empty."));
+        ASSERT_STREQ(e.what(), "Error: The vector is empty.");
     }
     try
     {
@@ -209,7 +231,7 @@ TEST(VectorTest, op3)
     }
     catch (std::runtime_error e)
     {
-        ASSERT_EQ(e.what(), std::string("Error: The vector is empty."));
+        ASSERT_STREQ(e.what(), "Error: The vector is empty.");
     }
 
     ASSERT_EQ(v, Vector({1, 1, 1}));
@@ -230,7 +252,7 @@ TEST(VectorTest, len)
     }
     catch (std::runtime_error e)
     {
-        ASSERT_EQ(e.what(), std::string("Error: The vector is empty."));
+        ASSERT_STREQ(e.what(), "Error: The vector is empty.");
     }
 
     v.append(0);
