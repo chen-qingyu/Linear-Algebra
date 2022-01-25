@@ -85,11 +85,11 @@ double SquareMatrix::det() const
         throw std::runtime_error("Error: The matrix are empty.");
     }
 
-    SquareMatrix upper = upperTriangular();
+    SquareMatrix echelon = rowEchelon();
     double det = 1;
-    for (size_t i = 0; i < upper.size; ++i)
+    for (size_t i = 0; i < echelon.size; ++i)
     {
-        det *= upper.rows[i][i];
+        det *= echelon.rows[i][i];
     }
 
     return det;
@@ -111,20 +111,17 @@ SquareMatrix SquareMatrix::inverse() const
         return SquareMatrix();
     }
 
-    // 单位阵E
-    SquareMatrix e(size);
-    // 增广A -> A:E
-    Matrix augmented = augment(e);
-    // 将A化成上三角矩阵
-    Matrix upper = augmented.upperTriangular();
-    // 将A化为对角矩阵
-    Matrix diag = upper.diagonal();
-    // 将A化为单位阵
+    // 1. 生成size阶单位阵E
+    // 2. 增广A -> A:E
+    // 3. 将A化成上阶梯形矩阵
+    // 4. 将A化为对角矩阵
+    Matrix diag = augment(SquareMatrix(size)).rowEchelon().diagonal(); // 链式调用提高效率
+    // 5. 将A化为单位阵
     for (size_t r = 0; r < diag.size.row; ++r)
     {
         diag.E(r, (double)(1 / diag[r][r]));
     }
-    // 此时原先的E即为A的逆（写得这么清晰是花了功夫的）
+    // 6. 此时原先的E即为A的逆（写得这么清晰是花了功夫的）
     SquareMatrix result;
     for (size_t r = 0; r < size; ++r)
     {

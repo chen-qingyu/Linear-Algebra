@@ -174,16 +174,16 @@ TEST(MatrixTest, e)
     std::cout << "elementary row transformation test OK." << std::endl;
 }
 
-TEST(MatrixTest, upper)
+TEST(MatrixTest, echelon)
 {
     Matrix m = Matrix(2, 1);
-    ASSERT_EQ(m.upperTriangular().toString(), "[1.000000 1.000000]\n[0.000000 0.000000]");
+    ASSERT_EQ(m.rowEchelon().toString(), "[1.000000 1.000000]\n[0.000000 0.000000]");
     m = Matrix({Vector({1, 2, 3}), Vector({4, 5, 6})});
-    ASSERT_EQ(m.upperTriangular().toString(), "[1.000000 2.000000 3.000000]\n[0.000000 -3.000000 -6.000000]");
+    ASSERT_EQ(m.rowEchelon().toString(), "[1.000000 2.000000 3.000000]\n[0.000000 -3.000000 -6.000000]");
     m = Matrix({Vector({1, 2}), Vector({3, 4}), Vector({5, 6})});
-    ASSERT_EQ(m.upperTriangular().toString(), "[1.000000 2.000000]\n[0.000000 -2.000000]\n[0.000000 0.000000]");
+    ASSERT_EQ(m.rowEchelon().toString(), "[1.000000 2.000000]\n[0.000000 -2.000000]\n[0.000000 0.000000]");
 
-    std::cout << "upperTriangular() test OK." << std::endl;
+    std::cout << "rowEchelon() test OK." << std::endl;
 }
 
 TEST(MatrixTest, rank)

@@ -81,7 +81,7 @@ public:
      * othors
      */
     Matrix transpose() const;
-    Matrix upperTriangular() const;
+    Matrix rowEchelon() const;
     Matrix& zeroAdjust();
     size_t rank() const;
     Matrix augment(const Matrix& m) const;

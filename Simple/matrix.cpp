@@ -339,7 +339,7 @@ Matrix Matrix::transpose() const
     return result;
 }
 
-Matrix Matrix::upperTriangular() const
+Matrix Matrix::rowEchelon() const
 {
     Matrix result = Matrix(*this);
 
@@ -360,7 +360,7 @@ Matrix Matrix::upperTriangular() const
         }
     }
 
-    // step 2: To the upper triangular. It's so elegant, I'm a genius haha.
+    // step 2: To the row echelon form. It's so elegant, I'm a genius haha.
     std::sort(result.rows.begin(), result.rows.end(), [=](const Vector& v1, const Vector& v2) -> bool { return v1.countLeadingZeros() < v2.countLeadingZeros(); });
 
     return result.zeroAdjust();
@@ -382,16 +382,16 @@ size_t Matrix::rank() const
         throw std::runtime_error("Error: The matrix are empty.");
     }
 
-    Matrix upper = upperTriangular();
+    Matrix echelon = rowEchelon();
     size_t zeros = 0;
-    for (const auto& r : upper.rows)
+    for (const auto& r : echelon.rows)
     {
         if (r.isZero()) // 这里不取非是因为循环内尽量减少操作
         {
             ++zeros;
         }
     }
-    return upper.size.row - zeros;
+    return echelon.size.row - zeros;
 }
 
 Matrix Matrix::augment(const Matrix& m) const
@@ -412,16 +412,16 @@ Matrix Matrix::augment(const Matrix& m) const
 
 Matrix Matrix::diagonal() const
 {
-    Matrix upper = upperTriangular();
-    for (size_t c = 0; c < upper.size.row; ++c)
+    Matrix echelon = rowEchelon();
+    for (size_t c = 0; c < echelon.size.row; ++c)
     {
         for (size_t r = 0; r < c; ++r)
         {
-            upper.E(r, c, -(upper[r][c] / upper[c][c]));
+            echelon.E(r, c, -(echelon[r][c] / echelon[c][c]));
         }
     }
 
-    return upper;
+    return echelon;
 }
 
 /*******************
