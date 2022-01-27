@@ -165,45 +165,99 @@ string Matrix::toString() const
 }
 
 /*
- * append rows
+ * combine and split
  */
 
-Matrix& Matrix::appendRows(const Vector& v)
+Matrix Matrix::combine(enumRowOrCol flag, const Matrix& m) const
 {
-    if (size.row == 0)
+    Matrix result(*this);
+    switch (flag)
     {
-        size.col = v.size;
+        case ROW:
+            if (m.size.col != size.col)
+            {
+                throw std::runtime_error("Error: Two matrices have different col numbers.");
+            }
+
+            result.rows.insert(result.rows.end(), m.rows.begin(), m.rows.end());
+            result.size.row += m.size.row;
+
+            break;
+
+        case COL:
+            if (m.size.row != size.row)
+            {
+                throw std::runtime_error("Error: Two matrices have different row numbers.");
+            }
+
+            for (size_t i = 0; i < size.row; ++i)
+            {
+                result[i].append(m[i]);
+            }
+            result.size.col += m.size.col;
+
+            break;
+
+        default:
+            throw std::runtime_error("Error: Invalid flag.");
+            break;
     }
-
-    if (v.size != size.col)
-    {
-        throw std::runtime_error("Error: The row vectors are not of equal size.");
-    }
-
-    rows.push_back(v);
-    size.row += 1;
-
-    return *this;
+    return result;
 }
 
-Matrix& Matrix::appendRows(vector<Vector>::const_iterator begin, vector<Vector>::const_iterator end)
+vector<Matrix> Matrix::split(enumRowOrCol flag, size_t n) const
 {
-    if (size.row == 0)
+    vector<Matrix> vm;
+    Matrix tmp;
+    switch (flag)
     {
-        size.col = (*begin).size;
-    }
+        case ROW:
+            if (n >= size.row || n == 0)
+            {
+                throw std::runtime_error("Error: Invalid position.");
+            }
 
-    for (; begin != end; ++begin)
-    {
-        if ((*begin).size != size.col)
-        {
-            throw std::runtime_error("Error: The row vectors are not of equal size.");
-        }
-    }
+            tmp.rows.clear();
+            tmp.size = {n, size.col};
+            tmp.rows.insert(tmp.rows.end(), rows.begin(), rows.begin() + n);
+            vm.insert(vm.end(), tmp);
 
-    rows.insert(rows.end(), begin, end);
-    size.row += (end - begin);
-    return *this;
+            tmp.rows.clear();
+            tmp.size = {size.row - n, size.col};
+            tmp.rows.insert(tmp.rows.end(), rows.begin() + n, rows.end());
+            vm.insert(vm.end(), tmp);
+
+            break;
+
+        case COL:
+            if (n >= size.col || n == 0)
+            {
+                throw std::runtime_error("Error: Invalid position.");
+            }
+
+            tmp.rows.clear();
+            tmp.size = {size.row, n};
+            for (size_t i = 0; i < size.row; ++i)
+            {
+                tmp.rows.insert(tmp.rows.end(), Vector(rows[i].doubles.begin(), rows[i].doubles.begin() + n));
+            }
+            vm.insert(vm.end(), tmp);
+
+            tmp.rows.clear();
+            tmp.size = {size.row, size.col - n};
+            for (size_t i = 0; i < size.row; ++i)
+            {
+                tmp.rows.insert(tmp.rows.end(), Vector(rows[i].doubles.begin() + n, rows[i].doubles.end()));
+            }
+            vm.insert(vm.end(), tmp);
+
+            break;
+
+        default:
+            throw std::runtime_error("Error: Invalid flag.");
+            break;
+    }
+    return vm;
 }
 
 /*
@@ -392,22 +446,6 @@ size_t Matrix::rank() const
         }
     }
     return echelon.size.row - zeros;
-}
-
-Matrix Matrix::augment(const Matrix& m) const
-{
-    if (size.row != m.size.row)
-    {
-        throw std::runtime_error("Error: Two matrices have different row numbers.");
-    }
-
-    Matrix result = Matrix(*this);
-    for (size_t i = 0; i < size.row; ++i)
-    {
-        result[i].append(m[i]);
-    }
-    result.size.col += m.size.col;
-    return result;
 }
 
 Matrix Matrix::diagonal() const

@@ -25,6 +25,12 @@ public:
         size_t col;
     } size; // 行列数
 
+    enum enumRowOrCol
+    {
+        ROW,
+        COL
+    };
+
     /*
      * constructor
      */
@@ -52,10 +58,10 @@ public:
     string toString() const;
 
     /*
-     * append rows
+     * combine and split
      */
-    Matrix& appendRows(const Vector& v);
-    Matrix& appendRows(vector<Vector>::const_iterator begin, vector<Vector>::const_iterator end);
+    Matrix combine(enumRowOrCol flag, const Matrix& m) const;
+    vector<Matrix> split(enumRowOrCol flag, size_t n) const;
 
     /*
      * Matrix + - * Matrix
@@ -84,7 +90,6 @@ public:
     Matrix rowEchelon() const;
     Matrix& zeroAdjust();
     size_t rank() const;
-    Matrix augment(const Matrix& m) const;
     Matrix diagonal() const;
 
     /*******************

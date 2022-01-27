@@ -205,3 +205,45 @@ TEST(MatrixTest, rank)
 
     std::cout << "rank() test OK." << std::endl;
 }
+
+TEST(MatrixTest, combine)
+{
+    Matrix m1 = {{1, 2}, {3, 4}};
+    Matrix m2(2, 0);
+    ASSERT_EQ(m1.combine(Matrix::COL, m2), Matrix({{1, 2, 0, 0}, {3, 4, 0, 0}}));
+    ASSERT_EQ(m2.combine(Matrix::COL, m1), Matrix({{0, 0, 1, 2}, {0, 0, 3, 4}}));
+    ASSERT_EQ(m1.combine(Matrix::ROW, m2), Matrix({{1, 2}, {3, 4}, {0, 0}, {0, 0}}));
+    ASSERT_EQ(m2.combine(Matrix::ROW, m1), Matrix({{0, 0}, {0, 0}, {1, 2}, {3, 4}}));
+
+    Matrix m3 = {{1, 2, 3, 4, 5}};
+    Matrix m4 = {{6, 7, 8, 9, 10}};
+    ASSERT_EQ(m3.combine(Matrix::COL, m4), Matrix({{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}}));
+    ASSERT_EQ(m4.combine(Matrix::COL, m3), Matrix({{6, 7, 8, 9, 10, 1, 2, 3, 4, 5}}));
+    ASSERT_EQ(m3.combine(Matrix::ROW, m4), Matrix({{1, 2, 3, 4, 5}, {6, 7, 8, 9, 10}}));
+    ASSERT_EQ(m4.combine(Matrix::ROW, m3), Matrix({{6, 7, 8, 9, 10}, {1, 2, 3, 4, 5}}));
+
+    std::cout << "combine() test OK." << std::endl;
+}
+
+TEST(MatrixTest, split)
+{
+    Matrix m1 = {{1, 2}, {3, 4}, {5, 6}};
+    ASSERT_EQ(m1.split(Matrix::COL, 1)[0], Matrix({{1}, {3}, {5}}));
+    ASSERT_EQ(m1.split(Matrix::COL, 1)[1], Matrix({{2}, {4}, {6}}));
+    ASSERT_EQ(m1.split(Matrix::ROW, 1)[0], Matrix({{1, 2}}));
+    ASSERT_EQ(m1.split(Matrix::ROW, 1)[1], Matrix({{3, 4}, {5, 6}}));
+
+    Matrix m2 = {{1, 2, 3, 4, 5}};
+    ASSERT_EQ(m2.split(Matrix::COL, 3)[0], Matrix({{1, 2, 3}}));
+    ASSERT_EQ(m2.split(Matrix::COL, 3)[1], Matrix({{4, 5}}));
+    try
+    {
+        m2.split(Matrix::ROW, 1);
+    }
+    catch (std::runtime_error e)
+    {
+        ASSERT_STREQ(e.what(), "Error: Invalid position.");
+    }
+
+    std::cout << "split() test OK." << std::endl;
+}

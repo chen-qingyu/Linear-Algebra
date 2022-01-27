@@ -22,7 +22,7 @@ using std::vector;
 
 class Vector
 {
-    friend class SquareMatrix;
+    friend class Matrix;
 
 private:
     vector<double> doubles; // 每个元素都是双精度浮点数
