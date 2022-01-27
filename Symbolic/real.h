@@ -40,6 +40,7 @@ public:
     Real operator-(const Real& r) const;
     Real operator*(const Real& r) const;
     Real operator/(const Real& r) const;
+    Real operator%(const Real& r) const;
 
     /*
      * Real (cmp) Real

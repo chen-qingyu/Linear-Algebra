@@ -90,6 +90,18 @@ Real Real::operator/(const Real& r) const
     // TODO
 }
 
+Real Real::operator%(const Real& r) const
+{
+    Real tmp(r);
+
+    while (tmp >= r)
+    {
+        tmp -= r;
+    }
+
+    return tmp;
+}
+
 /*
  * Real (cmp) Real
  */
@@ -135,6 +147,12 @@ bool Real::operator<=(const Real& r) const
 /*
  * Real (op)= Real
  */
+
+Real Real::operator-=(const Real& r)
+{
+    *this = *this - r;
+    return *this;
+}
 
 /*
  * Real (op) int
