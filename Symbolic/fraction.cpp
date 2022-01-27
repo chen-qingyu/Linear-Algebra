@@ -154,25 +154,25 @@ bool Fraction::operator<=(const Fraction& f) const
  * Fraction (op)= Fraction
  */
 
-Fraction Fraction::operator+=(const Fraction& f)
+Fraction& Fraction::operator+=(const Fraction& f)
 {
     *this = *this + f;
     return *this;
 }
 
-Fraction Fraction::operator-=(const Fraction& f)
+Fraction& Fraction::operator-=(const Fraction& f)
 {
     *this = *this - f;
     return *this;
 }
 
-Fraction Fraction::operator*=(const Fraction& f)
+Fraction& Fraction::operator*=(const Fraction& f)
 {
     *this = *this * f;
     return *this;
 }
 
-Fraction Fraction::operator/=(const Fraction& f)
+Fraction& Fraction::operator/=(const Fraction& f)
 {
     *this = *this / f;
     return *this;
@@ -240,25 +240,25 @@ bool Fraction::operator<=(int n) const
  * Fraction (op)= int
  */
 
-Fraction Fraction::operator+=(int n)
+Fraction& Fraction::operator+=(int n)
 {
     *this += Fraction(n);
     return *this;
 }
 
-Fraction Fraction::operator-=(int n)
+Fraction& Fraction::operator-=(int n)
 {
     *this -= Fraction(n);
     return *this;
 }
 
-Fraction Fraction::operator*=(int n)
+Fraction& Fraction::operator*=(int n)
 {
     *this *= Fraction(n);
     return *this;
 }
 
-Fraction Fraction::operator/=(int n)
+Fraction& Fraction::operator/=(int n)
 {
     *this /= Fraction(n);
     return *this;

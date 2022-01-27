@@ -56,10 +56,10 @@ public:
     /*
      * Fraction (op)= Fraction
      */
-    Fraction operator+=(const Fraction& f);
-    Fraction operator-=(const Fraction& f);
-    Fraction operator*=(const Fraction& f);
-    Fraction operator/=(const Fraction& f);
+    Fraction& operator+=(const Fraction& f);
+    Fraction& operator-=(const Fraction& f);
+    Fraction& operator*=(const Fraction& f);
+    Fraction& operator/=(const Fraction& f);
 
     /*
      * Fraction (op) int
@@ -82,10 +82,10 @@ public:
     /*
      * Fraction (op)= int
      */
-    Fraction operator+=(int n);
-    Fraction operator-=(int n);
-    Fraction operator*=(int n);
-    Fraction operator/=(int n);
+    Fraction& operator+=(int n);
+    Fraction& operator-=(int n);
+    Fraction& operator*=(int n);
+    Fraction& operator/=(int n);
 
     /*
      * (op) Fraction
