@@ -114,14 +114,21 @@ SquareMatrix SquareMatrix::inverse() const
     // 1. 生成size阶单位阵 E
     // 2. 生成增广矩阵 A:E
     // 3. 将 A:E 化为阶梯矩阵
+    Matrix echelon = combine(COL, SquareMatrix(size)).rowEchelon(); // 链式调用提高效率
     // 4. 将 A 化为对角矩阵
-    Matrix diag = combine(COL, SquareMatrix(size)).rowEchelon().diagonal(); // 链式调用提高效率
-    // 5. 将 A 化为单位阵
-    for (size_t r = 0; r < diag.size.row; ++r)
+    for (size_t c = 0; c < echelon.size.row; ++c)
     {
-        diag.E(r, (double)(1 / diag[r][r]));
+        for (size_t r = 0; r < c; ++r)
+        {
+            echelon.E(r, c, -(echelon[r][c] / echelon[c][c]));
+        }
+    }
+    // 5. 将 A 化为单位阵
+    for (size_t r = 0; r < echelon.size.row; ++r)
+    {
+        echelon.E(r, (double)(1 / echelon[r][r]));
     }
     // 6. 此时原先的 E 即为 A 的逆（写得这么清晰是花了功夫的）
-    SquareMatrix result = diag.split(COL, size)[1];
+    SquareMatrix result = echelon.split(COL, size)[1];
     return result;
 }

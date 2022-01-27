@@ -90,7 +90,6 @@ public:
     Matrix rowEchelon() const;
     Matrix& zeroAdjust();
     size_t rank() const;
-    Matrix diagonal() const;
 
     /*******************
      * friend function

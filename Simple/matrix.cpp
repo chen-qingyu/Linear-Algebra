@@ -448,20 +448,6 @@ size_t Matrix::rank() const
     return echelon.size.row - zeros;
 }
 
-Matrix Matrix::diagonal() const
-{
-    Matrix echelon = rowEchelon();
-    for (size_t c = 0; c < echelon.size.row; ++c)
-    {
-        for (size_t r = 0; r < c; ++r)
-        {
-            echelon.E(r, c, -(echelon[r][c] / echelon[c][c]));
-        }
-    }
-
-    return echelon;
-}
-
 /*******************
  * friend function
  *******************/
