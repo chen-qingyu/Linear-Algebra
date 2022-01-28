@@ -55,10 +55,10 @@ public:
     /*
      * Real (op)= Real
      */
-    Real operator+=(const Real& r);
-    Real operator-=(const Real& r);
-    Real operator*=(const Real& r);
-    Real operator/=(const Real& r);
+    Real& operator+=(const Real& r);
+    Real& operator-=(const Real& r);
+    Real& operator*=(const Real& r);
+    Real& operator/=(const Real& r);
 
     /*
      * Real (op) int
@@ -81,10 +81,10 @@ public:
     /*
      * Real (op)= int
      */
-    Real operator+=(int n);
-    Real operator-=(int n);
-    Real operator*=(int n);
-    Real operator/=(int n);
+    Real& operator+=(int n);
+    Real& operator-=(int n);
+    Real& operator*=(int n);
+    Real& operator/=(int n);
 
     /*
      * type conversion

@@ -148,7 +148,7 @@ bool Real::operator<=(const Real& r) const
  * Real (op)= Real
  */
 
-Real Real::operator-=(const Real& r)
+Real& Real::operator-=(const Real& r)
 {
     *this = *this - r;
     return *this;
