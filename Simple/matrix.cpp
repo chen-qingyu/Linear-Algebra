@@ -415,7 +415,7 @@ Matrix Matrix::rowEchelon() const
     }
 
     // step 2: To the row echelon form. It's so elegant, I'm a genius haha.
-    std::sort(result.rows.begin(), result.rows.end(), [=](const Vector& v1, const Vector& v2) -> bool { return v1.countLeadingZeros() < v2.countLeadingZeros(); });
+    std::sort(result.rows.begin(), result.rows.end(), [](const Vector& v1, const Vector& v2) -> bool { return v1.countLeadingZeros() < v2.countLeadingZeros(); });
 
     return result.zeroAdjust();
 }
