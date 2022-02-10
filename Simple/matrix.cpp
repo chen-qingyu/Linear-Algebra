@@ -93,6 +93,20 @@ Matrix::Matrix(const initializer_list<Vector>& il)
 }
 
 /*
+ * get size
+ */
+
+size_t Matrix::rowSize() const
+{
+    return size.row;
+}
+
+size_t Matrix::colSize() const
+{
+    return size.col;
+}
+
+/*
  * Matrix[]
  */
 

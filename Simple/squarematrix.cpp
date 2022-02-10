@@ -38,7 +38,7 @@ SquareMatrix::SquareMatrix(size_t n, double element)
 SquareMatrix::SquareMatrix(const Matrix& m)
     : Matrix(m)
 {
-    if (m.size.row != m.size.col)
+    if (m.rowSize() != m.colSize())
     {
         throw std::runtime_error("Error: The rows and columns of the square matrix are not equal.");
     }
@@ -60,6 +60,15 @@ SquareMatrix::SquareMatrix(const initializer_list<Vector>& il)
     {
         throw std::runtime_error("Error: The rows and columns of the square matrix are not equal.");
     }
+}
+
+/*
+ * get size
+ */
+
+size_t SquareMatrix::getSize() const
+{
+    return size;
 }
 
 /*
@@ -116,7 +125,7 @@ SquareMatrix SquareMatrix::inverse() const
     // 3. 将 A:E 化为阶梯矩阵
     Matrix echelon = combine(COL, SquareMatrix(size)).rowEchelon(); // 链式调用提高效率
     // 4. 将 A 化为对角矩阵
-    for (size_t c = 0; c < echelon.size.row; ++c)
+    for (size_t c = 0; c < echelon.rowSize(); ++c)
     {
         for (size_t r = 0; r < c; ++r)
         {
@@ -124,7 +133,7 @@ SquareMatrix SquareMatrix::inverse() const
         }
     }
     // 5. 将 A 化为单位阵
-    for (size_t r = 0; r < echelon.size.row; ++r)
+    for (size_t r = 0; r < echelon.rowSize(); ++r)
     {
         echelon.E(r, (double)(1 / echelon[r][r]));
     }

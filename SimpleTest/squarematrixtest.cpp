@@ -5,23 +5,23 @@
 TEST(SquareMatrix, squa)
 {
     SquareMatrix sm1 = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
-    ASSERT_EQ(sm1.size, (Matrix::size_t)3);
+    ASSERT_EQ(sm1.getSize(), (Matrix::size_t)3);
     ASSERT_EQ(sm1[0][0], 1);
     ASSERT_EQ(sm1[2][2], 9);
 
     SquareMatrix sm2;
-    ASSERT_EQ(sm2.size, (Matrix::size_t)0);
+    ASSERT_EQ(sm2.getSize(), (Matrix::size_t)0);
     ASSERT_EQ(sm2, SquareMatrix());
 
     SquareMatrix sm3(4);
-    ASSERT_EQ(sm3.size, (Matrix::size_t)4);
+    ASSERT_EQ(sm3.getSize(), (Matrix::size_t)4);
     ASSERT_EQ(sm3[0][0], 1);
     ASSERT_EQ(sm3[0][1], 0);
     ASSERT_EQ(sm3[1][0], 0);
     ASSERT_EQ(sm3[1][1], 1);
 
     SquareMatrix sm4(4, 1);
-    ASSERT_EQ(sm4.size, (Matrix::size_t)4);
+    ASSERT_EQ(sm4.getSize(), (Matrix::size_t)4);
     ASSERT_EQ(sm4[0][0], 1);
     ASSERT_EQ(sm4[0][1], 1);
     ASSERT_EQ(sm4[1][0], 1);
@@ -37,11 +37,11 @@ TEST(SquareMatrix, squa)
     }
 
     SquareMatrix sm6(5, 4);
-    ASSERT_EQ(sm6.size, (Matrix::size_t)5);
+    ASSERT_EQ(sm6.getSize(), (Matrix::size_t)5);
     ASSERT_EQ(sm6[0][0], 4);
     ASSERT_EQ(sm6[4][4], 4);
     sm6 = {{1, 2}, {3, 4}};
-    ASSERT_EQ(sm6.size, (Matrix::size_t)2);
+    ASSERT_EQ(sm6.getSize(), (Matrix::size_t)2);
     ASSERT_EQ(sm6[0][0], 1);
     ASSERT_EQ(sm6[1][1], 4);
 

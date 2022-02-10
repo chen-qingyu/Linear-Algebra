@@ -5,28 +5,28 @@
 TEST(MatrixTest, matr)
 {
     Matrix m;
-    ASSERT_EQ(m.size.row, (Matrix::size_t)0);
-    ASSERT_EQ(m.size.col, (Matrix::size_t)0);
+    ASSERT_EQ(m.rowSize(), (Matrix::size_t)0);
+    ASSERT_EQ(m.colSize(), (Matrix::size_t)0);
 
     Matrix m2 = Matrix({Vector({1, 2, 3}), Vector({4, 5, 6})});
-    ASSERT_EQ(m2.size.row, (Matrix::size_t)2);
-    ASSERT_EQ(m2.size.col, (Matrix::size_t)3);
+    ASSERT_EQ(m2.rowSize(), (Matrix::size_t)2);
+    ASSERT_EQ(m2.colSize(), (Matrix::size_t)3);
     ASSERT_EQ(m2[0], Vector({1, 2, 3}));
     ASSERT_EQ(m2[1], Vector({4, 5, 6}));
 
     Matrix m3 = Matrix(4, 0);
-    ASSERT_EQ(m3.size.row, (Matrix::size_t)4);
-    ASSERT_EQ(m3.size.col, (Matrix::size_t)4);
+    ASSERT_EQ(m3.rowSize(), (Matrix::size_t)4);
+    ASSERT_EQ(m3.colSize(), (Matrix::size_t)4);
     ASSERT_EQ(m3[3][3], 0);
 
     Matrix m4 = Matrix(4, 5, 1);
-    ASSERT_EQ(m4.size.row, (Matrix::size_t)4);
-    ASSERT_EQ(m4.size.col, (Matrix::size_t)5);
+    ASSERT_EQ(m4.rowSize(), (Matrix::size_t)4);
+    ASSERT_EQ(m4.colSize(), (Matrix::size_t)5);
     ASSERT_EQ(m4[3][4], 1);
 
     Matrix m5 = {{1, 2, 3}, {4, 5, 6}};
-    ASSERT_EQ(m5.size.row, (Matrix::size_t)2);
-    ASSERT_EQ(m5.size.col, (Matrix::size_t)3);
+    ASSERT_EQ(m5.rowSize(), (Matrix::size_t)2);
+    ASSERT_EQ(m5.colSize(), (Matrix::size_t)3);
     ASSERT_EQ(m5[0][0], 1);
     ASSERT_EQ(m5[1][2], 6);
 
@@ -49,12 +49,12 @@ TEST(MatrixTest, matr)
     }
 
     Matrix m8(1, 9);
-    ASSERT_EQ(m8.size.row, (Matrix::size_t)1);
-    ASSERT_EQ(m8.size.col, (Matrix::size_t)1);
+    ASSERT_EQ(m8.rowSize(), (Matrix::size_t)1);
+    ASSERT_EQ(m8.colSize(), (Matrix::size_t)1);
     ASSERT_EQ(m8[0][0], 9);
     m8 = {{1, 2}, {3, 4}, {5, 6}};
-    ASSERT_EQ(m8.size.row, (Matrix::size_t)3);
-    ASSERT_EQ(m8.size.col, (Matrix::size_t)2);
+    ASSERT_EQ(m8.rowSize(), (Matrix::size_t)3);
+    ASSERT_EQ(m8.colSize(), (Matrix::size_t)2);
     ASSERT_EQ(m8[0][0], 1);
     ASSERT_EQ(m8[2][1], 6);
 

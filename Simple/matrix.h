@@ -16,14 +16,14 @@ class Matrix
 protected:
     vector<Vector> rows; // 每个元素都是行向量
 
-public:
-    using size_t = vector<Vector>::size_type;
-
-    struct
+    struct _size
     {
         size_t row;
         size_t col;
     } size; // 行列数
+
+public:
+    using size_t = vector<Vector>::size_type;
 
     enum enumRowOrCol
     {
@@ -39,6 +39,12 @@ public:
     Matrix(size_t n, double element);
     Matrix(size_t row, size_t col, double element);
     Matrix(const initializer_list<Vector>& il);
+
+    /*
+     * get size
+     */
+    size_t rowSize() const;
+    size_t colSize() const;
 
     /*
      * Matrix[]

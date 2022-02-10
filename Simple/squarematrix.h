@@ -13,9 +13,10 @@
 
 class SquareMatrix : public Matrix
 {
-public:
+protected:
     size_t& size = Matrix::size.row; // 阶数
 
+public:
     /*
      * constructor
      */
@@ -25,6 +26,11 @@ public:
     SquareMatrix(const Matrix& m);
     SquareMatrix(size_t n);
     SquareMatrix(const initializer_list<Vector>& il);
+
+    /*
+     * get size
+     */
+    size_t getSize() const;
 
     /*
      * operator=
