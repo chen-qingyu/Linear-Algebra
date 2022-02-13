@@ -120,7 +120,7 @@ Vector& Matrix::operator[](size_t idx)
     return rows[idx];
 }
 
-Vector Matrix::operator[](size_t idx) const
+const Vector& Matrix::operator[](size_t idx) const
 {
     if (idx >= size.row)
     {

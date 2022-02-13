@@ -24,7 +24,7 @@ SquareMatrix::SquareMatrix()
 SquareMatrix::SquareMatrix(const vector<Vector>& vv)
     : Matrix(vv)
 {
-    if (vv.begin()->size != vv.size())
+    if (vv.begin()->getSize() != vv.size())
     {
         throw std::runtime_error("Error: The rows and columns of the square matrix are not equal.");
     }
@@ -56,7 +56,7 @@ SquareMatrix::SquareMatrix(Matrix::size_t n)
 SquareMatrix::SquareMatrix(const initializer_list<Vector>& il)
     : Matrix(il)
 {
-    if (il.begin()->size != il.size())
+    if (il.begin()->getSize() != il.size())
     {
         throw std::runtime_error("Error: The rows and columns of the square matrix are not equal.");
     }

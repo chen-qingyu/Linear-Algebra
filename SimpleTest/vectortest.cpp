@@ -8,35 +8,35 @@ TEST(VectorTest, vect)
 {
     Vector a;
     ASSERT_EQ(a, Vector());
-    ASSERT_EQ(a.size, (Vector::size_t)0);
+    ASSERT_EQ(a.getSize(), (Vector::size_t)0);
 
     Vector b = Vector({1});
     ASSERT_EQ(b, Vector().append(1));
-    ASSERT_EQ(b.size, (Vector::size_t)1);
+    ASSERT_EQ(b.getSize(), (Vector::size_t)1);
 
     Vector c = Vector({0, 1, 2});
     ASSERT_EQ(c, Vector().append(0).append(1).append(2));
-    ASSERT_EQ(c.size, (Vector::size_t)3);
+    ASSERT_EQ(c.getSize(), (Vector::size_t)3);
 
     Vector d = {1, 2, 3, 4};
     ASSERT_EQ(d, Vector({1, 2, 3, 4}));
-    ASSERT_EQ(d.size, (Vector::size_t)4);
+    ASSERT_EQ(d.getSize(), (Vector::size_t)4);
 
     Vector e(5, 4);
     ASSERT_EQ(e, Vector({4, 4, 4, 4, 4}));
-    ASSERT_EQ(e.size, (Vector::size_t)5);
+    ASSERT_EQ(e.getSize(), (Vector::size_t)5);
 
     vector<double> vd = {1, 2, 3, 4, 5};
     Vector f(vd);
     ASSERT_EQ(f, Vector({1, 2, 3, 4, 5}));
-    ASSERT_EQ(f.size, (Vector::size_t)5);
+    ASSERT_EQ(f.getSize(), (Vector::size_t)5);
 
     Vector g = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
-    ASSERT_EQ(g.size, (Vector::size_t)10);
+    ASSERT_EQ(g.getSize(), (Vector::size_t)10);
     ASSERT_EQ(g[0], 0);
     ASSERT_EQ(g[9], 9);
     g = {2, 3, 5, 7, 11};
-    ASSERT_EQ(g.size, (Vector::size_t)5);
+    ASSERT_EQ(g.getSize(), (Vector::size_t)5);
     ASSERT_EQ(g[0], 2);
     ASSERT_EQ(g[4], 11);
 
@@ -309,17 +309,17 @@ TEST(VectorTest, unit)
 TEST(VectorTest, all)
 {
     Vector v;
-    ASSERT_EQ(v.size, (Vector::size_t)0);
+    ASSERT_EQ(v.getSize(), (Vector::size_t)0);
 
     v.append({1, 2, 3});
-    ASSERT_EQ(v.size, (Vector::size_t)3);
+    ASSERT_EQ(v.getSize(), (Vector::size_t)3);
 
     Vector v2({4, 5, 6});
     v.append(v2);
-    ASSERT_EQ(v.size, (Vector::size_t)6);
+    ASSERT_EQ(v.getSize(), (Vector::size_t)6);
 
     v.append(7);
-    ASSERT_EQ(v.size, (Vector::size_t)7);
+    ASSERT_EQ(v.getSize(), (Vector::size_t)7);
 
     int len = 0;
     for (int i = 1; i <= 7; ++i)

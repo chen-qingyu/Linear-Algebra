@@ -51,6 +51,11 @@ Vector::Vector(size_t n, double element)
     size = n;
 }
 
+Vector::size_t Vector::getSize() const
+{
+    return size;
+}
+
 /*
  * append element
  */

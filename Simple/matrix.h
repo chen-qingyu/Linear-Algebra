@@ -50,7 +50,7 @@ public:
      * Matrix[]
      */
     Vector& operator[](size_t idx);
-    Vector operator[](size_t idx) const;
+    const Vector& operator[](size_t idx) const;
 
     /*
      * Matrix == != Matrix

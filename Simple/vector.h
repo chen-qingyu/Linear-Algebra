@@ -26,11 +26,10 @@ class Vector
 
 private:
     vector<double> doubles; // 每个元素都是双精度浮点数
+    size_t size;            // 元素个数
 
 public:
     using size_t = vector<double>::size_type;
-
-    size_t size; // 元素个数
 
     /*
      * constructor
@@ -40,6 +39,11 @@ public:
     Vector(vector<double>::const_iterator begin, vector<double>::const_iterator end);
     Vector(const initializer_list<double>& il);
     Vector(size_t n, double element);
+
+    /*
+     * get size
+     */
+    size_t getSize() const;
 
     /*
      * append element

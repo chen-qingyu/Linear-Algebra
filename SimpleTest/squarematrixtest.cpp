@@ -2,7 +2,7 @@
 
 #include "../Simple/squarematrix.h"
 
-TEST(SquareMatrix, squa)
+TEST(SquareMatrixTest, squa)
 {
     SquareMatrix sm1 = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
     ASSERT_EQ(sm1.getSize(), (Matrix::size_t)3);
@@ -48,7 +48,7 @@ TEST(SquareMatrix, squa)
     std::cout << "SquareMatrix() test OK." << std::endl;
 }
 
-TEST(SquareMatrix, det)
+TEST(SquareMatrixTest, det)
 {
     SquareMatrix sm = SquareMatrix(2, 1);
     ASSERT_TRUE(eq(sm.det(), 0));
@@ -77,7 +77,7 @@ TEST(SquareMatrix, det)
     std::cout << "det() test OK." << std::endl;
 }
 
-TEST(SquareMatrix, inv)
+TEST(SquareMatrixTest, inv)
 {
     SquareMatrix sm({Vector({1, 1}), Vector({1, 1})});
     ASSERT_EQ(sm.inverse(), SquareMatrix());
@@ -96,7 +96,7 @@ TEST(SquareMatrix, inv)
     std::cout << "inverse() test OK." << std::endl;
 }
 
-TEST(SquareMatrix, opassign)
+TEST(SquareMatrixTest, opassign)
 {
     SquareMatrix sm;
     ASSERT_EQ(sm, SquareMatrix());
