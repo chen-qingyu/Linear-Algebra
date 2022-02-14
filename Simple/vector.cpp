@@ -172,7 +172,7 @@ string Vector::toString() const
  * Vector + - Vector
  */
 
-Vector Vector::operator+(const Vector& v) const
+const Vector Vector::operator+(const Vector& v) const
 {
     if (size != v.size)
     {
@@ -191,7 +191,7 @@ Vector Vector::operator+(const Vector& v) const
     return result;
 }
 
-Vector Vector::operator-(const Vector& v) const
+const Vector Vector::operator-(const Vector& v) const
 {
     if (size != v.size)
     {
@@ -237,7 +237,7 @@ double Vector::operator*(const Vector& v) const
  * scalar multiplication
  */
 
-Vector Vector::operator*(const double& d) const
+const Vector Vector::operator*(const double& d) const
 {
     if (size == 0)
     {
@@ -252,7 +252,7 @@ Vector Vector::operator*(const double& d) const
     return result;
 }
 
-Vector Vector::operator/(const double& d) const
+const Vector Vector::operator/(const double& d) const
 {
     if (size == 0)
     {

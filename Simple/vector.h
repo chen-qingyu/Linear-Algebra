@@ -74,8 +74,8 @@ public:
     /*
      * Vector + - Vector
      */
-    Vector operator+(const Vector& v) const;
-    Vector operator-(const Vector& v) const;
+    const Vector operator+(const Vector& v) const;
+    const Vector operator-(const Vector& v) const;
 
     /*
      * dot product
@@ -85,8 +85,8 @@ public:
     /*
      * scalar multiplication
      */
-    Vector operator*(const double& d) const;
-    Vector operator/(const double& d) const;
+    const Vector operator*(const double& d) const;
+    const Vector operator/(const double& d) const;
 
     /*
      * othors

@@ -72,15 +72,15 @@ public:
     /*
      * Matrix + - * Matrix
      */
-    Matrix operator+(const Matrix& m) const;
-    Matrix operator-(const Matrix& m) const;
-    Matrix operator*(const Matrix& m) const;
+    const Matrix operator+(const Matrix& m) const;
+    const Matrix operator-(const Matrix& m) const;
+    const Matrix operator*(const Matrix& m) const;
 
     /*
      * scalar multiplication
      */
-    Matrix operator*(const double& d) const;
-    Matrix operator/(const double& d) const;
+    const Matrix operator*(const double& d) const;
+    const Matrix operator/(const double& d) const;
 
     /*
      * elementary row transformation

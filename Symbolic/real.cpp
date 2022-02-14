@@ -62,35 +62,35 @@ Real::Real(const vector<RealItem>& poly)
  * Real (op) Real
  */
 
-Real Real::operator+(const Real& r) const
+const Real Real::operator+(const Real& r) const
 {
     return Real(poly.front() + r.poly.front());
 
     // TODO
 }
 
-Real Real::operator-(const Real& r) const
+const Real Real::operator-(const Real& r) const
 {
     return Real(poly.front() - r.poly.front());
 
     // TODO
 }
 
-Real Real::operator*(const Real& r) const
+const Real Real::operator*(const Real& r) const
 {
     return Real(poly.front() * r.poly.front());
 
     // TODO
 }
 
-Real Real::operator/(const Real& r) const
+const Real Real::operator/(const Real& r) const
 {
     return Real(poly.front() / r.poly.front());
 
     // TODO
 }
 
-Real Real::operator%(const Real& r) const
+const Real Real::operator%(const Real& r) const
 {
     Real tmp(r);
 

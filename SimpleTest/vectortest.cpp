@@ -91,6 +91,7 @@ TEST(VectorTest, op1)
     Vector v2 = Vector({4, 5, 6});
 
     Vector v3 = v1 + v2;
+
     ASSERT_EQ(v1 + v2, v2 + v1);
     ASSERT_EQ(v1, Vector({1, 2, 3}));
     ASSERT_EQ(v2, Vector({4, 5, 6}));
@@ -107,6 +108,8 @@ TEST(VectorTest, op1)
     ASSERT_EQ(v1, Vector({1, 2, 3}));
     ASSERT_EQ(v2, Vector({4, 5, 6}));
     ASSERT_EQ(v5, Vector({3, 3, 3}));
+
+    ASSERT_EQ(v1 + v2 - v3 + v4 + v5, Vector({0, 0, 0}));
 
     Vector v6 = Vector({1, 1, 1, 1});
     try

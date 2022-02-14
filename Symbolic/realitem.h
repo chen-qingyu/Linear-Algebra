@@ -34,10 +34,10 @@ public:
     /*
      * RealItem (op) RealItem
      */
-    RealItem operator+(const RealItem& ri) const;
-    RealItem operator-(const RealItem& ri) const;
-    RealItem operator*(const RealItem& ri) const;
-    RealItem operator/(const RealItem& ri) const;
+    const RealItem operator+(const RealItem& ri) const;
+    const RealItem operator-(const RealItem& ri) const;
+    const RealItem operator*(const RealItem& ri) const;
+    const RealItem operator/(const RealItem& ri) const;
 
     /*
      * RealItem (cmp) RealItem
@@ -60,10 +60,10 @@ public:
     /*
      * RealItem (op) int
      */
-    RealItem operator+(int n) const;
-    RealItem operator-(int n) const;
-    RealItem operator*(int n) const;
-    RealItem operator/(int n) const;
+    const RealItem operator+(int n) const;
+    const RealItem operator-(int n) const;
+    const RealItem operator*(int n) const;
+    const RealItem operator/(int n) const;
 
     /*
      * RealItem (cmp) int
@@ -86,11 +86,11 @@ public:
     /*
      * (op) RealItem
      */
-    RealItem operator-() const;
+    const RealItem operator-() const;
     RealItem& operator++();
     RealItem& operator--();
-    RealItem operator++(int);
-    RealItem operator--(int);
+    const RealItem operator++(int);
+    const RealItem operator--(int);
 
     /*
      * type conversion
@@ -110,10 +110,10 @@ public:
     /*
      * int (op) RealItem
      */
-    friend RealItem operator+(int n, const RealItem& ri);
-    friend RealItem operator-(int n, const RealItem& ri);
-    friend RealItem operator*(int n, const RealItem& ri);
-    friend RealItem operator/(int n, const RealItem& ri);
+    friend const RealItem operator+(int n, const RealItem& ri);
+    friend const RealItem operator-(int n, const RealItem& ri);
+    friend const RealItem operator*(int n, const RealItem& ri);
+    friend const RealItem operator/(int n, const RealItem& ri);
 
     /*
      * int (cmp) RealItem

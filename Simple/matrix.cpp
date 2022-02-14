@@ -278,7 +278,7 @@ vector<Matrix> Matrix::split(enumRowOrCol flag, size_t n) const
  * Matrix + - * Matrix
  */
 
-Matrix Matrix::operator+(const Matrix& m) const
+const Matrix Matrix::operator+(const Matrix& m) const
 {
     if ((size.row != m.size.row) || (size.col != m.size.col))
     {
@@ -297,7 +297,7 @@ Matrix Matrix::operator+(const Matrix& m) const
     return result;
 }
 
-Matrix Matrix::operator-(const Matrix& m) const
+const Matrix Matrix::operator-(const Matrix& m) const
 {
     if ((size.row != m.size.row) || (size.col != m.size.col))
     {
@@ -316,7 +316,7 @@ Matrix Matrix::operator-(const Matrix& m) const
     return result;
 }
 
-Matrix Matrix::operator*(const Matrix& m) const
+const Matrix Matrix::operator*(const Matrix& m) const
 {
     if (size.col != m.size.row)
     {
@@ -343,7 +343,7 @@ Matrix Matrix::operator*(const Matrix& m) const
  * scalar multiplication
  */
 
-Matrix Matrix::operator*(const double& d) const
+const Matrix Matrix::operator*(const double& d) const
 {
     Matrix result = Matrix(*this);
     for (size_t i = 0; i < size.row; ++i)
@@ -353,7 +353,7 @@ Matrix Matrix::operator*(const double& d) const
     return result;
 }
 
-Matrix Matrix::operator/(const double& d) const
+const Matrix Matrix::operator/(const double& d) const
 {
     Matrix result = Matrix(*this);
     for (size_t i = 0; i < size.row; ++i)

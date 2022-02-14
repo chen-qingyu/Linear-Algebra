@@ -132,7 +132,7 @@ RealItem::RealItem(const Fraction& coef, int integer, const Fraction& power)
  * RealItem (op) RealItem
  */
 
-RealItem RealItem::operator+(const RealItem& ri) const
+const RealItem RealItem::operator+(const RealItem& ri) const
 {
     if (integer != ri.integer || power != ri.power)
     {
@@ -142,7 +142,7 @@ RealItem RealItem::operator+(const RealItem& ri) const
     return RealItem(coef + ri.coef, integer, power);
 }
 
-RealItem RealItem::operator-(const RealItem& ri) const
+const RealItem RealItem::operator-(const RealItem& ri) const
 {
     if (integer != ri.integer || power != ri.power)
     {
@@ -152,7 +152,7 @@ RealItem RealItem::operator-(const RealItem& ri) const
     return RealItem(coef - ri.coef, integer, power);
 }
 
-RealItem RealItem::operator*(const RealItem& ri) const
+const RealItem RealItem::operator*(const RealItem& ri) const
 {
     if (power != ri.power)
     {
@@ -162,7 +162,7 @@ RealItem RealItem::operator*(const RealItem& ri) const
     return RealItem(coef * ri.coef, integer * ri.integer, power);
 }
 
-RealItem RealItem::operator/(const RealItem& ri) const
+const RealItem RealItem::operator/(const RealItem& ri) const
 {
     if (power != ri.power)
     {
@@ -240,22 +240,22 @@ RealItem RealItem::operator/=(const RealItem& ri)
  * RealItem (op) int
  */
 
-RealItem RealItem::operator+(int n) const
+const RealItem RealItem::operator+(int n) const
 {
     return operator+(RealItem(n));
 }
 
-RealItem RealItem::operator-(int n) const
+const RealItem RealItem::operator-(int n) const
 {
     return operator-(RealItem(n));
 }
 
-RealItem RealItem::operator*(int n) const
+const RealItem RealItem::operator*(int n) const
 {
     return operator*(RealItem(n));
 }
 
-RealItem RealItem::operator/(int n) const
+const RealItem RealItem::operator/(int n) const
 {
     return operator/(RealItem(n));
 }
@@ -326,7 +326,7 @@ RealItem RealItem::operator/=(int n)
  * (op) RealItem
  */
 
-RealItem RealItem::operator-() const
+const RealItem RealItem::operator-() const
 {
     return (*this) * (-1);
 }
@@ -343,14 +343,14 @@ RealItem& RealItem::operator--()
     return *this;
 }
 
-RealItem RealItem::operator++(int)
+const RealItem RealItem::operator++(int)
 {
     RealItem tmp = *this;
     *this += 1;
     return tmp;
 }
 
-RealItem RealItem::operator--(int)
+const RealItem RealItem::operator--(int)
 {
     RealItem tmp = *this;
     *this -= 1;
@@ -416,22 +416,22 @@ std::ostream& operator<<(std::ostream& os, const RealItem& ri)
  * int (op) RealItem
  */
 
-RealItem operator+(int n, const RealItem& ri)
+const RealItem operator+(int n, const RealItem& ri)
 {
     return RealItem(n) + ri;
 }
 
-RealItem operator-(int n, const RealItem& ri)
+const RealItem operator-(int n, const RealItem& ri)
 {
     return RealItem(n) - ri;
 }
 
-RealItem operator*(int n, const RealItem& ri)
+const RealItem operator*(int n, const RealItem& ri)
 {
     return RealItem(n) * ri;
 }
 
-RealItem operator/(int n, const RealItem& ri)
+const RealItem operator/(int n, const RealItem& ri)
 {
     return RealItem(n) / ri;
 }

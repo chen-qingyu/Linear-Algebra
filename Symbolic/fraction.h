@@ -38,10 +38,10 @@ public:
     /*
      * Fraction (op) Fraction
      */
-    Fraction operator+(const Fraction& f) const;
-    Fraction operator-(const Fraction& f) const;
-    Fraction operator*(const Fraction& f) const;
-    Fraction operator/(const Fraction& f) const;
+    const Fraction operator+(const Fraction& f) const;
+    const Fraction operator-(const Fraction& f) const;
+    const Fraction operator*(const Fraction& f) const;
+    const Fraction operator/(const Fraction& f) const;
 
     /*
      * Fraction (cmp) Fraction
@@ -64,10 +64,10 @@ public:
     /*
      * Fraction (op) int
      */
-    Fraction operator+(int n) const;
-    Fraction operator-(int n) const;
-    Fraction operator*(int n) const;
-    Fraction operator/(int n) const;
+    const Fraction operator+(int n) const;
+    const Fraction operator-(int n) const;
+    const Fraction operator*(int n) const;
+    const Fraction operator/(int n) const;
 
     /*
      * Fraction (cmp) int
@@ -90,11 +90,11 @@ public:
     /*
      * (op) Fraction
      */
-    Fraction operator-() const;
+    const Fraction operator-() const;
     Fraction& operator++();
     Fraction& operator--();
-    Fraction operator++(int);
-    Fraction operator--(int);
+    const Fraction operator++(int);
+    const Fraction operator--(int);
 
     /*
      * type conversion
@@ -114,10 +114,10 @@ public:
     /*
      * int (op) Fraction
      */
-    friend Fraction operator+(int n, const Fraction& f);
-    friend Fraction operator-(int n, const Fraction& f);
-    friend Fraction operator*(int n, const Fraction& f);
-    friend Fraction operator/(int n, const Fraction& f);
+    friend const Fraction operator+(int n, const Fraction& f);
+    friend const Fraction operator-(int n, const Fraction& f);
+    friend const Fraction operator*(int n, const Fraction& f);
+    friend const Fraction operator/(int n, const Fraction& f);
 
     /*
      * int (cmp) Fraction

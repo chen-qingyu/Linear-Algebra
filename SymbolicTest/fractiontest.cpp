@@ -181,21 +181,20 @@ TEST(FractionTest, unary)
 {
     Fraction a(1, 2);
     ASSERT_EQ((a = -a), Fraction(-1, 2));
-    ASSERT_EQ((++a), Fraction(1, 2));
-    ASSERT_EQ((--a), Fraction(-1, 2));
-    ASSERT_EQ((a++), Fraction(-1, 2));
+    ASSERT_EQ(++a, Fraction(1, 2));
+    ASSERT_EQ(--a, Fraction(-1, 2));
+    ASSERT_EQ(a++, Fraction(-1, 2));
     ASSERT_EQ(a, Fraction(1, 2));
-    ASSERT_EQ((a--), Fraction(1, 2));
+    ASSERT_EQ(a--, Fraction(1, 2));
     ASSERT_EQ(a, Fraction(-1, 2));
 
     Fraction b(1, 3);
     ASSERT_EQ(((++b) = 1), 1);
     ASSERT_EQ(b, 1);
     ASSERT_EQ(((--b) = 233), 233);
-    ASSERT_EQ(b, 233);
-    ASSERT_EQ(((b++) = 1), 1);
+    ASSERT_EQ(b++, 233);
     ASSERT_EQ(b, 234);
-    ASSERT_EQ(((b--) = 1), 1);
+    ASSERT_EQ(b--, 234);
     ASSERT_EQ(b, 233);
 
     std::cout << "(op) Fraction test OK." << std::endl;

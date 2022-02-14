@@ -36,11 +36,11 @@ public:
     /*
      * Real (op) Real
      */
-    Real operator+(const Real& r) const;
-    Real operator-(const Real& r) const;
-    Real operator*(const Real& r) const;
-    Real operator/(const Real& r) const;
-    Real operator%(const Real& r) const;
+    const Real operator+(const Real& r) const;
+    const Real operator-(const Real& r) const;
+    const Real operator*(const Real& r) const;
+    const Real operator/(const Real& r) const;
+    const Real operator%(const Real& r) const;
 
     /*
      * Real (cmp) Real
@@ -63,10 +63,11 @@ public:
     /*
      * Real (op) int
      */
-    Real operator+(int n) const;
-    Real operator-(int n) const;
-    Real operator*(int n) const;
-    Real operator/(int n) const;
+    const Real operator+(int n) const;
+    const Real operator-(int n) const;
+    const Real operator*(int n) const;
+    const Real operator/(int n) const;
+    const Real operator%(int n) const;
 
     /*
      * Real (cmp) int
@@ -109,10 +110,11 @@ public:
     /*
      * int (op) Real
      */
-    friend Real operator+(int n, const Real& r);
-    friend Real operator-(int n, const Real& r);
-    friend Real operator*(int n, const Real& r);
-    friend Real operator/(int n, const Real& r);
+    friend const Real operator+(int n, const Real& r);
+    friend const Real operator-(int n, const Real& r);
+    friend const Real operator*(int n, const Real& r);
+    friend const Real operator/(int n, const Real& r);
+    friend const Real operator%(int n, const Real& r);
 
     /*
      * int (cmp) Real
