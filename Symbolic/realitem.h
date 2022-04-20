@@ -96,7 +96,7 @@ public:
      * type conversion
      */
     operator double() const;
-    string toString() const;
+    operator string() const;
 
     /*******************
      * friend function

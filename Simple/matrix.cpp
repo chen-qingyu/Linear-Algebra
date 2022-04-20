@@ -161,7 +161,7 @@ bool Matrix::operator!=(const Matrix& m) const
  * type conversion
  */
 
-string Matrix::toString() const
+Matrix::operator string() const
 {
     if (size.row == 0 || size.col == 0)
     {
@@ -171,7 +171,7 @@ string Matrix::toString() const
     string str = "";
     for (const auto& r : rows)
     {
-        str += r.toString();
+        str += (string)r;
         str += '\n';
     }
     str.pop_back();
@@ -472,7 +472,7 @@ size_t Matrix::rank() const
 
 std::ostream& operator<<(std::ostream& os, const Matrix& m)
 {
-    return os << m.toString();
+    return os << (string)m;
 }
 
 /*

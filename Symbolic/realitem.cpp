@@ -366,7 +366,7 @@ RealItem::operator double() const
     return (double)coef * (std::pow(integer, (double)power));
 }
 
-string RealItem::toString() const
+RealItem::operator string() const
 {
     if (coef == 0 || integer == 0)
     {
@@ -375,7 +375,7 @@ string RealItem::toString() const
 
     if (integer == 1 || power == 0)
     {
-        return coef.toString();
+        return (string)coef;
     }
 
     string str = "";
@@ -387,13 +387,13 @@ string RealItem::toString() const
         }
         else
         {
-            str += "(" + coef.toString() + ")*";
+            str += "(" + (string)coef + ")*";
         }
     }
     str += std::to_string(integer);
     if (power != 1)
     {
-        str += "^(" + power.toString() + ")";
+        str += "^(" + (string)power + ")";
     }
 
     return str;
@@ -409,7 +409,7 @@ string RealItem::toString() const
 
 std::ostream& operator<<(std::ostream& os, const RealItem& ri)
 {
-    return os << ri.toString();
+    return os << (string)ri;
 }
 
 /*

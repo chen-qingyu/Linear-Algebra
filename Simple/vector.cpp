@@ -150,7 +150,7 @@ bool Vector::operator!=(const Vector& v) const
  * type conversion
  */
 
-string Vector::toString() const
+Vector::operator string() const
 {
     string str = "[";
     if (size == 0)
@@ -370,7 +370,7 @@ bool Vector::isZero() const
 
 std::ostream& operator<<(std::ostream& os, const Vector& v)
 {
-    return os << v.toString();
+    return os << (string)v;
 }
 
 /*

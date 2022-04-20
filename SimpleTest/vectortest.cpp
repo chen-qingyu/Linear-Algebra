@@ -78,11 +78,11 @@ TEST(VectorTest, op)
 
 TEST(VectorTest, tostr)
 {
-    ASSERT_EQ(Vector().toString(), "[]");
-    ASSERT_EQ(Vector({1, 2, 3}).toString(), "[1.000000 2.000000 3.000000]");
-    ASSERT_EQ(Vector({0, 0.5, 0.66}).toString(), "[0.000000 0.500000 0.660000]");
+    ASSERT_EQ((string)Vector(), "[]");
+    ASSERT_EQ((string)Vector({1, 2, 3}), "[1.000000 2.000000 3.000000]");
+    ASSERT_EQ((string)Vector({0, 0.5, 0.66}), "[0.000000 0.500000 0.660000]");
 
-    std::cout << "toString() test OK." << std::endl;
+    std::cout << "operator string() test OK." << std::endl;
 }
 
 TEST(VectorTest, op1)

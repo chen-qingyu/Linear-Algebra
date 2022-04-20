@@ -185,12 +185,12 @@ Real::operator double() const
     return result;
 }
 
-string Real::toString() const
+Real::operator string() const
 {
     string str = "";
     for (const auto& item : poly)
     {
-        str += item.toString();
+        str += (string)item;
         str += " + ";
     }
     if (str != "")
@@ -226,7 +226,7 @@ Real& Real::zeroAdjust()
 
 std::ostream& operator<<(std::ostream& os, const Real& r)
 {
-    return os << r.toString();
+    return os << (string)r;
 }
 
 /*

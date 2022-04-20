@@ -135,16 +135,16 @@ TEST(FractionTest, cmp3)
 
 TEST(FractionTest, tostr)
 {
-    ASSERT_EQ(Fraction(1, 2).toString(), "1/2");
-    ASSERT_EQ(Fraction(2, 1).toString(), "2");
-    ASSERT_EQ(Fraction(10).toString(), "10");
-    ASSERT_EQ(Fraction().toString(), "0");
-    ASSERT_EQ(Fraction(5, 10).toString(), "1/2");
-    ASSERT_EQ(Fraction(10, 5).toString(), "2");
-    ASSERT_EQ(Fraction(11, 12).toString(), "11/12");
-    ASSERT_EQ(Fraction(9, -4).toString(), "-9/4");
+    ASSERT_EQ((string)Fraction(1, 2), "1/2");
+    ASSERT_EQ((string)Fraction(2, 1), "2");
+    ASSERT_EQ((string)Fraction(10), "10");
+    ASSERT_EQ((string)Fraction(), "0");
+    ASSERT_EQ((string)Fraction(5, 10), "1/2");
+    ASSERT_EQ((string)Fraction(10, 5), "2");
+    ASSERT_EQ((string)Fraction(11, 12), "11/12");
+    ASSERT_EQ((string)Fraction(9, -4), "-9/4");
 
-    std::cout << "toString() test OK." << std::endl;
+    std::cout << "operator string() test OK." << std::endl;
 }
 
 TEST(FractionTest, opassign1)
@@ -206,14 +206,14 @@ TEST(FractionTest, all)
     ASSERT_EQ(a, 0);
     ASSERT_EQ((a = Fraction(1, -3)), Fraction(-1, 3));
     ASSERT_EQ((a += Fraction(1, -3)), Fraction(-2, 3));
-    ASSERT_EQ(a.toString(), "-2/3");
+    ASSERT_EQ((string)a, "-2/3");
     ASSERT_EQ((a = -100), Fraction(-100));
-    ASSERT_EQ(a.toString(), "-100");
+    ASSERT_EQ((string)a, "-100");
     ASSERT_EQ((a = 1), Fraction(1));
     ASSERT_EQ((a -= Fraction(1, 100)), Fraction(99, 100));
     ASSERT_EQ((a *= 50), Fraction(99, 2));
     ASSERT_EQ((a /= 99), Fraction(1, 2));
-    ASSERT_EQ(a.toString(), "1/2");
+    ASSERT_EQ((string)a, "1/2");
     ASSERT_EQ((double)a, 0.5);
     ASSERT_EQ((a = a + a), 1);
     ASSERT_EQ((a = a * a), 1);

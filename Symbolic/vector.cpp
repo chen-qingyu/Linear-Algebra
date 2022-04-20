@@ -97,7 +97,7 @@
 // * type conversion
 // */
 
-//string Vector::toString() const
+//string Vector::operator string() const
 //{
 //    string str = "[";
 //    if (size == 0)
@@ -108,7 +108,7 @@
 //    {
 //        for (const auto& f : reals)
 //        {
-//            str += f.toString() + " ";
+//            str += f.operator string() + " ";
 //        }
 //        str[str.length() - 1] = ']';
 //    }
@@ -286,7 +286,7 @@
 
 //std::ostream& operator<<(std::ostream& os, const Vector& v)
 //{
-//    return os << v.toString();
+//    return os << v.operator string();
 //}
 
 ///*

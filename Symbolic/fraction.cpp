@@ -313,7 +313,7 @@ Fraction::operator double() const
     return (double)num / (double)den;
 }
 
-string Fraction::toString() const
+Fraction::operator string() const
 {
     string str = "";
     if (num % den == 0)
@@ -337,7 +337,7 @@ string Fraction::toString() const
 
 std::ostream& operator<<(std::ostream& os, const Fraction& f)
 {
-    return os << f.toString();
+    return os << (string)f;
 }
 
 /*

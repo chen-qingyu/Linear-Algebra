@@ -67,11 +67,11 @@
 
 //void VectorTest::tostr()
 //{
-//    assert(Vector().toString() == "[]");
-//    assert(Vector({1, 2, 3}).toString() == "[1 2 3]");
-//    assert(Vector({0, Fraction(1, 2), Fraction(2, 3)}).toString() == "[0 1/2 2/3]");
+//    assert(Vector().operator string() == "[]");
+//    assert(Vector({1, 2, 3}).operator string() == "[1 2 3]");
+//    assert(Vector({0, Fraction(1, 2), Fraction(2, 3)}).operator string() == "[0 1/2 2/3]");
 
-//    std::cout << "tostr(): toString() test OK." << std::endl;
+//    std::cout << "tostr(): operator string() test OK." << std::endl;
 //}
 
 //void VectorTest::op1()

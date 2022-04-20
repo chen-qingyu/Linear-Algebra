@@ -56,7 +56,7 @@
 //    /*
 //     * type conversion
 //     */
-//    string toString() const;
+//    operator string() const;
 
 //    /*
 //     * Vector + - Vector

@@ -61,7 +61,7 @@ public:
     /*
      * type conversion
      */
-    string toString() const;
+    operator string() const;
 
     /*
      * combine and split

@@ -89,13 +89,13 @@ TEST(MatrixTest, op)
 TEST(MatrixTest, tostr)
 {
     Matrix m = Matrix();
-    ASSERT_EQ(m.toString(), "[]");
+    ASSERT_EQ((string)m, "[]");
     Matrix m2 = Matrix(2, 3, 0);
-    ASSERT_EQ(m2.toString(), "[0.000000 0.000000 0.000000]\n[0.000000 0.000000 0.000000]");
+    ASSERT_EQ((string)m2, "[0.000000 0.000000 0.000000]\n[0.000000 0.000000 0.000000]");
     Matrix m3 = Matrix(1, 2, 5);
-    ASSERT_EQ(m3.toString(), "[5.000000 5.000000]");
+    ASSERT_EQ((string)m3, "[5.000000 5.000000]");
 
-    std::cout << "toString() test OK." << std::endl;
+    std::cout << "operator string() test OK." << std::endl;
 }
 
 TEST(MatrixTest, op1)
@@ -177,11 +177,11 @@ TEST(MatrixTest, e)
 TEST(MatrixTest, echelon)
 {
     Matrix m = Matrix(2, 1);
-    ASSERT_EQ(m.rowEchelon().toString(), "[1.000000 1.000000]\n[0.000000 0.000000]");
+    ASSERT_EQ((string)m.rowEchelon(), "[1.000000 1.000000]\n[0.000000 0.000000]");
     m = Matrix({Vector({1, 2, 3}), Vector({4, 5, 6})});
-    ASSERT_EQ(m.rowEchelon().toString(), "[1.000000 2.000000 3.000000]\n[0.000000 -3.000000 -6.000000]");
+    ASSERT_EQ((string)m.rowEchelon(), "[1.000000 2.000000 3.000000]\n[0.000000 -3.000000 -6.000000]");
     m = Matrix({Vector({1, 2}), Vector({3, 4}), Vector({5, 6})});
-    ASSERT_EQ(m.rowEchelon().toString(), "[1.000000 2.000000]\n[0.000000 -2.000000]\n[0.000000 0.000000]");
+    ASSERT_EQ((string)m.rowEchelon(), "[1.000000 2.000000]\n[0.000000 -2.000000]\n[0.000000 0.000000]");
 
     std::cout << "rowEchelon() test OK." << std::endl;
 }
